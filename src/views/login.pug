@@ -4,12 +4,25 @@ html(lang="en")
 		meta(charset="UTF-8")
 		meta(http-equiv="X-UA-Compatible", content="IE=edge")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="/css/main.css")
 		title= title
 	body(class=bodyClass)
-		form(action='/dangnhap', method='POST')
-			label(for='username') Mã đăng nhập:
-			input(type='text', id='username', name='username')
-			label(for='password') Mật khẩu:
-			input(type='password', id='password', name='password')
-			button(type='submit') Đăng nhập
+		.login-container
+			.login-main
+				.login-body
+					p.login-title.color-main Đăng nhập vào hệ thống
+					form.login-form(action='/dangnhap', method='POST')
+						.login-group
+							label(for='username') Mã đăng nhập
+							input(type='text', id='username', name='username')
+						.login-group
+							label(for='password') Mật khẩu
+							input(type='password', id='password', name='password')
+						.login-group.flex-right
+							a(href="") Quên mật khẩu 
+						.login-group.flex-center
+							button(type='submit') Đăng nhập
+				.login-desc
+					p.login-title.color-white Hello, Friend !
+					p.login-text Thank you for taking the time to explore our website. We hope you find it informative and helpful.
 

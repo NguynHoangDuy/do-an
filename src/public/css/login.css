@@ -1,0 +1,165 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f5f7;
+}
+.login-main {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  width: 50%;
+  height: 70%;
+  background: white;
+  border-radius: 14px;
+  display: flex;
+  overflow: hidden;
+}
+
+.login-body,
+.login-desc {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+.login-desc {
+  background: #54b585;
+}
+.color-main {
+  color: #54b585;
+}
+.login-title {
+  position: relative;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.login-title::after {
+  content: "";
+  overflow: auto;
+  position: absolute;
+  width: 70px;
+  border-radius: 20px;
+  height: 5px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #54b585;
+}
+
+.color-white {
+  color: white;
+}
+.color-white::after {
+  background-color: white;
+}
+
+.login-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-group label {
+  margin-bottom: 15px;
+}
+.login-group input {
+  height: 50px;
+  font-size: 16px;
+  border: 0;
+  background: #f3f5f7;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.flex-right {
+  align-items: end;
+}
+.flex-right a {
+  color: black;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.flex-center {
+  align-items: center;
+}
+
+.login-group button {
+  min-width: 30%;
+  padding: 10px;
+  height: 50px;
+  border: 0;
+  background: #54b585;
+  color: white;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s linear;
+}
+
+.login-group button:hover {
+  position: relative;
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+}
+
+.login-text {
+  color: white;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 1439px) {
+  .login-main {
+    width: 70%;
+    height: 80%;
+  }
+  .login-title {
+    max-width: 200px;
+    margin: 20px auto;
+    line-height: 1.4;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .login-title {
+    max-width: 200px;
+    margin: 10px auto 20px;
+  }
+
+  .login-group input {
+    height: 40px;
+    border: 0;
+    background: #f3f5f7;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .login-title {
+    font-size: 24px;
+  }
+  .login-main {
+    height: 50%;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login-main {
+    height: 70%;
+  }
+  .login-desc {
+    display: none;
+  }
+  .login-body {
+    width: 100%;
+  }
+}
