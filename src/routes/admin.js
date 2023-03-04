@@ -1,10 +1,15 @@
-const checkLoggedIn = require("../middleware/checkLogin")
+const checkLogged = require("../middleware/checkLogin");
+const checkAuthor = require("../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
 const AdminController = require("../app/controllers/AdminController");
 
-router.use("/dangxuat", AdminController.dangxuat);
-router.use("/", checkLoggedIn,AdminController.index);
+router.use(
+  "/",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.index
+);
 
 module.exports = router;

@@ -1,17 +1,7 @@
-
-class AdminController{
-    index(req, res) {
-        res.render('./admin/admin');
-      }
-
-      dangxuat(req,res){
-        req.session.destroy(function(err) {
-          if (err) {
-            console.log(err);
-          }
-          res.redirect('/');
-        });
-      }
+class AdminController {
+  index(req, res) {
+    res.render("./admin/admin");
+  }
 }
 
-module.exports = new AdminController()
+module.exports = new AdminController();
