@@ -6,6 +6,12 @@ const router = express.Router();
 const AdminController = require("../app/controllers/AdminController");
 
 router.use(
+  "/hocvien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.hocvien
+);
+router.use(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
