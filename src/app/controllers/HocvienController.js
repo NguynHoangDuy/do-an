@@ -1,6 +1,7 @@
 class HocVienController {
   index(req, res) {
-    res.render("./hocvien/hocvien");
+    const name = req.session.ten;
+    res.render("./hocvien/hocvien", { quyen: "Học viên", ten: name });
   }
 }
 

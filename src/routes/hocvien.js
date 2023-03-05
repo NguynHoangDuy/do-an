@@ -8,7 +8,7 @@ const HocVienController = require("../app/controllers/HocvienController");
 router.use(
   "/",
   checkLogged.checkLoggedIn,
-  checkPermission.checkPermission(["QTV"]),
+  checkPermission.checkPermission(["HV"]),
   HocVienController.index
 );
 

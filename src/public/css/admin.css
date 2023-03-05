@@ -1,0 +1,100 @@
+/* css header admin */
+.header-dash {
+  background-color: #54b585;
+  /* height: 150px; */
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex {
+  display: flex;
+}
+
+.header-logo {
+  border-radius: 50%;
+}
+
+.header-title {
+  align-self: center;
+  font-size: 32px;
+  color: white;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.text-title {
+  font-size: 22px;
+  color: black;
+}
+
+.text-right {
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.header-infor {
+  border-top: 2px solid snow;
+  padding: 10px 0;
+  background-color: #49796b;
+}
+
+.flex-end {
+  justify-content: end;
+}
+
+.icon-min {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.border-right {
+  border-right: 2px solid snow;
+  margin-right: 20px;
+  padding-right: 20px;
+}
+
+/* end css header admin */
+
+/* css admin main  */
+.dash-main {
+  background-color: #eaeff8;
+  padding: 50px 0;
+}
+.group-item {
+  width: calc(100% / 3);
+  padding: 0 15px;
+}
+.group {
+  flex-wrap: wrap;
+}
+.group-content {
+  padding: 20px;
+  background: white;
+  margin-bottom: 20px;
+  justify-content: space-around;
+  border-radius: 20px;
+}
+
+.group-content:hover {
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
+.content-right {
+  width: 75%;
+}
+
+.content-title {
+  font-weight: 600;
+  color: #1c3967;
+  text-transform: capitalize;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.content-desc {
+  min-height: 40px;
+  color: #505050;
+}
+/* end css admin main */

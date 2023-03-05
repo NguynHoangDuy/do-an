@@ -1,6 +1,7 @@
 class AdminController {
   index(req, res) {
-    res.render("./admin/admin");
+    const name = req.session.ten;
+    res.render("./admin/admin", { quyen: "Quản trị viên", ten: name });
   }
 }
 
