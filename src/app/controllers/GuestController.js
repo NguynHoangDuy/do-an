@@ -15,7 +15,7 @@ class GuestController {
         `SELECT * FROM quan_tri_vien WHERE MA_QTV='${username}'`,
         (err, result) => {
           if (err) {
-            res.redirect("/");
+            res.redirect("/dangnhap");
           } else {
             if (result.length !== 0) {
               bcrypt.compare(password, result[0].MAT_KHAU, (err, kq) => {
@@ -28,6 +28,7 @@ class GuestController {
                 } else {
                   console.log(result[0].MAT_KHAU);
                   console.log("sai");
+                  res.redirect("/dangnhap");
                 }
               });
             } else {
@@ -35,7 +36,7 @@ class GuestController {
                 `SELECT * FROM giao_vien WHERE MA_GV='${username}'`,
                 (err, result) => {
                   if (err) {
-                    res.redirect("/");
+                    res.redirect("/dangnhap");
                   } else {
                     if (result.length !== 0) {
                       bcrypt.compare(
@@ -51,6 +52,7 @@ class GuestController {
                           } else {
                             console.log(result[0].MAT_KHAU);
                             console.log("sai");
+                            res.redirect("/dangnhap");
                           }
                         }
                       );
@@ -59,7 +61,7 @@ class GuestController {
                         `SELECT * FROM hoc_vien WHERE MA_HV='${username}'`,
                         (err, result) => {
                           if (err) {
-                            res.redirect("/");
+                            res.redirect("/dangnhap");
                           } else {
                             if (result.length !== 0) {
                               bcrypt.compare(
@@ -75,12 +77,13 @@ class GuestController {
                                   } else {
                                     console.log(result[0].MAT_KHAU);
                                     console.log("sai");
+                                    res.redirect("/dangnhap");
                                   }
                                 }
                               );
                             } else {
                               console.log("Invalid username");
-                              res.redirect("/");
+                              res.redirect("/dangnhap");
                             }
                           }
                         }

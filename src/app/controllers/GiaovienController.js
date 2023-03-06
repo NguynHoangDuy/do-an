@@ -1,7 +1,8 @@
 class GiaoVienController {
   index(req, res) {
-    const name = req.session.ten;
-    res.render("./giaovien/giaovien", { quyen: "Giáo viên", ten: name });
+    res.locals.quyen = "Giáo viên";
+    res.locals.ten = req.session.ten;
+    res.render("./giaovien/giaovien");
   }
 }
 

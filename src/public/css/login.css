@@ -68,7 +68,7 @@
   margin-bottom: 15px;
 }
 .login-group input {
-  height: 50px;
+  /* height: 50px; */
   font-size: 16px;
   border: 0;
   background: #f3f5f7;
@@ -133,7 +133,6 @@
   }
 
   .login-group input {
-    height: 40px;
     border: 0;
     background: #f3f5f7;
     padding: 20px;
