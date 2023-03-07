@@ -6,12 +6,14 @@ block container
 			form.bg-white.search-form.mb-4(action="/admin/hocvien/timkiem", method="get")
 				.login-group
 					label(for='hoten') Họ và tên
-					input.mb-0.h-50(type='text', id='hoten', name='hoten')
+					input.mb-0.h-50(type='text', id='hoten', name='hoten', value= hoten)
 				.login-group
 					label(for='sdt') Số điện thoại
-					input.mb-0.h-50(type='text', id='sdt', name='sdt')
+					input.mb-0.h-50(type='text', id='sdt', name='sdt', , value= sdt)
 				.login-group.button-search
 					button(type='submit') Tìm kiếm
+			if (kq !== 0)
+				p.mb-3 Kết quả tìm kiếm: Có #{kq} kết quả được tìm thấy
 			.bg-white.p-20.radius-16.mt-2
 				.table-responsive
 					table.table.no-wrap.user-table.mb-0 
@@ -54,10 +56,10 @@ block container
 							ul.pagination.justify-center
 								if (Number(current) === 1)
 									li.page-item.disabled
-										a.page-link(href="/admin/hocvien") Đầu
+										a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt) Đầu
 								else
 									li.page-item
-										a.page-link(href="/admin/hocvien") Đầu
+										a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt) Đầu
 								if (Number(current) > 3)
 									- index = Number(current) - 2
 								else 
@@ -68,21 +70,23 @@ block container
 								while (index < Number(current) + 2 && Number(index) <= pages)
 									if ( Number(index) === current)
 										li.page-item.active
-											a.page-link(href="/admin/hocvien?trang="+index)= index
+											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+index)= index
 										- index++
 									else
 										li.page-item
-											a.page-link(href="/admin/hocvien?trang="+index)= index
+											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+index)= index
 										- index++
 								if (index === current + 2 && index < pages)
 									li.page-item.disabled
 										a.page-link(href="#") ...
 								if (current === pages)
 									li.page-item.disabled
-										a.page-link(href="/admin/hocvien?trang="+pages) Cuối
+										a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+pages) Cuối
 								else 
 									li.page-item
-										a.page-link(href="/admin/hocvien?trang="+pages) Cuối
+										a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+pages) Cuối
+			.flex.flex-end.mt-4
+				a.button(href="/admin/hocvien") Trở về
 
 
 
