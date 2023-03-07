@@ -1,5 +1,6 @@
 const con = require("../../config/db");
 const bcrypt = require("bcrypt");
+const HocVien = require("../models/hocvien");
 class AdminController {
   index(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -31,6 +32,7 @@ class AdminController {
                 listHv: result,
                 current: page,
                 pages: totalPages,
+                perPage: perPage,
               });
             }
           }
@@ -66,6 +68,7 @@ class AdminController {
                   listHv: result,
                   current: page,
                   pages: totalPages,
+                  perPage: perPage,
                 });
               }
             }
@@ -96,6 +99,7 @@ class AdminController {
                     kq: totalCount,
                     hoten: hoten,
                     sdt: sdt,
+                    perPage: perPage,
                   });
                 }
               }
@@ -111,7 +115,7 @@ class AdminController {
     res.locals.ten = req.session.ten;
     res.render("./admin/hocvien/them");
   }
-  themhocvien_action(req, res) {
+  async themhocvien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     const {
@@ -124,22 +128,61 @@ class AdminController {
       dt,
       lop,
       truong,
+      phuhuynh,
+      sdtph,
       nganh,
       truongdh,
       cv,
     } = req.body;
-    con.query("SELECT MAX(MA_HV) as MA_HV FROM hoc_vien", (err, id) => {
-      if (err) {
-        console.log("Sai");
-      } else {
-        const countMaHV = parseInt(id[0].MA_HV.substr(5)) + 1;
-        const mahv = "ALFHV" + String(countMaHV).padStart(5, "0");
-      }
-    });
+    const hv = new HocVien();
+    const mahv = await hv.layMaHV();
+    // mahv.then((kq) => console.log(kq));
     const mkArr = ngaysinh.split("-");
     const mk = mkArr.reverse().join("");
-    console.log(mk);
-    res.render("./admin/hocvien/them");
+    const salt = bcrypt.genSaltSync(10);
+    const mkHash = bcrypt.hashSync(mk, salt);
+
+    const kq = hv.themhocvien(
+      mahv,
+      hoten,
+      gt,
+      ngaysinh,
+      sdt,
+      diachi,
+      email,
+      mkHash,
+      dt,
+      lop,
+      truong,
+      phuhuynh,
+      sdtph,
+      nganh,
+      truongdh,
+      cv
+    );
+    if (kq) {
+      res.redirect(`/admin/hocvien/kqthem?ma=${mahv}`);
+    }
+  }
+  kqthem(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const ma = req.query.ma;
+    res.render(`./admin/hocvien/kqthem`, { ma: ma });
+  }
+  async xemhocvien(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const ma = req.query.mahv;
+    const hv = new HocVien();
+    const kqHv = await hv.xemthongtin(ma);
+    console.log(kqHv);
+    res.render("./admin/hocvien/xem", { hv: kqHv });
+  }
+  suahocvien(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    res.render("./admin/hocvien/sua");
   }
 }
 

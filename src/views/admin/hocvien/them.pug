@@ -9,7 +9,7 @@ block container
                         label(for='hoten') Họ và tên
                         input(type='text', id='hoten', name='hoten')
                     .create-item
-                        label(for='username') Giới tính
+                        label(for='gt') Giới tính
                         select.not-focus(class="form-control", id="gt", name="gt")
                             option(value="1") Nam  
                             option(value="0") Nữ
@@ -52,13 +52,13 @@ block container
                                         input(type='text', id='phuhuynh', name='phuhuynh')
                                     .create-item
                                         label(for='sdt-ph') Số điện thoại phụ huynh
-                                        input(type='text', id='phuhuynh', name='phuhuynh')  
+                                        input(type='text', id='sdt-ph', name='sdt-ph')  
                             .sv-content.mt-4
                                 .create-group.mt-2
                                     .create-item
                                         label(for='nganh') Ngành
                                         input(type='text', id='nganh', name='nganh')
-                                    .create-item.mt-2
+                                    .create-item
                                         label(for='truongdh') Trường
                                         input(type='text', id='truongdh', name='truongdh')              
                             .dtk-content.mt-4

@@ -27,9 +27,10 @@ block container
 								th(scope="col", class="border-0 text-uppercase font-medium") Địa chỉ
 								th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
 						tbody
+							- stt = 1
 							for hv in listHv 
 								tr
-									td(class="pl-4") 1
+									td(class="pl-4")= (perPage * current) - (perPage - stt++)
 									td
 										p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
 									td

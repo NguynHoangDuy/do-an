@@ -19,9 +19,10 @@ block container
 								th(scope="col", class="border-0 text-uppercase font-medium") Địa chỉ
 								th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
 						tbody
+							- stt = 1
 							for hv in listHv 
 								tr
-									td(class="pl-4") 1
+									td(class="pl-4")= (perPage * current) - (perPage - stt++)
 									td
 										p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
 									td
@@ -36,9 +37,9 @@ block container
 									td
 										p.text-overflow(class="font-medium mb-0")= hv.DIA_CHI
 									td
-										a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+										a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-info") 
-										a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+										a(href="/admin/hocvien/suahocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-trash") 
 										a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-edit") 
@@ -78,7 +79,5 @@ block container
 									li.page-item
 										a.page-link(href="/admin/hocvien?trang="+pages) Cuối
 			.flex.flex-end.mt-4
-				a.button(href="/admin/") Trở về
-
-
+				a.button(href="/admin") Trở về
 

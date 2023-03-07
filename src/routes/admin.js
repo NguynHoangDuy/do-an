@@ -11,6 +11,18 @@ router.use(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.timkiem
 );
+router.use(
+  "/hocvien/xemhocvien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xemhocvien
+);
+router.use(
+  "/hocvien/suahocvien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.suahocvien
+);
 router.post(
   "/hocvien/themhocvien",
   checkLogged.checkLoggedIn,
@@ -22,6 +34,12 @@ router.get(
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themhocvien
+);
+router.get(
+  "/hocvien/kqthem",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.kqthem
 );
 router.use(
   "/hocvien",
