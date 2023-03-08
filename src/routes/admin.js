@@ -12,6 +12,12 @@ router.use(
   AdminController.timkiem
 );
 router.use(
+  "/giaovien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.giaovien
+);
+router.use(
   "/hocvien/xemhocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),

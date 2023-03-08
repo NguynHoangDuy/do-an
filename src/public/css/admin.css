@@ -285,4 +285,53 @@ input#dtk:checked ~ .dtk-content input {
 .mr-10 {
   margin-right: 10px;
 }
+.p-15 {
+  padding: 15px !important;
+}
 /* end css admin main */
+
+/*css giao vien */
+.mr-20 {
+  margin-right: 20px;
+}
+.member-entry {
+  display: flex;
+  padding: 20px;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 30%);
+  border-radius: 20px;
+  transition: all 300ms ease-in-out;
+  margin-bottom: 30px;
+}
+.member-entry:hover {
+  background: #dee2e6;
+  transition: all 300ms ease-in-out;
+}
+.member-img {
+  width: 12%;
+}
+.member-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.member-detail {
+  color: #1c3967;
+  width: 80%;
+}
+.p-40 {
+  padding: 40px;
+}
+
+.search-form-full {
+  width: 50%;
+}
+
+.search-form-full > input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 0;
+}
+/* end css giao vien */

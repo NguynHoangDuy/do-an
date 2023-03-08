@@ -1,4 +1,3 @@
-const { query } = require("../../config/db");
 const con = require("../../config/db");
 
 class HocVien {
@@ -12,6 +11,38 @@ class HocVien {
       (this.email = email),
       (this.matkhau = matkhau),
       (this.dt = dt);
+  }
+  async demHv() {
+    const count = () => {
+      return new Promise((resolve, reject) => {
+        con.query("select count(*) as count from hoc_vien", (err, kq) => {
+          if (err) {
+            reject(0);
+          } else {
+            resolve(kq[0].count);
+          }
+        });
+      });
+    };
+    return await count();
+  }
+  async getAllHv(offset, perPage) {
+    const hv = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `Select * from hoc_vien Limit ${offset}, ${perPage}`,
+          (err, kq) => {
+            if (err) {
+              reject([]);
+            } else {
+              if (kq.length !== 0) resolve(kq);
+              else resolve([]);
+            }
+          }
+        );
+      });
+    };
+    return await hv();
   }
   layMaHV() {
     const mahv = () => {

@@ -1,0 +1,13 @@
+mixin confirm-modal(index,title, content, confirmBtnText, confirmBtnHref)
+  .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= index)
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5.modal-title#confirm-modal-title #{title}
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          p= content
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+          a.btn.btn-danger(href=confirmBtnHref) #{confirmBtnText}

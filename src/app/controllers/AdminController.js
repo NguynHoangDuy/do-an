@@ -1,47 +1,50 @@
 const con = require("../../config/db");
 const bcrypt = require("bcrypt");
 const HocVien = require("../models/hocvien");
+const GiaoVien = require("../models/giaovien");
 class AdminController {
   index(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     res.render("./admin/admin");
   }
-
-  hocvien(req, res) {
+  async giaovien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
     let page = parseInt(req.query.trang) || 1;
     const offset = (page - 1) * perPage;
-    con.query("select count(*) as count from hoc_vien", (err, count) => {
-      if (err) {
-        console.log("sai");
-      } else {
-        const totalCount = count[0].count;
-        const totalPages = Math.ceil(totalCount / perPage);
-
-        con.query(
-          `Select * from hoc_vien Limit ${offset}, ${perPage}`,
-          (err, result) => {
-            if (err) {
-              console.log("Lỗi");
-              res.render("./admin/hocvien");
-            } else {
-              res.render("./admin/hocvien", {
-                listHv: result,
-                current: page,
-                pages: totalPages,
-                perPage: perPage,
-              });
-            }
-          }
-        );
-      }
+    const gv = new GiaoVien();
+    const totalCount = await gv.demGv();
+    const totalPages = Math.ceil(totalCount / perPage);
+    const listGv = await gv.getAllGv(offset, perPage);
+    console.log(listGv);
+    res.render("./admin/giaovien", {
+      listGv: listGv,
+      current: page,
+      pages: totalPages,
+      perPage: perPage,
+    });
+  }
+  async hocvien(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+    let page = parseInt(req.query.trang) || 1;
+    const offset = (page - 1) * perPage;
+    const hv = new HocVien();
+    const totalCount = await hv.demHv();
+    const totalPages = Math.ceil(totalCount / perPage);
+    const listHv = await hv.getAllHv(offset, perPage);
+    res.render("./admin/hocvien", {
+      listHv: listHv,
+      current: page,
+      pages: totalPages,
+      perPage: perPage,
     });
   }
 
-  timkiem(req, res) {
+  async timkiem(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
@@ -50,30 +53,15 @@ class AdminController {
     const hoten = req.query.hoten;
     const sdt = req.query.sdt;
     if (!hoten && !sdt) {
-      con.query("select count(*) as count from hoc_vien", (err, count) => {
-        if (err) {
-          console.log("sai");
-        } else {
-          const totalCount = count[0].count;
-          const totalPages = Math.ceil(totalCount / perPage);
-
-          con.query(
-            `Select * from hoc_vien Limit ${offset}, ${perPage}`,
-            (err, result) => {
-              if (err) {
-                console.log("Lỗi");
-                res.render("./admin/hocvien");
-              } else {
-                res.render("./admin/hocvien/timkiem", {
-                  listHv: result,
-                  current: page,
-                  pages: totalPages,
-                  perPage: perPage,
-                });
-              }
-            }
-          );
-        }
+      const hv = new HocVien();
+      const totalCount = await hv.demHv();
+      const totalPages = Math.ceil(totalCount / perPage);
+      const listHv = await hv.getAllHv(offset, perPage);
+      res.render("./admin/hocvien/timkiem", {
+        listHv: listHv,
+        current: page,
+        pages: totalPages,
+        perPage: perPage,
       });
     } else {
       con.query(

@@ -39,10 +39,11 @@ block container
 									td
 										a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-info") 
-										a(href="/admin/hocvien/suahocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+										a(href="/admin/hocvien/capnhathocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-edit") 
-										a(href="/admin/hocvien/xoahocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+										button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-trash") 
+									+confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`)
 				.pagination.row
 					if (pages > 0)
 						nav.mx-auto

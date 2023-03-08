@@ -81,8 +81,9 @@ block container
                                         .create-item.w-100
                                             label(for='cv') Công việc
                                             input(type='text', id='cv', name='cv', value= hv[0].CV)             
-                    .button-main.mt-4.text-center
-                        button(type='submit') Cập nhật
+                    .button-main.mt-4.text-center.overflow-hidden
+                        button.p-15.mr-10(type='submit') Cập nhật
+                        a.button(href="/admin/hocvien/xemhocvien?mahv="+hv[0].MA_HV) Trở về
             else
                 p.title Không có thông tin
                 .flex.flex-end.mt-4
