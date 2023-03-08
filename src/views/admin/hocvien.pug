@@ -40,9 +40,9 @@ block container
 										a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-info") 
 										a(href="/admin/hocvien/suahocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
-											i(class="fa fa-trash") 
-										a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-edit") 
+										a(href="/admin/hocvien/xoahocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+											i(class="fa fa-trash") 
 				.pagination.row
 					if (pages > 0)
 						nav.mx-auto

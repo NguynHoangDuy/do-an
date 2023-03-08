@@ -17,17 +17,29 @@ router.use(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.xemhocvien
 );
-router.use(
-  "/hocvien/suahocvien",
+router.get(
+  "/hocvien/capnhathocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.suahocvien
+);
+router.post(
+  "/hocvien/capnhathocvien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.suahocvien_action
 );
 router.post(
   "/hocvien/themhocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themhocvien_action
+);
+router.use(
+  "/hocvien/xoahocvien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xoahocvien
 );
 router.get(
   "/hocvien/themhocvien",

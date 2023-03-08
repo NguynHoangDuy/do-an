@@ -12,7 +12,7 @@ block container
 					input.mb-0.h-50(type='text', id='sdt', name='sdt', , value= sdt)
 				.login-group.button-search
 					button(type='submit') Tìm kiếm
-			if (kq !== 0)
+			if (kq)
 				p.mb-3 Kết quả tìm kiếm: Có #{kq} kết quả được tìm thấy
 			.bg-white.p-20.radius-16.mt-2
 				.table-responsive

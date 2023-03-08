@@ -176,13 +176,69 @@ class AdminController {
     const ma = req.query.mahv;
     const hv = new HocVien();
     const kqHv = await hv.xemthongtin(ma);
-    console.log(kqHv);
     res.render("./admin/hocvien/xem", { hv: kqHv });
   }
-  suahocvien(req, res) {
+  async suahocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    res.render("./admin/hocvien/sua");
+    const ma = req.query.mahv;
+    const hv = new HocVien();
+    const kqHv = await hv.xemthongtin(ma);
+    res.render("./admin/hocvien/sua", { hv: kqHv });
+  }
+  async suahocvien_action(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const ma = req.query.mahv;
+    const {
+      hoten,
+      gt,
+      ngaysinh,
+      sdt,
+      diachi,
+      email,
+      dt,
+      lop,
+      truong,
+      phuhuynh,
+      sdtph,
+      nganh,
+      truongdh,
+      cv,
+      tinhtrang,
+    } = req.body;
+    const hv = new HocVien();
+    const kq = hv.capnhathocvien(
+      ma,
+      hoten,
+      gt,
+      ngaysinh,
+      sdt,
+      diachi,
+      email,
+      dt,
+      lop,
+      truong,
+      phuhuynh,
+      sdtph,
+      nganh,
+      truongdh,
+      cv,
+      tinhtrang
+    );
+    console.log(kq);
+    if (kq) {
+      console.log(kq);
+      res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
+    }
+  }
+  xoahocvien(req, res) {
+    const ma = req.query.mahv;
+    const hv = new HocVien();
+    const kq = hv.xoahocvien(ma);
+    if (kq) {
+      res.redirect(`/admin/hocvien/`);
+    }
   }
 }
 

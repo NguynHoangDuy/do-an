@@ -281,4 +281,8 @@ input#dtk:checked ~ .dtk-content input {
   font-weight: bold;
   transition: transform 0.1s linear;
 }
+
+.mr-10 {
+  margin-right: 10px;
+}
 /* end css admin main */
