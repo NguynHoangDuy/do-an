@@ -9,126 +9,68 @@ block container
 							input(type="text", name="search", placeholder="Tìm kiếm")
 				
 			.bg-white.p-40.radius-16.mt-2
-				a(href="").member-entry
-					.member-img.mr-20
-						img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
-					.member-detail
-						h4 Nguyễn Hoàng Duy
-						.row.info-list
-							.col-sm-4.flex
-								p.mr-10 
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-				a(href="").member-entry
-					.member-img.mr-20
-						img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
-					.member-detail
-						h4 Nguyễn Hoàng Duy
-						.row.info-list
-							.col-sm-4.flex
-								p.mr-10 
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-				a(href="").member-entry
-					.member-img.mr-20
-						img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
-					.member-detail
-						h4 Nguyễn Hoàng Duy
-						.row.info-list
-							.col-sm-4.flex
-								p.mr-10 
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-				a(href="").member-entry
-					.member-img.mr-20
-						img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
-					.member-detail
-						h4 Nguyễn Hoàng Duy
-						.row.info-list
-							.col-sm-4.flex
-								p.mr-10 
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
-							.col-sm-4.flex
-								p.mr-10
-									i.fa.fa-briefcase
-								p Khánh Hòa
+				for gv in listGv
+					a(href="").member-entry
+						.member-img.mr-20
+							img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
+						.member-detail
+							h4.text-20.mb-3= gv.HO_TEN
+							.row.info-list
+								.col-sm-4.flex.mb-3
+									p.mr-10 
+										i(class="fa-regular fa-calendar-days")
+									+formatDate(gv.NGAY_SINH)
+								.col-sm-4.flex.mb-3
+									p.mr-10
+										i.fa.fa-location-dot
+									p= gv.DIA_CHI 
+								.col-sm-4.flex.mb-3
+									p.mr-10
+										i.fa.fa-phone
+									p= gv.SDT
+								.col-sm-4.flex.mb-3
+									p.mr-10
+										i.fa.fa-envelope
+									p= gv.EMAIL
+								.col-sm-4.flex.mb-3
+									p.mr-10
+										i.fa.fa-school-flag
+									p= gv.TRINH_DO
+								.pagination.row
+				if (pages > 0)
+					nav.mx-auto
+						ul.pagination.justify-center
+							if (Number(current) === 1)
+								li.page-item.disabled
+									a.page-link(href="/admin/hocvien") Đầu
+							else
+								li.page-item
+									a.page-link(href="/admin/hocvien") Đầu
+							if (Number(current) > 3)
+								- index = Number(current) - 2
+							else 
+								- index = 1
+							if (Number(index) !== 1)
+								li.page-item.disabled
+									a.page-link(href="#") ...
+							while (index < Number(current) + 2 && Number(index) <= pages)
+								if ( Number(index) === current)
+									li.page-item.active
+										a.page-link(href="/admin/hocvien?trang="+index)= index
+									- index++
+								else
+									li.page-item
+										a.page-link(href="/admin/hocvien?trang="+index)= index
+									- index++
+							if (index === current + 2 && index < pages)
+								li.page-item.disabled
+									a.page-link(href="#") ...
+							if (current === pages)
+								li.page-item.disabled
+									a.page-link(href="/admin/hocvien?trang="+pages) Cuối
+							else 
+								li.page-item
+									a.page-link(href="/admin/hocvien?trang="+pages) Cuối
 				 
 			.flex.flex-end.mt-4
 				a.button(href="/admin") Trở về

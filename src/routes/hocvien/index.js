@@ -1,9 +1,9 @@
-const checkLogged = require("../middleware/checkLogin");
-const checkPermission = require("../middleware/checkPermission");
+const checkLogged = require("../../middleware/checkLogin");
+const checkPermission = require("../../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
-const HocVienController = require("../app/controllers/HocvienController");
+const HocVienController = require("../../app/controllers/HocvienController");
 
 router.use(
   "/",

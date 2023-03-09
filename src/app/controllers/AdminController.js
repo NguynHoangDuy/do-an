@@ -6,7 +6,7 @@ class AdminController {
   index(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    res.render("./admin/admin");
+    res.render("./admin");
   }
   async giaovien(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -18,13 +18,17 @@ class AdminController {
     const totalCount = await gv.demGv();
     const totalPages = Math.ceil(totalCount / perPage);
     const listGv = await gv.getAllGv(offset, perPage);
-    console.log(listGv);
     res.render("./admin/giaovien", {
       listGv: listGv,
       current: page,
       pages: totalPages,
       perPage: perPage,
     });
+  }
+  themgiaovien(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    res.render("./admin/giaovien/them");
   }
   async hocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -163,16 +167,28 @@ class AdminController {
     res.locals.ten = req.session.ten;
     const ma = req.query.mahv;
     const hv = new HocVien();
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
     const kqHv = await hv.xemthongtin(ma);
-    res.render("./admin/hocvien/xem", { hv: kqHv });
+    res.render("./admin/hocvien/xem", { hv: kqHv, formatDate });
   }
   async suahocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     const ma = req.query.mahv;
     const hv = new HocVien();
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
     const kqHv = await hv.xemthongtin(ma);
-    res.render("./admin/hocvien/sua", { hv: kqHv });
+    res.render("./admin/hocvien/sua", { hv: kqHv, formatDate });
   }
   async suahocvien_action(req, res) {
     res.locals.quyen = "Quản trị viên";

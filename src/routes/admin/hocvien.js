@@ -1,12 +1,12 @@
-const checkLogged = require("../middleware/checkLogin");
-const checkAuthor = require("../middleware/checkPermission");
+const checkLogged = require("../../middleware/checkLogin");
+const checkAuthor = require("../../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
-const AdminController = require("../app/controllers/AdminController");
+const AdminController = require("../../app/controllers/AdminController");
 
 router.use(
-  "/hocvien/timkiem",
+  "/timkiem",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.timkiem
@@ -18,58 +18,52 @@ router.use(
   AdminController.giaovien
 );
 router.use(
-  "/hocvien/xemhocvien",
+  "/xemhocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.xemhocvien
 );
 router.get(
-  "/hocvien/capnhathocvien",
+  "/capnhathocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.suahocvien
 );
 router.post(
-  "/hocvien/capnhathocvien",
+  "/capnhathocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.suahocvien_action
 );
 router.post(
-  "/hocvien/themhocvien",
+  "/themhocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themhocvien_action
 );
 router.use(
-  "/hocvien/xoahocvien",
+  "/xoahocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.xoahocvien
 );
 router.get(
-  "/hocvien/themhocvien",
+  "/themhocvien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themhocvien
 );
 router.get(
-  "/hocvien/kqthem",
+  "/kqthem",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.kqthem
 );
 router.use(
-  "/hocvien",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.hocvien
-);
-router.use(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
-  AdminController.index
+  AdminController.hocvien
 );
 
 module.exports = router;

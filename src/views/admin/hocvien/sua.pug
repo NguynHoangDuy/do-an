@@ -22,16 +22,8 @@ block container
                                 option(value="0", selected =(hv[0].TINH_TRANG==0?true:false)) Nghỉ học
                     .create-group.mt-2
                         .create-item
-                            label(for='ngaysinh') Ngày sinh
-                            - dateString = hv[0].NGAY_SINH
-                            - date = new Date(dateString)
-                            - formattedDate = date.toLocaleDateString('en-GB') // Chuyển đổi sang định dạng dd/MM/yyyy
-                            - parts = formattedDate.split('/') // Cắt chuỗi thành mảng các phần tử
-                            - year = parts[2]
-                            - month = parts[1]
-                            - day = parts[0]
-                            - finalDate = `${year}-${month}-${day}`    
-                            input(type='date', id='ngaysinh', name='ngaysinh', value= finalDate)
+                            label(for='ngaysinh') Ngày sinh   
+                            input(type='date', id='ngaysinh', name='ngaysinh', value= formatDate(hv[0].NGAY_SINH))
                         .create-item
                             label(for='sdt') Số điện thoại
                             input(type='text', id='sdt', name='sdt',value= hv[0].SDT)
