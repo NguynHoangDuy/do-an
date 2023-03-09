@@ -39,12 +39,12 @@ class GiaoVien {
   async layMaGV() {
     const magv = () => {
       return new Promise((resolve, reject) => {
-        con.query("SELECT MAX(MA_GV) as MA_HV FROM giao_vien", (err, id) => {
+        con.query("SELECT MAX(MA_GV) as MA_GV FROM giao_vien", (err, id) => {
           if (err) {
             reject(0);
           } else {
-            const countMaHV = parseInt(id[0].MA_GV.substr(5)) + 1;
-            const mahv = "ALFGV" + String(countMaHV).padStart(5, "0");
+            const countMaGV = parseInt(id[0].MA_GV.substr(5)) + 1;
+            const mahv = "ALFGV" + String(countMaGV).padStart(3, "0");
             resolve(mahv);
           }
         });
@@ -61,16 +61,19 @@ class GiaoVien {
     diachi,
     email,
     matkhau,
+    trinhdo,
     anh_dd
   ) {
     let kqThem = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO giao_vien (MA_GV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, ANH_DD) VALUES ('${ma_gv}','GV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${anh_dd}'`,
+          `INSERT INTO giao_vien (MA_GV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, TRINH_DO, ANH_DD) VALUES ('${ma_gv}','GV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${trinhdo}','${anh_dd}')`,
           (err, result) => {
             if (err) {
+              console.log(err);
               reject(0);
             } else {
+              console.log(result);
               resolve(1);
             }
           }

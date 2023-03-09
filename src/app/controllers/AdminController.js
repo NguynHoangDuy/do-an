@@ -30,6 +30,39 @@ class AdminController {
     res.locals.ten = req.session.ten;
     res.render("./admin/giaovien/them");
   }
+  async themgiaovien_action(req, res) {
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const { hoten, gt, ngaysinh, sdt, diachi, email, trinhdo } = req.body;
+    const anh_dd = req.file.filename;
+    const gv = new GiaoVien();
+    const maGv = await gv.layMaGV();
+    console.log(req.body, req.file);
+    const mkArr = req.body.ngaysinh.split("-");
+    const mk = mkArr.reverse().join("");
+    const salt = bcrypt.genSaltSync(10);
+    const mkHash = await bcrypt.hashSync(mk, salt);
+    console.log(mkHash);
+    console.log(maGv);
+    const kq = gv.themgiaovien(
+      maGv,
+      hoten,
+      gt,
+      ngaysinh,
+      sdt,
+      diachi,
+      email,
+      mkHash,
+      trinhdo,
+      anh_dd
+    );
+    if (kq) {
+      res.redirect(`/admin/hocvien/kqthem?ma=${maGv}`);
+    } else {
+      res.redirect(`/admin`);
+    }
+    res.render("./admin/giaovien/them");
+  }
   async hocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
