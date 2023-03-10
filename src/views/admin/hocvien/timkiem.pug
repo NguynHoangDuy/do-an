@@ -53,78 +53,9 @@ block container
 											i(class="fa fa-trash") 
 									+confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`)
 				if (kq)
-					.pagination.row
-						if (pages > 0)
-							nav.mx-auto
-								ul.pagination.justify-center
-									if (Number(current) === 1)
-										li.page-item.disabled
-											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt) Đầu
-									else
-										li.page-item
-											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt) Đầu
-									if (Number(current) > 3)
-										- index = Number(current) - 2
-									else 
-										- index = 1
-									if (Number(index) !== 1)
-										li.page-item.disabled
-											a.page-link(href="#") ...
-									while (index < Number(current) + 2 && Number(index) <= pages)
-										if ( Number(index) === current)
-											li.page-item.active
-												a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+index)= index
-											- index++
-										else
-											li.page-item
-												a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+index)= index
-											- index++
-									if (index === current + 2 && index < pages)
-										li.page-item.disabled
-											a.page-link(href="#") ...
-									if (current === pages)
-										li.page-item.disabled
-											if (hoten )
-											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+pages) Cuối
-									else 
-										li.page-item
-											a.page-link(href="/admin/hocvien/timkiem?hoten="+hoten+"&sdt="+sdt+"&trang="+pages) Cuối
+					+pagination(current, pages, `/admin/hocvien/timkiem?hoten=${hoten}&sdt=${sdt}`, `/admin/hocvien/timkiem?hoten=${hoten}&sdt=${sdt}&trang=`)
 				else
-					.pagination.row
-						if (pages > 0)
-							nav.mx-auto
-								ul.pagination.justify-center
-									if (Number(current) === 1)
-										li.page-item.disabled
-											a.page-link(href="/admin/hocvien/timkiem") Đầu
-									else
-										li.page-item
-											a.page-link(href="/admin/hocvien/timkiem") Đầu
-									if (Number(current) > 3)
-										- index = Number(current) - 2
-									else 
-										- index = 1
-									if (Number(index) !== 1)
-										li.page-item.disabled
-											a.page-link(href="#") ...
-									while (index < Number(current) + 2 && Number(index) <= pages)
-										if ( Number(index) === current)
-											li.page-item.active
-												a.page-link(href="/admin/hocvien/timkiem?trang="+index)= index
-											- index++
-										else
-											li.page-item
-												a.page-link(href="/admin/hocvien/timkiem?trang="+index)= index
-											- index++
-									if (index === current + 2 && index < pages)
-										li.page-item.disabled
-											a.page-link(href="#") ...
-									if (current === pages)
-										li.page-item.disabled
-											a.page-link(href="/admin/hocvien/timkiem?trang="+pages) Cuối
-									else 
-										li.page-item
-											a.page-link(href="/admin/hocvien/timkiem?trang="+pages) Cuối
+					+pagination(current, pages, "/admin/hocvien/timkiem", "/admin/hocvien/timkiem?trang=")
 			.flex.flex-end.mt-4
 				a.button(href="/admin/hocvien") Trở về
 

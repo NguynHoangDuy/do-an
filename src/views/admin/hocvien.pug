@@ -44,41 +44,7 @@ block container
 										button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-trash") 
 									+confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`)
-				.pagination.row
-					if (pages > 0)
-						nav.mx-auto
-							ul.pagination.justify-center
-								if (Number(current) === 1)
-									li.page-item.disabled
-										a.page-link(href="/admin/hocvien") Đầu
-								else
-									li.page-item
-										a.page-link(href="/admin/hocvien") Đầu
-								if (Number(current) > 3)
-									- index = Number(current) - 2
-								else 
-									- index = 1
-								if (Number(index) !== 1)
-									li.page-item.disabled
-										a.page-link(href="#") ...
-								while (index < Number(current) + 2 && Number(index) <= pages)
-									if ( Number(index) === current)
-										li.page-item.active
-											a.page-link(href="/admin/hocvien?trang="+index)= index
-										- index++
-									else
-										li.page-item
-											a.page-link(href="/admin/hocvien?trang="+index)= index
-										- index++
-								if (index === current + 2 && index < pages)
-									li.page-item.disabled
-										a.page-link(href="#") ...
-								if (current === pages)
-									li.page-item.disabled
-										a.page-link(href="/admin/hocvien?trang="+pages) Cuối
-								else 
-									li.page-item
-										a.page-link(href="/admin/hocvien?trang="+pages) Cuối
+				+pagination(current, pages, "/admin/hocvien", "/admin/hocvien/trang=")
 			.flex.flex-end.mt-4
 				a.button(href="/admin") Trở về
 

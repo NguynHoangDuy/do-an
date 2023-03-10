@@ -12,19 +12,41 @@ class HocVien {
       (this.matkhau = matkhau),
       (this.dt = dt);
   }
-  async demHv() {
+  async demHv(hoten, sdt) {
     const count = () => {
       return new Promise((resolve, reject) => {
-        con.query("select count(*) as count from hoc_vien", (err, kq) => {
-          if (err) {
-            reject(0);
-          } else {
-            resolve(kq[0].count);
+        con.query(
+          `select count(*) as count from hoc_vien where HO_TEN like '%${hoten}%' or SDT='${sdt}'`,
+          (err, kq) => {
+            if (err) {
+              reject(0);
+            } else {
+              resolve(kq[0].count);
+            }
           }
-        });
+        );
       });
     };
     return await count();
+  }
+  async timkiemHV(offset, perPage, hoten, sdt) {
+    const hv = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `Select * from hoc_vien where HO_TEN like '%${hoten}%' or SDT='${sdt}' Limit ${offset}, ${perPage}`,
+          (err, kq) => {
+            if (err) {
+              con;
+              resolve([]);
+            } else {
+              if (kq.length !== 0) resolve(kq);
+              else resolve([]);
+            }
+          }
+        );
+      });
+    };
+    return await hv();
   }
   async getAllHv(offset, perPage) {
     const hv = () => {

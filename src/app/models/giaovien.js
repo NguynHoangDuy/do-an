@@ -4,16 +4,19 @@ class GiaoVien {
   constructor(ma_gv) {
     this.ma_gv = ma_gv;
   }
-  async demGv() {
+  async demGv(ho_ten) {
     const count = () => {
       return new Promise((resolve, reject) => {
-        con.query("select count(*) as count from giao_vien", (err, kq) => {
-          if (err) {
-            reject(0);
-          } else {
-            resolve(kq[0].count);
+        con.query(
+          `select count(*) as count from giao_vien where HO_TEN like "%${ho_ten}%"`,
+          (err, kq) => {
+            if (err) {
+              reject(0);
+            } else {
+              resolve(kq[0].count);
+            }
           }
-        });
+        );
       });
     };
     return await count();
@@ -26,6 +29,25 @@ class GiaoVien {
           (err, kq) => {
             if (err) {
               reject([]);
+            } else {
+              if (kq.length !== 0) resolve(kq);
+              else resolve([]);
+            }
+          }
+        );
+      });
+    };
+    return await gv();
+  }
+  async timkiemGiaoVien(offset, perPage, hoten) {
+    const gv = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `Select * from giao_vien where HO_TEN like "%${hoten}%" Limit ${offset}, ${perPage}`,
+          (err, kq) => {
+            if (err) {
+              con;
+              resolve([]);
             } else {
               if (kq.length !== 0) resolve(kq);
               else resolve([]);
@@ -70,10 +92,8 @@ class GiaoVien {
           `INSERT INTO giao_vien (MA_GV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, TRINH_DO, ANH_DD) VALUES ('${ma_gv}','GV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${trinhdo}','${anh_dd}')`,
           (err, result) => {
             if (err) {
-              console.log(err);
-              reject(0);
+              resolve(0);
             } else {
-              console.log(result);
               resolve(1);
             }
           }

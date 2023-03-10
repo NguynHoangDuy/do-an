@@ -17,3 +17,39 @@ mixin formatDate(date)
   - const [day, month, year] = formattedDate.split('/')
   - const formattedDateStr = year + '-' + month + '-' + day
   p #{formattedDateStr}
+mixin pagination(current, pages, link_first, link)
+  .pagination.row
+    if (pages > 0)
+      nav.mx-auto
+        ul.pagination.justify-center
+          if (Number(current) === 1)
+            li.page-item.disabled
+              a.page-link(href= link_first) Đầu
+          else
+            li.page-item
+              a.page-link(href= link_first) Đầu
+          if (Number(current) > 3)
+            - index = Number(current) - 2
+          else 
+            - index = 1
+          if (Number(index) !== 1)
+            li.page-item.disabled
+              a.page-link(href="#") ...
+          while (index < Number(current) + 2 && Number(index) <= pages)
+            if ( Number(index) === current)
+              li.page-item.active
+                a.page-link(href= link + index)= index
+              - index++
+            else
+              li.page-item
+                a.page-link(href= link + index)= index
+              - index++
+          if (index === current + 2 && index < pages)
+            li.page-item.disabled
+              a.page-link(href="#") ...
+          if (current === pages)
+            li.page-item.disabled
+              a.page-link(href= link+pages) Cuối
+          else 
+            li.page-item
+              a.page-link(href= link+pages) Cuối

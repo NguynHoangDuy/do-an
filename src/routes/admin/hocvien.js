@@ -3,7 +3,7 @@ const checkAuthor = require("../../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
-const AdminController = require("../../app/controllers/AdminController");
+const AdminController = require("../../app/controllers/AdminController/AdminHocVienController");
 
 router.use(
   "/timkiem",
@@ -11,12 +11,7 @@ router.use(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.timkiem
 );
-router.use(
-  "/giaovien",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.giaovien
-);
+
 router.use(
   "/xemhocvien",
   checkLogged.checkLoggedIn,
@@ -63,7 +58,7 @@ router.use(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
-  AdminController.hocvien
+  AdminController.index
 );
 
 module.exports = router;

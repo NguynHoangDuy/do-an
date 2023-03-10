@@ -4,15 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = "/src/public/img/avatars";
-    if (!fs.existsSync(dir)) {
-      fs.mkdir(dir, { recursive: true }, (err) => {
-        if (err) return cb(err);
-        cb(null, dir);
-      });
-    } else {
-      cb(null, dir);
-    }
+    cb(null, "src/public/img/avatars");
   },
   filename: async function (req, file, cb) {
     const gv = new GiaoVien();

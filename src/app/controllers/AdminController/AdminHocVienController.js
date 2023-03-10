@@ -1,76 +1,14 @@
-const con = require("../../config/db");
 const bcrypt = require("bcrypt");
-const HocVien = require("../models/hocvien");
-const GiaoVien = require("../models/giaovien");
-class AdminController {
-  index(req, res) {
-    res.locals.quyen = "Quản trị viên";
-    res.locals.ten = req.session.ten;
-    res.render("./admin");
-  }
-  async giaovien(req, res) {
-    res.locals.quyen = "Quản trị viên";
-    res.locals.ten = req.session.ten;
-    let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
-    let page = parseInt(req.query.trang) || 1;
-    const offset = (page - 1) * perPage;
-    const gv = new GiaoVien();
-    const totalCount = await gv.demGv();
-    const totalPages = Math.ceil(totalCount / perPage);
-    const listGv = await gv.getAllGv(offset, perPage);
-    res.render("./admin/giaovien", {
-      listGv: listGv,
-      current: page,
-      pages: totalPages,
-      perPage: perPage,
-    });
-  }
-  themgiaovien(req, res) {
-    res.locals.quyen = "Quản trị viên";
-    res.locals.ten = req.session.ten;
-    res.render("./admin/giaovien/them");
-  }
-  async themgiaovien_action(req, res) {
-    res.locals.quyen = "Quản trị viên";
-    res.locals.ten = req.session.ten;
-    const { hoten, gt, ngaysinh, sdt, diachi, email, trinhdo } = req.body;
-    const anh_dd = req.file.filename;
-    const gv = new GiaoVien();
-    const maGv = await gv.layMaGV();
-    console.log(req.body, req.file);
-    const mkArr = req.body.ngaysinh.split("-");
-    const mk = mkArr.reverse().join("");
-    const salt = bcrypt.genSaltSync(10);
-    const mkHash = await bcrypt.hashSync(mk, salt);
-    console.log(mkHash);
-    console.log(maGv);
-    const kq = gv.themgiaovien(
-      maGv,
-      hoten,
-      gt,
-      ngaysinh,
-      sdt,
-      diachi,
-      email,
-      mkHash,
-      trinhdo,
-      anh_dd
-    );
-    if (kq) {
-      res.redirect(`/admin/hocvien/kqthem?ma=${maGv}`);
-    } else {
-      res.redirect(`/admin`);
-    }
-    res.render("./admin/giaovien/them");
-  }
-  async hocvien(req, res) {
+const HocVien = require("../../models/hocvien");
+class AdminHocVienController {
+  async index(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
     let page = parseInt(req.query.trang) || 1;
     const offset = (page - 1) * perPage;
     const hv = new HocVien();
-    const totalCount = await hv.demHv();
+    const totalCount = await hv.demHv("", "");
     const totalPages = Math.ceil(totalCount / perPage);
     const listHv = await hv.getAllHv(offset, perPage);
     res.render("./admin/hocvien", {
@@ -91,7 +29,7 @@ class AdminController {
     const sdt = req.query.sdt;
     if (!hoten && !sdt) {
       const hv = new HocVien();
-      const totalCount = await hv.demHv();
+      const totalCount = await hv.demHv("", "");
       const totalPages = Math.ceil(totalCount / perPage);
       const listHv = await hv.getAllHv(offset, perPage);
       res.render("./admin/hocvien/timkiem", {
@@ -101,37 +39,19 @@ class AdminController {
         perPage: perPage,
       });
     } else {
-      con.query(
-        `select count(*) as count from hoc_vien where HO_TEN like '%${hoten}%' or SDT='${sdt}'`,
-        (err, count) => {
-          if (err) {
-            console.log("sai");
-          } else {
-            const totalCount = count[0].count;
-            const totalPages = Math.ceil(totalCount / perPage);
-
-            con.query(
-              `Select * from hoc_vien where HO_TEN like '%${hoten}%'or SDT = '${sdt}' Limit ${offset}, ${perPage}`,
-              (err, result) => {
-                if (err) {
-                  console.log("Lỗi");
-                  res.render("./admin/hocvien");
-                } else {
-                  res.render("./admin/hocvien/timkiem", {
-                    listHv: result,
-                    current: page,
-                    pages: totalPages,
-                    kq: totalCount,
-                    hoten: hoten,
-                    sdt: sdt,
-                    perPage: perPage,
-                  });
-                }
-              }
-            );
-          }
-        }
-      );
+      const hv = new HocVien();
+      const totalCount = await hv.demHv(hoten, sdt);
+      const totalPages = Math.ceil(totalCount / perPage);
+      const listHv = await hv.timkiemHV(offset, perPage, hoten, sdt);
+      res.render("./admin/hocvien/timkiem", {
+        listHv: listHv,
+        current: page,
+        pages: totalPages,
+        kq: totalCount,
+        hoten: hoten,
+        sdt: sdt,
+        perPage: perPage,
+      });
     }
   }
 
@@ -201,10 +121,14 @@ class AdminController {
     const ma = req.query.mahv;
     const hv = new HocVien();
     function formatDate(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
+      if (date === null) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      } else {
+        return "0000-00-00";
+      }
     }
     const kqHv = await hv.xemthongtin(ma);
     res.render("./admin/hocvien/xem", { hv: kqHv, formatDate });
@@ -279,4 +203,4 @@ class AdminController {
   }
 }
 
-module.exports = new AdminController();
+module.exports = new AdminHocVienController();

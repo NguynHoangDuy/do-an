@@ -4,7 +4,7 @@ const uploadImage = require("../../middleware/uploadImage");
 const express = require("express");
 const router = express.Router();
 
-const AdminController = require("../../app/controllers/AdminController");
+const AdminController = require("../../app/controllers/AdminController/AdminGiaoVienController");
 
 router.post(
   "/themgiaovien",
@@ -19,11 +19,11 @@ router.get(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themgiaovien
 );
-router.use(
+router.get(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
-  AdminController.giaovien
+  AdminController.index
 );
 
 module.exports = router;

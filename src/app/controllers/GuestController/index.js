@@ -1,4 +1,4 @@
-const con = require("../../config/db");
+const con = require("../../../config/db");
 const bcrypt = require("bcrypt");
 class GuestController {
   index(req, res) {
