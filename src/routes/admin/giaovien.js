@@ -1,6 +1,7 @@
 const checkLogged = require("../../middleware/checkLogin");
 const checkAuthor = require("../../middleware/checkPermission");
-const uploadImage = require("../../middleware/uploadImage");
+const addImage = require("../../middleware/addImage");
+const updateImage = require("../../middleware/updateImage");
 const express = require("express");
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.post(
   "/themgiaovien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
-  uploadImage.single("anh_dd"),
+  addImage.single("anh_dd"),
   AdminController.themgiaovien_action
 );
 router.get(
@@ -18,6 +19,31 @@ router.get(
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themgiaovien
+);
+router.use(
+  "/xemgiaovien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xemgiaovien
+);
+router.use(
+  "/xoagiaovien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xoagiaovien
+);
+router.post(
+  "/capnhatgiaovien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  updateImage.single("anh_dd"),
+  AdminController.suathongtin_action
+);
+router.get(
+  "/capnhatgiaovien",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.suathongtin
 );
 router.get(
   "/",

@@ -110,12 +110,12 @@ class GiaoVien {
           `SELECT * FROM giao_vien where MA_GV = '${ma_gv}'`,
           (err, dt) => {
             if (err) {
-              reject([]);
+              resolve(0);
             } else {
               if (dt.length !== 0) {
-                resolve(dt);
+                resolve(dt[0]);
               } else {
-                resolve([]);
+                resolve(0);
               }
             }
           }
@@ -132,16 +132,19 @@ class GiaoVien {
     sdt,
     diachi,
     email,
+    trinhdo,
     anh_dd
   ) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `UPDATE giao_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}', ,ANH_DD='${anh_dd}' WHERE MA_HV='${ma_gv}'`,
+          `UPDATE giao_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}', ANH_DD='${anh_dd}', TRINH_DO='${trinhdo}' WHERE MA_GV='${ma_gv}'`,
           (err, dt) => {
             if (err) {
-              reject(0);
+              console.log(err);
+              resolve(0);
             } else {
+              console.log(dt);
               resolve(1);
             }
           }
@@ -151,14 +154,14 @@ class GiaoVien {
     return await kq();
   }
 
-  async xoahocvien(magv) {
+  async xoagiaovien(magv) {
     const kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `DELETE FROM giao_vien WHERE MA_HV='${magv}'`,
+          `DELETE FROM giao_vien WHERE MA_GV='${magv}'`,
           (err, result) => {
             if (err) {
-              reject(0);
+              resolve(0);
             } else {
               resolve(1);
             }

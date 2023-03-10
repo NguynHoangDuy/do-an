@@ -1,4 +1,4 @@
-extends ../layout/layout-dash
+extends ../../layout/layout-dash
 block container
     .dash-main
         .container
@@ -6,10 +6,10 @@ block container
             .flex.justify-around
                 a.button(href="/admin/giaovien/themgiaovien") Thêm giáo viên mới 
                 form.search-form-full(action="/admin/giaovien", method="get", role="form")
-                            input(type="text", name="timkiem", placeholder="Tìm kiếm")
+                            input(type="text", name="timkiem", value= hoten,placeholder="Tìm kiếm")
             .bg-white.p-40.radius-16.mt-2
                 for gv in listGv
-                    a(href="").member-entry
+                    a(href="/admin/giaovien/xemgiaovien?magv="+gv.MA_GV).member-entry
                         .member-img.mr-20
                             img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
                         .member-detail
@@ -35,7 +35,11 @@ block container
                                     p.mr-10
                                         i.fa.fa-school-flag
                                     p= gv.TRINH_DO		
-                +pagination(current, pages, "/admin/giaovien", "/admin/giaovien/trang=")
+                if (!tk)
+                    +pagination(current, pages, "/admin/giaovien", "/admin/giaovien?trang=")
+                else
+                    +pagination(current, pages, `/admin/giaovien?timkiem=${hoten}`, `/admin/giaovien?timkiem=${hoten}&trang=`)
+
             .flex.flex-end.mt-4
                 a.button(href="/admin") Trở về
 
