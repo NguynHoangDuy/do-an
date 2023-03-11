@@ -1,4 +1,3 @@
-const con = require("../../../config/db");
 class HocVienController {
   index(req, res) {
     const name = req.session.ten;

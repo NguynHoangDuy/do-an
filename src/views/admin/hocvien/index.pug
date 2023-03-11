@@ -1,50 +1,54 @@
 extends ../../layout/layout-dash
 block container
-	.dash-main
-		.container
-			p.title Quản lý thông tin học viên
-			.flex.justify-around
-				a.button(href="/admin/hocvien/timkiem") Tìm kiếm 
-				a.button(href="/admin/hocvien/themhocvien") Thêm học viên mới 
-			.bg-white.p-20.radius-16.mt-2
-				.table-responsive
-					table.table.no-wrap.user-table.mb-0 
-						thead
-							tr.borderbottom
-								th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
-								th(scope="col", class="border-0 text-uppercase font-medium") Họ và tên
-								th(scope="col", class="border-0 text-uppercase font-medium") Giới tính
-								th(scope="col", class="border-0 text-uppercase font-medium") Số điện thoại
-								th(scope="col", class="border-0 text-uppercase font-medium") Email
-								th(scope="col", class="border-0 text-uppercase font-medium") Địa chỉ
-								th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
-						tbody
-							- stt = 1
-							for hv in listHv 
-								tr
-									td(class="pl-4")= (perPage * current) - (perPage - stt++)
-									td
-										p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
-									td
-										if (hv.GIOI_TINH === 1)
-											p.text-overflow(class="font-medium mb-0") Nam
-										else 
-											p.text-overflow(class="font-medium mb-0") Nữ
-									td
-										p.text-overflow(class="font-medium mb-0")= hv.SDT
-									td
-										p.text-overflow(class="font-medium mb-0")= hv.EMAIL
-									td
-										p.text-overflow(class="font-medium mb-0")= hv.DIA_CHI
-									td
-										a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
-											i(class="fa fa-info") 
-										a(href="/admin/hocvien/capnhathocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
-											i(class="fa fa-edit") 
-										button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
-											i(class="fa fa-trash") 
-									+confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`)
-				+pagination(current, pages, "/admin/hocvien", "/admin/hocvien/trang=")
-			.flex.flex-end.mt-4
-				a.button(href="/admin") Trở về
+    .dash-main
+        .container
+            p.title Quản lý thông tin học viên
+            .flex.justify-around
+                a.button(href="/admin/hocvien/timkiem") Tìm kiếm 
+                a.button(href="/admin/hocvien/themhocvien") Thêm học viên mới 
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages) 
+            .bg-white.p-20.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Họ và tên
+                                th(scope="col", class="border-0 text-uppercase font-medium") Giới tính
+                                th(scope="col", class="border-0 text-uppercase font-medium") Số điện thoại
+                                th(scope="col", class="border-0 text-uppercase font-medium") Email
+                                th(scope="col", class="border-0 text-uppercase font-medium") Địa chỉ
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+                        tbody
+                            - stt = 1
+                            for hv in listHv 
+                                tr
+                                    td(class="pl-4")= (perPage * current) - (perPage - stt++)
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
+                                    td
+                                        if (hv.GIOI_TINH === 1)
+                                            p.text-overflow(class="font-medium mb-0") Nam
+                                        else 
+                                            p.text-overflow(class="font-medium mb-0") Nữ
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.SDT
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.EMAIL
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.DIA_CHI
+                                    td
+                                        a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-info") 
+                                        a(href="/admin/hocvien/capnhathocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-edit") 
+                                        button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-trash") 
+                                    +confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`)
+                +pagination(current, pages, "/admin/hocvien", "/admin/hocvien/trang=")
+            .flex.flex-end.mt-4
+                a.button(href="/admin") Trở về
 

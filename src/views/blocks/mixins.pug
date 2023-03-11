@@ -4,7 +4,7 @@ mixin confirm-modal(index,title, content, confirmBtnText, confirmBtnHref)
       .modal-content
         .modal-header
           h5.modal-title#confirm-modal-title #{title}
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
+          button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
           p= content
