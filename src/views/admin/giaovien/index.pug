@@ -7,6 +7,10 @@ block container
                 a.button(href="/admin/giaovien/themgiaovien") Thêm giáo viên mới 
                 form.search-form-full(action="/admin/giaovien", method="get", role="form")
                             input(type="text", name="timkiem", value= hoten,placeholder="Tìm kiếm")
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages)
             .bg-white.p-40.radius-16.mt-2
                 for gv in listGv
                     a(href="/admin/giaovien/xemgiaovien?magv="+gv.MA_GV).member-entry

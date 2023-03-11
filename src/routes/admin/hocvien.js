@@ -11,7 +11,12 @@ router.use(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.timkiem
 );
-
+router.use(
+  "/resetMK",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.resetMK
+);
 router.use(
   "/xemhocvien",
   checkLogged.checkLoggedIn,

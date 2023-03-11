@@ -141,10 +141,8 @@ class GiaoVien {
           `UPDATE giao_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}', ANH_DD='${anh_dd}', TRINH_DO='${trinhdo}' WHERE MA_GV='${ma_gv}'`,
           (err, dt) => {
             if (err) {
-              console.log(err);
               resolve(0);
             } else {
-              console.log(dt);
               resolve(1);
             }
           }
@@ -160,6 +158,24 @@ class GiaoVien {
         con.query(
           `DELETE FROM giao_vien WHERE MA_GV='${magv}'`,
           (err, result) => {
+            if (err) {
+              resolve(0);
+            } else {
+              resolve(1);
+            }
+          }
+        );
+      });
+    };
+    return await kq();
+  }
+
+  async resetMK(ma_gv, mk) {
+    let kq = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `UPDATE giao_vien SET MAT_KHAU='${mk}' WHERE MA_GV='${ma_gv}'`,
+          (err, dt) => {
             if (err) {
               resolve(0);
             } else {

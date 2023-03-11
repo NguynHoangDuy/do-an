@@ -106,7 +106,11 @@ class AdminHocVienController {
       cv
     );
     if (kq) {
-      res.redirect(`/admin/hocvien/kqthem?ma=${mahv}`);
+      req.flash("success", "Thêm học viên thành công.");
+      res.redirect(`/admin/hocvien`);
+    } else {
+      req.flash("fail", "Thêm học viên không thành công.");
+      res.redirect(`/admin/hocvien`);
     }
   }
   kqthem(req, res) {
@@ -187,9 +191,11 @@ class AdminHocVienController {
       cv,
       tinhtrang
     );
-    console.log(kq);
     if (kq) {
-      console.log(kq);
+      req.flash("success", "Cập nhật học viên thành công.");
+      res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
+    } else {
+      req.flash("fail", "Cập nhật học viện không thành công");
       res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
     }
   }
@@ -198,7 +204,31 @@ class AdminHocVienController {
     const hv = new HocVien();
     const kq = hv.xoahocvien(ma);
     if (kq) {
+      req.flash("success", "Xóa học viên thành công.");
       res.redirect(`/admin/hocvien/`);
+    } else {
+      req.flash("fail", "Xóa giáo viên không thành công.");
+      res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
+    }
+  }
+  async resetMK(req, res) {
+    const magv = req.query.mahv;
+    const gv = new HocVien();
+    const giaovien = await gv.xemthongtin(magv);
+    const ngaySinh = giaovien[0].NGAY_SINH;
+    const date = new Date(ngaySinh);
+    const mk = `${date.getDate()}${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}${date.getFullYear()}`;
+    const salt = bcrypt.genSaltSync(10);
+    const mkHash = await bcrypt.hashSync(mk, salt);
+    const kq = gv.resetMK(magv, mkHash);
+    if (kq) {
+      req.flash("success", "Cập nhật mật khẩu thành công.");
+      res.redirect(`/admin/hocvien`);
+    } else {
+      req.flash("fail", "Cập nhật mật khẩu thành công.");
+      res.render(`/admin/hocvien/xemhocvien?mahv=${magv}`);
     }
   }
 }

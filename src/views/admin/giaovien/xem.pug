@@ -1,52 +1,57 @@
 extends ../../layout/layout-dash
 block container
-	.dash-main
-		.container
-			if (kq)
-				p.title Xem thông tin giáo viên
-					.flex.flex-end
-						a.mr-10.button(href="/admin/giaovien/capnhatgiaovien?magv="+kq.MA_GV) Cập nhật
-						button.mr-10.button(data-toggle="modal" ,data-target=`#${kq.MA_GV}`) Xóa 
-						a.button(href="/admin/giaovien") Trở về
-						+confirm-modal(`${kq.MA_GV}`,'Xác nhận xóa giáo viên', 'Bạn có chắc chắn muốn xóa giáo viên này?', 'Xóa', `/admin/giaovien/xoagiaovien?magv=${kq.MA_GV}`) 
-					.bg-white.create-form.mb-4
-						div
-							p Ảnh đại diện
-								div.text-center
-									label.d-block.mb-2(for="anh_dd") 
-										img.img-account-profile.rounded-circle.mb-2(src="/img/avatars/"+kq.ANH_DD, alt="")
-									input.d-none(type="file", name="anh_dd", id="anh_dd", disabled)
-									label.button(for="anh_dd") Tải ảnh lên 
-						.create-group.mt-2
-							.create-item
-								label(for='hoten') Họ và tên
-								input(type='text', id='hoten', name='hoten', disabled, value= kq.HO_TEN)
-							.create-item
-								label(for='gt') Giới tính
-								select.not-focus(class="form-control", id="gt", name="gt", disabled)
-									option(value="1", selected =(kq.GIOI_TINH==1?true:false)) Nam  
-									option(value="0", selected =(kq.GIOI_TINH==0?true:false)) Nữ
-						.create-group.mt-2
-							.create-item
-								label(for='ngaysinh') Ngày sinh
-								input(type='date', id='ngaysinh', name='ngaysinh', value= formatDate(kq.NGAY_SINH), disabled)
-							.create-item
-								label(for='sdt') Số điện thoại
-								input(type='text', id='sdt', name='sdt', disabled , value= kq.SDT)
-						.create-group.mt-2
-							.create-item.w-100
-								label(for='diachi') Địa chỉ
-								input(type='text', id='diachi', name='diachi', value= kq.DIA_CHI, disabled)
-						.create-group.mt-2
-							.create-item.w-100
-								label(for='email') Email
-								input(type='email', id='email', name='email', value= kq.EMAIL, disabled)
-						.create-group.mt-2
-							.create-item.w-100
-								label(for='trinhdo') Trình độ
-								input(type='text', id='trinhdo', name='trinhdo', value= kq.TRINH_DO, disabled)
-			else
-				p.title Không có thông tin
+    .dash-main
+        .container
+            if (kq)
+                p.title Xem thông tin giáo viên
+                    .flex.flex-end
+                        a.mr-10.button(href="/admin/giaovien/resetmk?magv="+kq.MA_GV) Reset mật khẩu
+                        a.mr-10.button(href="/admin/giaovien/capnhatgiaovien?magv="+kq.MA_GV) Cập nhật
+                        button.mr-10.button(data-toggle="modal" ,data-target=`#${kq.MA_GV}`) Xóa 
+                        a.button(href="/admin/giaovien") Trở về
+                        +confirm-modal(`${kq.MA_GV}`,'Xác nhận xóa giáo viên', 'Bạn có chắc chắn muốn xóa giáo viên này?', 'Xóa', `/admin/giaovien/xoagiaovien?magv=${kq.MA_GV}`) 
+                    if messages.success
+                        +alert(messages)
+                    if messages.fail
+                        +alertNot(messages) 
+                    .bg-white.create-form.mb-4
+                        div
+                            p Ảnh đại diện
+                                div.text-center
+                                    label.d-block.mb-2(for="anh_dd") 
+                                        img.img-account-profile.rounded-circle.mb-2(src="/img/avatars/"+kq.ANH_DD, alt="")
+                                    input.d-none(type="file", name="anh_dd", id="anh_dd", disabled)
+                                    label.button(for="anh_dd") Tải ảnh lên 
+                        .create-group.mt-2
+                            .create-item
+                                label(for='hoten') Họ và tên
+                                input(type='text', id='hoten', name='hoten', disabled, value= kq.HO_TEN)
+                            .create-item
+                                label(for='gt') Giới tính
+                                select.not-focus(class="form-control", id="gt", name="gt", disabled)
+                                    option(value="1", selected =(kq.GIOI_TINH==1?true:false)) Nam  
+                                    option(value="0", selected =(kq.GIOI_TINH==0?true:false)) Nữ
+                        .create-group.mt-2
+                            .create-item
+                                label(for='ngaysinh') Ngày sinh
+                                input(type='date', id='ngaysinh', name='ngaysinh', value= formatDate(kq.NGAY_SINH), disabled)
+                            .create-item
+                                label(for='sdt') Số điện thoại
+                                input(type='text', id='sdt', name='sdt', disabled , value= kq.SDT)
+                        .create-group.mt-2
+                            .create-item.w-100
+                                label(for='diachi') Địa chỉ
+                                input(type='text', id='diachi', name='diachi', value= kq.DIA_CHI, disabled)
+                        .create-group.mt-2
+                            .create-item.w-100
+                                label(for='email') Email
+                                input(type='email', id='email', name='email', value= kq.EMAIL, disabled)
+                        .create-group.mt-2
+                            .create-item.w-100
+                                label(for='trinhdo') Trình độ
+                                input(type='text', id='trinhdo', name='trinhdo', value= kq.TRINH_DO, disabled)
+            else
+                p.title Không có thông tin
 
 
 

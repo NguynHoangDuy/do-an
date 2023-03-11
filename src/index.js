@@ -5,10 +5,11 @@ const route = require("./routes");
 const session = require("express-session");
 const port = 3000;
 const bodyParser = require("body-parser");
+const flash = require("express-flash");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(flash());
 app.set("view engine", "pug");
 app.set("views", "src" + "/views");
 app.use(express.static(path.join(__dirname, "public")));

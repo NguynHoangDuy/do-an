@@ -32,6 +32,12 @@ router.use(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.xoagiaovien
 );
+router.use(
+  "/resetMK",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.resetMK
+);
 router.post(
   "/capnhatgiaovien",
   checkLogged.checkLoggedIn,

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const GiaoVien = require("../../models/giaovien");
+
 class AdminGiaoVienController {
   async index(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -69,9 +70,11 @@ class AdminGiaoVienController {
       anh_dd
     );
     if (kq) {
-      res.redirect(`/admin/hocvien/kqthem?ma=${maGv}`);
+      req.flash("success", "Thêm giáo viên thành công.");
+      res.redirect(`/admin/giaovien`);
     } else {
-      res.redirect(`/admin`);
+      req.flash("fail", "Thêm giáo viên không thành công");
+      res.redirect(`/admin/giaovien/themgiaovien`);
     }
   }
 
@@ -141,6 +144,7 @@ class AdminGiaoVienController {
       anh_dd
     );
     if (kqCN) {
+      req.flash("success", "Cập nhật giáo viên thành công.");
       res.redirect(`/admin/giaovien/xemgiaovien?magv=${magv}`);
     } else {
       res.render("/admin/giaovien/sua", { kq });
@@ -152,8 +156,33 @@ class AdminGiaoVienController {
     const gv = new GiaoVien();
     const kq = gv.xoagiaovien(magv);
     if (kq) {
+      req.flash("success", "Xóa giáo viên thành công.");
       res.redirect(`/admin/giaovien`);
     } else {
+      req.flash("fail", "Xóa giáo viên không thành công.");
+      res.render(`/admin/giaovien/xemgiaovien?magv=${magv}`);
+    }
+  }
+  async resetMK(req, res) {
+    const magv = req.query.magv;
+    const gv = new GiaoVien();
+    const giaovien = await gv.xemthongtin(magv);
+
+    const ngaySinh = giaovien.NGAY_SINH;
+
+    const date = new Date(ngaySinh);
+    const mk = `${date.getDate()}${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}${date.getFullYear()}`;
+    const salt = bcrypt.genSaltSync(10);
+    const mkHash = await bcrypt.hashSync(mk, salt);
+    console.log(mkHash);
+    const kq = gv.resetMK(magv, mkHash);
+    if (kq) {
+      req.flash("success", "Cập nhật mật khẩu thành công.");
+      res.redirect(`/admin/giaovien`);
+    } else {
+      req.flash("fail", "Cập nhật mật khẩu thành công.");
       res.render(`/admin/giaovien/xemgiaovien?magv=${magv}`);
     }
   }

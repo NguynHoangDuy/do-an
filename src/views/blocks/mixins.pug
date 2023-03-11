@@ -53,3 +53,13 @@ mixin pagination(current, pages, link_first, link)
           else 
             li.page-item
               a.page-link(href= link+pages) Cuối
+
+
+mixin alert(messages)
+  .alert.alert-success
+    button.close-alert.close(data-dismiss="alert") &times;
+    = messages.success
+mixin alertNot(messages)
+  .alert.alert-warning
+    button.close-alert.close(data-dismiss="alert") &times;
+    = messages.fail
