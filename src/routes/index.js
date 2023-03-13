@@ -2,10 +2,12 @@ const guestRouter = require("./guest");
 const adminRouter = require("./admin");
 const adminHocVienRouter = require("./admin/hocvien");
 const adminGiaoVienRouter = require("./admin/giaovien");
+const adminKhoaHocRouter = require("./admin/khoahoc");
 const giaoVienRouter = require("./giaovien");
 const hocVienRouter = require("./hocvien");
 
 function route(app) {
+  app.use("/admin/khoahoc", adminKhoaHocRouter);
   app.use("/admin/hocvien", adminHocVienRouter);
   app.use("/admin/giaovien", adminGiaoVienRouter);
   app.use("/admin", adminRouter);

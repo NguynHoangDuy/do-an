@@ -1,18 +1,7 @@
 const con = require("../../config/db");
 
 class HocVien {
-  constructor(ma_hv, ho_ten, gt, ngaysinh, sdt, diachi, email, matkhau, dt) {
-    (this.ma_hv = ma_hv),
-      (this.ho_ten = ho_ten),
-      (this.gt = gt),
-      (this.sdt = sdt),
-      (this.ngaysinh = ngaysinh),
-      (this.diachi = diachi),
-      (this.email = email),
-      (this.matkhau = matkhau),
-      (this.dt = dt);
-  }
-  async demHv(hoten, sdt) {
+  demHv(hoten, sdt) {
     const count = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -27,9 +16,9 @@ class HocVien {
         );
       });
     };
-    return await count();
+    return count();
   }
-  async timkiemHV(offset, perPage, hoten, sdt) {
+  timkiemHV(offset, perPage, hoten, sdt) {
     const hv = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -46,9 +35,9 @@ class HocVien {
         );
       });
     };
-    return await hv();
+    return hv();
   }
-  async getAllHv(offset, perPage) {
+  getAllHv(offset, perPage) {
     const hv = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -64,7 +53,7 @@ class HocVien {
         );
       });
     };
-    return await hv();
+    return hv();
   }
   layMaHV() {
     const mahv = () => {
@@ -85,7 +74,7 @@ class HocVien {
       return kq;
     });
   }
-  async themhocvien(
+  themhocvien(
     ma_hv,
     ho_ten,
     gt,
@@ -106,7 +95,7 @@ class HocVien {
     let kqThem = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}')`,
+          `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}', '${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}')`,
           (err, result) => {
             if (err) {
               resolve(0);
@@ -118,10 +107,10 @@ class HocVien {
         );
       });
     };
-    return await kqThem();
+    return kqThem();
   }
 
-  async xemthongtin(ma_hv) {
+  xemthongtin(ma_hv) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -140,9 +129,9 @@ class HocVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
-  async capnhathocvien(
+  capnhathocvien(
     ma_hv,
     ho_ten,
     gt,
@@ -174,10 +163,10 @@ class HocVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 
-  async xoahocvien(mahv) {
+  xoahocvien(mahv) {
     const kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -192,10 +181,10 @@ class HocVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 
-  async resetMK(ma_hv, mk) {
+  resetMK(ma_hv, mk) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -210,7 +199,7 @@ class HocVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 }
 

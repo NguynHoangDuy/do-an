@@ -69,7 +69,7 @@ class AdminGiaoVienController {
       trinhdo,
       anh_dd
     );
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Thêm giáo viên thành công.");
       res.redirect(`/admin/giaovien`);
     } else {
@@ -143,7 +143,7 @@ class AdminGiaoVienController {
       trinhdo,
       anh_dd
     );
-    if (kqCN) {
+    if (kqCN === 1) {
       req.flash("success", "Cập nhật giáo viên thành công.");
       res.redirect(`/admin/giaovien/xemgiaovien?magv=${magv}`);
     } else {
@@ -155,7 +155,7 @@ class AdminGiaoVienController {
     const magv = req.query.magv;
     const gv = new GiaoVien();
     const kq = gv.xoagiaovien(magv);
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Xóa giáo viên thành công.");
       res.redirect(`/admin/giaovien`);
     } else {
@@ -167,18 +167,15 @@ class AdminGiaoVienController {
     const magv = req.query.magv;
     const gv = new GiaoVien();
     const giaovien = await gv.xemthongtin(magv);
-
     const ngaySinh = giaovien.NGAY_SINH;
-
     const date = new Date(ngaySinh);
     const mk = `${date.getDate()}${(date.getMonth() + 1)
       .toString()
       .padStart(2, "0")}${date.getFullYear()}`;
     const salt = bcrypt.genSaltSync(10);
     const mkHash = await bcrypt.hashSync(mk, salt);
-    console.log(mkHash);
     const kq = gv.resetMK(magv, mkHash);
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Cập nhật mật khẩu thành công.");
       res.redirect(`/admin/giaovien`);
     } else {

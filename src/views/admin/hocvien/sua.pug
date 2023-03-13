@@ -4,11 +4,9 @@ block container
         .container
             if (hv.length !== 0)
                 p.title Thông tin học viên
-                if messages.success
-                    +alert(messages)
                 if messages.fail
                     +alertNot(messages) 
-                form.bg-white.create-form.mb-4(action="/admin/hocvien/suahocvien?mahv="+hv[0].MA_HV, method="post")
+                form.bg-white.create-form.mb-4(action="/admin/hocvien/capnhathocvien?mahv="+hv[0].MA_HV, method="post")
                     .create-group.mt-2
                         .create-item
                             label(for='hoten') Họ và tên
@@ -60,10 +58,10 @@ block container
                                     .create-group.mt-2
                                         .create-item
                                             label(for='phuhuynh') Phụ huynh
-                                            input(type='text', id='phuhuynh', name='phuhuynh', value= hv[0].PHU_HUYNH)
+                                            input(type='text', id='phuhuynh', name='phuhuynh', value= phuhuynh)
                                         .create-item
                                             label(for='sdt-ph') Số điện thoại phụ huynh
-                                            input(type='text', id='sdt-ph', name='sdt-ph',value= hv[0].SDT_PH)  
+                                            input(type='text', id='sdt-ph', name='sdtph',value= hv[0].SDT_PH)  
                                 .sv-content.mt-4
                                     .create-group.mt-2
                                         .create-item

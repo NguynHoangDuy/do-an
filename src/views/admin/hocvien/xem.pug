@@ -10,6 +10,10 @@ block container
                     button.mr-10.button(data-toggle="modal" ,data-target=`#${hv[0].MA_HV}`) Xóa 
                     a.button(href="/admin/hocvien") Trở về
                     +confirm-modal(`${hv[0].MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${hv.MA_HV}`) 
+                if messages.success
+                    +alert(messages)
+                if messages.fail
+                    +alertNot(messages) 
                 .bg-white.create-form.mb-4
                     .create-group.mt-2
                         .create-item

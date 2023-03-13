@@ -4,7 +4,7 @@ class GiaoVien {
   constructor(ma_gv) {
     this.ma_gv = ma_gv;
   }
-  async demGv(ho_ten) {
+  demGv(ho_ten) {
     const count = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -19,9 +19,9 @@ class GiaoVien {
         );
       });
     };
-    return await count();
+    return count();
   }
-  async getAllGv(offset, perPage) {
+  getAllGv(offset, perPage) {
     const gv = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -37,9 +37,9 @@ class GiaoVien {
         );
       });
     };
-    return await gv();
+    return gv();
   }
-  async timkiemGiaoVien(offset, perPage, hoten) {
+  timkiemGiaoVien(offset, perPage, hoten) {
     const gv = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -56,9 +56,9 @@ class GiaoVien {
         );
       });
     };
-    return await gv();
+    return gv();
   }
-  async layMaGV() {
+  layMaGV() {
     const magv = () => {
       return new Promise((resolve, reject) => {
         con.query("SELECT MAX(MA_GV) as MA_GV FROM giao_vien", (err, id) => {
@@ -72,9 +72,9 @@ class GiaoVien {
         });
       });
     };
-    return await magv();
+    return magv();
   }
-  async themgiaovien(
+  themgiaovien(
     ma_gv,
     ho_ten,
     gt,
@@ -100,10 +100,10 @@ class GiaoVien {
         );
       });
     };
-    return await kqThem();
+    return kqThem();
   }
 
-  async xemthongtin(ma_gv) {
+  xemthongtin(ma_gv) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -122,9 +122,9 @@ class GiaoVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
-  async capnhatgiaovien(
+  capnhatgiaovien(
     ma_gv,
     ho_ten,
     gt,
@@ -149,10 +149,10 @@ class GiaoVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 
-  async xoagiaovien(magv) {
+  xoagiaovien(magv) {
     const kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -167,10 +167,10 @@ class GiaoVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 
-  async resetMK(ma_gv, mk) {
+  resetMK(ma_gv, mk) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
@@ -185,7 +185,7 @@ class GiaoVien {
         );
       });
     };
-    return await kq();
+    return kq();
   }
 }
 

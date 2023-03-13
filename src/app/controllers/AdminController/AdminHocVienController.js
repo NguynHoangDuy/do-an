@@ -105,7 +105,7 @@ class AdminHocVienController {
       truongdh,
       cv
     );
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Thêm học viên thành công.");
       res.redirect(`/admin/hocvien`);
     } else {
@@ -191,19 +191,19 @@ class AdminHocVienController {
       cv,
       tinhtrang
     );
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Cập nhật học viên thành công.");
       res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
     } else {
       req.flash("fail", "Cập nhật học viện không thành công");
-      res.redirect(`/admin/hocvien/xemhocvien?mahv=${ma}`);
+      res.redirect(`/admin/hocvien/suahocvien?mahv=${ma}`);
     }
   }
   xoahocvien(req, res) {
     const ma = req.query.mahv;
     const hv = new HocVien();
     const kq = hv.xoahocvien(ma);
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Xóa học viên thành công.");
       res.redirect(`/admin/hocvien/`);
     } else {
@@ -223,7 +223,7 @@ class AdminHocVienController {
     const salt = bcrypt.genSaltSync(10);
     const mkHash = await bcrypt.hashSync(mk, salt);
     const kq = gv.resetMK(magv, mkHash);
-    if (kq) {
+    if (kq === 1) {
       req.flash("success", "Cập nhật mật khẩu thành công.");
       res.redirect(`/admin/hocvien`);
     } else {
