@@ -1,5 +1,19 @@
 const con = require("../../config/db");
 class KhoaHoc {
+  dsKhoaHocAll() {
+    const dsKH = () => {
+      return new Promise((resolve, reject) => {
+        con.query(`SELECT * from khoa_hoc`, (err, kq) => {
+          if (err) {
+            resolve([]);
+          } else {
+            resolve(kq);
+          }
+        });
+      });
+    };
+    return dsKH();
+  }
   dsKhoaHoc(offset, perPage) {
     const dsKH = () => {
       return new Promise((resolve, reject) => {
@@ -17,7 +31,7 @@ class KhoaHoc {
     };
     return dsKH();
   }
-  async demKH(maKH = "", tenKH = "") {
+  demKH(maKH = "", tenKH = "") {
     if (maKH || tenKH) {
       const count = () => {
         return new Promise((resolve, reject) => {
@@ -67,11 +81,11 @@ class KhoaHoc {
     return timkiem();
   }
 
-  themkhoahoc(maKH, tenKH, hocPhi) {
+  themkhoahoc(maKH, tenKH) {
     const khoahoc = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO khoa_hoc (MA_KH, TEN_KH, HOC_PHI) VALUES ('${maKH}','${tenKH}','${hocPhi}')`,
+          `INSERT INTO khoa_hoc (MA_KH, TEN_KH) VALUES ('${maKH}','${tenKH}')`,
           (err, kq) => {
             if (err) {
               reject(err);
@@ -84,11 +98,11 @@ class KhoaHoc {
     };
     return khoahoc();
   }
-  capnhatkhoahoc(maKH, tenKH, hocPhi, old) {
+  capnhatkhoahoc(maKH, tenKH, old) {
     const khoahoc = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `UPDATE khoa_hoc SET MA_KH='${maKH}',TEN_KH='${tenKH}',HOC_PHI='${hocPhi}' WHERE MA_KH = '${old}'`,
+          `UPDATE khoa_hoc SET MA_KH='${maKH}',TEN_KH='${tenKH}' WHERE MA_KH = '${old}'`,
           (err, kq) => {
             if (err) {
               reject(err);
@@ -119,11 +133,11 @@ class KhoaHoc {
     return kq();
   }
 
-  moDangKy(maKH, tgBD, tgKT, tt) {
+  moDangKy(maKH, tgBD, tgKT, hocphi, tt) {
     const moDK = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO dang_ky_khoa_hoc (MA_KH, TG_BD, TG_KT, TINH_TRANG) VALUES ('${maKH}','${tgBD}','${tgKT}','${tt}')`,
+          `INSERT INTO mo_dang_ky (MA_KH, TG_BD, TG_KT, HOC_PHI, TINH_TRANG) VALUES ('${maKH}','${tgBD}','${tgKT}','${hocphi}','${tt}')`,
           (err, kq) => {
             if (err) {
               console.log(err);

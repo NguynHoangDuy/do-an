@@ -8,7 +8,7 @@ block container
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `timkiem`)
                     .modal-dialog(role='document')
                         .modal-content
-                            form(action="/admin/khoahoc", method="get") 
+                            form(action="/admin/modangky", method="get") 
                                 .modal-header
                                     h5.modal-title#confirm-modal-title Tìm kiếm khóa học
                                     button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -25,24 +25,40 @@ block container
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                     button.btn.btn-success(type="submit") Tìm kiếm
-                a.button(data-toggle="modal" ,data-target=`#themkh`) Thêm khóa học 
+                a.button(data-toggle="modal" ,data-target=`#themkh`) Mở đăng ký khóa học
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themkh`)
                     .modal-dialog.mw-70(role='document')
                         .modal-content
-                            form(action="/admin/khoahoc/themkhoahoc", method="post") 
+                            form(action="/admin/modangky/modangky", method="post") 
                                 .modal-header
-                                    h5.modal-title#confirm-modal-title Thêm khóa học mới
+                                    h5.modal-title#confirm-modal-title Mở đăng ký
                                     button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
                                         span(aria-hidden='true') &times;
                                 .modal-body
                                     .create-group.mt-2
                                         .create-item.w-100
-                                            label(for='maKH') Mã khóa học
-                                            input(type='text', id='maKH', name='maKH', required)
+                                            label(for='makh') Chọn khóa học
+                                            select.not-focus(class="form-control", id="makh", name="makh")
+                                                for dsMa in dsMaKH
+                                                    option(value= dsMa.MA_KH)= dsMa.TEN_KH
                                     .create-group.mt-2
                                         .create-item.w-100
-                                            label(for='tenKH') Tên khóa học
-                                            input(type='text', id='tenKH', name='tenKH', required)
+                                            label(for='ngaybd') Ngày bắt đầu
+                                            input(type='date', id='ngaybd', name='ngaybd',required)
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='ngaykt') Ngày kết thúc
+                                            input(type='date', id='ngaykt', name='ngaykt',  required)
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='hocphi') Học phí
+                                            input(type='number', id='hocphi', name='hocphi',  required)
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='tt') Tình trạng
+                                            select.not-focus(class="form-control", id="tt", name="tt", required)
+                                                option(value="1") Cho phép đăng ký  
+                                                option(value="0") Không cho phép đăng ký
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                     button.btn.btn-success(type="submit") Thêm khóa học
@@ -58,7 +74,9 @@ block container
                                 th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
                                 th(scope="col", class="border-0 text-uppercase font-medium") Mã khóa học
                                 th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
-                                th(scope="col", class="border-0 text-uppercase font-medium") Mở đăng ký
+                                th(scope="col", class="border-0 text-uppercase font-medium") Thời gian bắt đầu
+                                th(scope="col", class="border-0 text-uppercase font-medium") Thời gian kết thúc
+                                th(scope="col", class="border-0 text-uppercase font-medium") Danh sách các lớp
                                 th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
                         tbody
                             - stt = 1
@@ -68,7 +86,11 @@ block container
                                     td
                                         p.text-overflow(class="font-medium mb-0")= kh.MA_KH
                                     td
-                                        p.mw-100.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+                                        p.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_BD)
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_KT)
                                     td
                                         button(data-toggle="modal" ,data-target=`#dangky${kh.MA_KH}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-info")
@@ -88,15 +110,15 @@ block container
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='ngaybd') Ngày bắt đầu
-                                                                    input(type='date', id='ngaybd', name='ngaybd',required)
+                                                                    input(type='date', id='ngaybd', name='ngaybd', value= formatDate(kh.TG_BD),required)
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='ngaykt') Ngày kết thúc
-                                                                    input(type='date', id='ngaykt', name='ngaykt',  required)
+                                                                    input(type='date', id='ngaykt', name='ngaykt', value= formatDate(kh.TG_KT),  required)
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='hocphi') Học phí
-                                                                    input(type='number', id='hocphi', name='hocphi',  required)
+                                                                    input(type='number', id='hocphi', name='hocphi', value= kh.HOC_PHI,  required)
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='tt') Tình trạng
@@ -107,12 +129,12 @@ block container
                                                             button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                                             button.btn.btn-success(type="submit") Mở đăng ký   
                                     td
-                                        button(data-toggle="modal" ,data-target=`#capnhat${kh.MA_KH}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                        button(data-toggle="modal" ,data-target=`#capnhat${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-edit")
-                                        .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capnhat${kh.MA_KH}`)
+                                        .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capnhat${kh.MA_KHCC}`)
                                             .modal-dialog.mw-70(role='document')
                                                 .modal-content
-                                                    form(action=`/admin/khoahoc/capnhatkhoahoc?makh=${kh.MA_KH}`, method="post") 
+                                                    form(action=`/admin/modangky/capnhat?makhcc=${kh.MA_KHCC}`, method="post") 
                                                         .modal-header
                                                             h5.modal-title#confirm-modal-title Cập nhật khóa học
                                                             button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -120,18 +142,32 @@ block container
                                                         .modal-body
                                                             .create-group.mt-2
                                                                 .create-item.w-100
-                                                                    label(for='maKH') Mã khóa học
-                                                                    input(type='text', id='maKH', name='maKH', value= kh.MA_KH, required)
+                                                                    label(for='makh') Mã khóa học
+                                                                    input(type='text', id='makh', name='makh', value= kh.MA_KH, required)
                                                             .create-group.mt-2
                                                                 .create-item.w-100
-                                                                    label(for='tenKH') Tên khóa học
-                                                                    input(type='text', id='tenKH', name='tenKH', value= kh.TEN_KH, required)
+                                                                    label(for='ngaybd') Ngày bắt đầu
+                                                                    input(type='date', id='ngaybd', name='ngaybd',value= formatDate(kh.TG_BD),required)
+                                                            .create-group.mt-2
+                                                                .create-item.w-100
+                                                                    label(for='ngaykt') Ngày kết thúc
+                                                                    input(type='date', id='ngaykt', name='ngaykt', value= formatDate(kh.TG_KT), required)
+                                                            .create-group.mt-2
+                                                                .create-item.w-100
+                                                                    label(for='hocphi') Học phí
+                                                                    input(type='number', id='hocphi', name='hocphi',  value= kh.HOC_PHI,required)
+                                                            .create-group.mt-2
+                                                                .create-item.w-100
+                                                                    label(for='tt') Tình trạng
+                                                                    select.not-focus(class="form-control", id="tt", name="tt", required)
+                                                                        option(value="1") Cho phép đăng ký  
+                                                                        option(value="0") Không cho phép đăng ký
                                                         .modal-footer
                                                             button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
-                                                            button.btn.btn-success(type="submit") Cập nhật
-                                        button(data-toggle="modal" ,data-target=`#xoa${kh.MA_KH}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                                            button.btn.btn-success(type="submit") Cập nhật 
+                                        button(data-toggle="modal" ,data-target=`#xoa${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-trash") 
-                                        +confirm-modal(`xoa${kh.MA_KH}`,'Xác nhận xóa khóa học', 'Bạn có chắc chắn muốn xóa khóa học này?', 'Xóa', `/admin/khoahoc/xoakhoahoc?makh=${kh.MA_KH}`)
+                                        +confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận xóa khóa học', 'Bạn có chắc chắn muốn xóa khóa học này?', 'Xóa', `/admin/modangky/xoa?makhcc=${kh.MA_KHCC}`)
                 if (!tk)
                     +pagination(current, pages, "/admin/khoahoc", "/admin/khoahoc?trang=")
                 else 

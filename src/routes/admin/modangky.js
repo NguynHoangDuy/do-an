@@ -3,31 +3,25 @@ const checkAuthor = require("../../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
-const AdminController = require("../../app/controllers/AdminController/AdminKhoaHocController");
+const AdminController = require("../../app/controllers/AdminController/AdminMoDangKyController");
 
-router.post(
+router.use(
+  "/xoa",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xoa
+);
+router.use(
+  "/capnhat",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.capNhat
+);
+router.use(
   "/modangky",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.moDangKy
-);
-router.use(
-  "/xoakhoahoc",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.xoaKhoaHoc
-);
-router.post(
-  "/capnhatkhoahoc",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.capNhatKhoaHoc
-);
-router.post(
-  "/themkhoahoc",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.themKhoaHoc
 );
 router.use(
   "/",

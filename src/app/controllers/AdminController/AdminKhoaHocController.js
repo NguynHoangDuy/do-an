@@ -15,31 +15,18 @@ class AdminKhoaHocController {
       const totalCount = await khoaHoc.demKH();
       const totalPages = Math.ceil(totalCount / perPage);
       const listKH = await khoaHoc.dsKhoaHoc(offset, perPage);
-      function formatMoney(num) {
-        return Number(num).toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        });
-      }
       res.render("./admin/khoahoc", {
         listKH,
         current: page,
         pages: totalPages,
         perPage: perPage,
         tk: false,
-        formatMoney,
       });
     } else {
       const totalCount = await khoaHoc.demKH(makh, tenkh);
       const totalPages = Math.ceil(totalCount / perPage);
       const listKH = await khoaHoc.timkiemKH(offset, perPage, makh, tenkh);
       console.log(listKH);
-      function formatMoney(num) {
-        return Number(num).toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        });
-      }
       res.render("./admin/khoahoc", {
         listKH,
         current: page,
@@ -48,17 +35,16 @@ class AdminKhoaHocController {
         tk: true,
         makh,
         tenkh,
-        formatMoney,
       });
     }
   }
   async themKhoaHoc(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    const { maKH, tenKH, hocphi } = req.body;
+    const { maKH, tenKH } = req.body;
     console.log(req.body);
     const khoahoc = new KhoaHoc();
-    const kq = await khoahoc.themkhoahoc(maKH, tenKH, hocphi);
+    const kq = await khoahoc.themkhoahoc(maKH, tenKH);
     if (kq === 1) {
       req.flash("success", "Thêm khóa học thành công.");
       res.redirect(`/admin/khoahoc`);
@@ -72,10 +58,10 @@ class AdminKhoaHocController {
     res.locals.ten = req.session.ten;
     const old = req.query.makh;
     console.log(old);
-    const { maKH, tenKH, hocphi } = req.body;
+    const { maKH, tenKH } = req.body;
     console.log(req.body);
     const khoahoc = new KhoaHoc();
-    const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, hocphi, old);
+    const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, old);
     if (kq === 1) {
       req.flash("success", "Cập nhật khóa học thành công.");
       res.redirect(`/admin/khoahoc`);
@@ -101,9 +87,9 @@ class AdminKhoaHocController {
   async moDangKy(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    const { makh, ngaybd, ngaykt, tt } = req.body;
+    const { makh, ngaybd, ngaykt, hocphi, tt } = req.body;
     const khoahoc = new KhoaHoc();
-    const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, tt);
+    const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, hocphi, tt);
     if (kq === 1) {
       req.flash("success", "Mở đăng ký thành công.");
       res.redirect(`/admin/khoahoc`);
