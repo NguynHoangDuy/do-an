@@ -1,11 +1,17 @@
 const con = require("../../config/db");
 
 class HocVien {
-  demHv(hoten, sdt) {
+  demHv(hoten, sdt, cn) {
     const count = () => {
+      let chiNhanh;
+      if (cn) {
+        chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+      } else {
+        chiNhanh = ``;
+      }
       return new Promise((resolve, reject) => {
         con.query(
-          `select count(*) as count from hoc_vien where HO_TEN like '%${hoten}%' or SDT='${sdt}'`,
+          `select count(*) as count from hoc_vien where (HO_TEN like '%${hoten}%' or SDT='${sdt}') ${chiNhanh}`,
           (err, kq) => {
             if (err) {
               reject(0);
@@ -18,11 +24,17 @@ class HocVien {
     };
     return count();
   }
-  timkiemHV(offset, perPage, hoten, sdt) {
+  timkiemHV(offset, perPage, hoten, sdt, cn) {
     const hv = () => {
+      let chiNhanh;
+      if (cn) {
+        chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+      } else {
+        chiNhanh = ``;
+      }
       return new Promise((resolve, reject) => {
         con.query(
-          `Select * from hoc_vien where HO_TEN like '%${hoten}%' or SDT='${sdt}' Limit ${offset}, ${perPage}`,
+          `Select * from hoc_vien where (HO_TEN like '%${hoten}%' or SDT='${sdt}') ${chiNhanh} Limit ${offset}, ${perPage}`,
           (err, kq) => {
             if (err) {
               con;
@@ -37,11 +49,17 @@ class HocVien {
     };
     return hv();
   }
-  getAllHv(offset, perPage) {
+  getAllHv(offset, perPage, cn) {
     const hv = () => {
+      let chiNhanh;
+      if (cn) {
+        chiNhanh = `where MA_CHI_NHANH = '${cn}'`;
+      } else {
+        chiNhanh = ``;
+      }
       return new Promise((resolve, reject) => {
         con.query(
-          `Select * from hoc_vien Limit ${offset}, ${perPage}`,
+          `Select * from hoc_vien ${chiNhanh} Limit ${offset}, ${perPage}`,
           (err, kq) => {
             if (err) {
               reject([]);
@@ -90,17 +108,17 @@ class HocVien {
     sdtph,
     nganh,
     truongdh,
-    cv
+    cv,
+    chinhanh
   ) {
     let kqThem = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}', '${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}')`,
+          `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV, MA_CHI_NHANH) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}', '${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}', '${chinhanh}')`,
           (err, result) => {
             if (err) {
-              resolve(0);
+              reject(err);
             } else {
-              console.log(result);
               resolve(1);
             }
           }

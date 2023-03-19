@@ -2,7 +2,8 @@ extends ../../layout/layout-dash
 block container
     .dash-main
         .container
-            p.title Quản lý khóa học
+            p= dsLop
+            p.title Danh sách mở đăng ký
             .flex.justify-around
                 button.button(data-toggle="modal" ,data-target=`#timkiem`) Tìm kiếm 
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `timkiem`)

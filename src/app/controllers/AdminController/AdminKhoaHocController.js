@@ -11,6 +11,7 @@ class AdminKhoaHocController {
     const makh = req.query.maKH;
     const tenkh = req.query.tenKH;
     const khoaHoc = new KhoaHoc();
+
     if (!makh && !tenkh) {
       const totalCount = await khoaHoc.demKH();
       const totalPages = Math.ceil(totalCount / perPage);

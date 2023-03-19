@@ -13,6 +13,7 @@ class AdminKhoaHocController {
     const khoahoc = new KhoaHoc();
     const dsMaKH = await khoahoc.dsKhoaHocAll();
     const modangky = new MoDangKy();
+
     function formatMoney(num) {
       return Number(num).toLocaleString("vi-VN", {
         style: "currency",

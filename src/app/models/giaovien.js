@@ -4,6 +4,21 @@ class GiaoVien {
   constructor(ma_gv) {
     this.ma_gv = ma_gv;
   }
+
+  dsGv() {
+    const ds = () => {
+      return new Promise((resolve, reject) => {
+        con.query("SELECT * from giao_vien", (err, kq) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(1);
+          }
+        });
+      });
+    };
+    return ds();
+  }
   demGv(ho_ten) {
     const count = () => {
       return new Promise((resolve, reject) => {

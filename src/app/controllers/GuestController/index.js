@@ -24,6 +24,7 @@ class GuestController {
                   req.session.quyen = result[0].MA_QUYEN;
                   req.session.ten = result[0].MA_QTV;
                   req.session.username = result[0].MA_QTV;
+                  req.session.chinhanh = result[0].MA_CHI_NHANH;
                   res.redirect("./admin");
                 } else {
                   console.log(result[0].MAT_KHAU);
@@ -48,6 +49,7 @@ class GuestController {
                             req.session.quyen = result[0].MA_QUYEN;
                             req.session.ten = result[0].HO_TEN;
                             req.session.username = result[0].MA_GV;
+                            req.session.chinhanh = result[0].MA_CHI_NHANH;
                             res.redirect("./giaovien");
                           } else {
                             console.log(result[0].MAT_KHAU);
@@ -73,6 +75,8 @@ class GuestController {
                                     req.session.quyen = result[0].MA_QUYEN;
                                     req.session.ten = result[0].HO_TEN;
                                     req.session.username = result[0].MA_HV;
+                                    req.session.chinhanh =
+                                      result[0].MA_CHI_NHANH;
                                     res.redirect("./hocvien");
                                   } else {
                                     console.log(result[0].MAT_KHAU);

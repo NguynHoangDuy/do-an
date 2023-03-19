@@ -53,12 +53,7 @@ router.get(
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themhocvien
 );
-router.get(
-  "/kqthem",
-  checkLogged.checkLoggedIn,
-  checkAuthor.checkPermission(["QTV"]),
-  AdminController.kqthem
-);
+
 router.use(
   "/",
   checkLogged.checkLoggedIn,

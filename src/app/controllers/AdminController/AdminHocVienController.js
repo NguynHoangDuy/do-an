@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const ChiNhanh = require("../../models/chinhanh");
 const HocVien = require("../../models/hocvien");
 class AdminHocVienController {
   async index(req, res) {
@@ -8,9 +9,9 @@ class AdminHocVienController {
     let page = parseInt(req.query.trang) || 1;
     const offset = (page - 1) * perPage;
     const hv = new HocVien();
-    const totalCount = await hv.demHv("", "");
+    const totalCount = await hv.demHv("", "", req.session.chinhanh);
     const totalPages = Math.ceil(totalCount / perPage);
-    const listHv = await hv.getAllHv(offset, perPage);
+    const listHv = await hv.getAllHv(offset, perPage, req.session.chinhanh);
     res.render("./admin/hocvien", {
       listHv: listHv,
       current: page,
@@ -29,9 +30,9 @@ class AdminHocVienController {
     const sdt = req.query.sdt;
     if (!hoten && !sdt) {
       const hv = new HocVien();
-      const totalCount = await hv.demHv("", "");
+      const totalCount = await hv.demHv("", "", req.session.chinhanh);
       const totalPages = Math.ceil(totalCount / perPage);
-      const listHv = await hv.getAllHv(offset, perPage);
+      const listHv = await hv.getAllHv(offset, perPage, req.session.chinhanh);
       res.render("./admin/hocvien/timkiem", {
         listHv: listHv,
         current: page,
@@ -40,9 +41,15 @@ class AdminHocVienController {
       });
     } else {
       const hv = new HocVien();
-      const totalCount = await hv.demHv(hoten, sdt);
+      const totalCount = await hv.demHv(hoten, sdt, req.session.chinhanh);
       const totalPages = Math.ceil(totalCount / perPage);
-      const listHv = await hv.timkiemHV(offset, perPage, hoten, sdt);
+      const listHv = await hv.timkiemHV(
+        offset,
+        perPage,
+        hoten,
+        sdt,
+        req.session.chinhanh
+      );
       res.render("./admin/hocvien/timkiem", {
         listHv: listHv,
         current: page,
@@ -55,10 +62,13 @@ class AdminHocVienController {
     }
   }
 
-  themhocvien(req, res) {
+  async themhocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    res.render("./admin/hocvien/them");
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaKH = await chiNhanh.xemChiNhanh();
+    res.render("./admin/hocvien/them", { dsMaKH, admin });
   }
   async themhocvien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -79,6 +89,12 @@ class AdminHocVienController {
       truongdh,
       cv,
     } = req.body;
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.boy.chinhanh;
+    }
     const hv = new HocVien();
     const mahv = await hv.layMaHV();
     // mahv.then((kq) => console.log(kq));
@@ -87,7 +103,7 @@ class AdminHocVienController {
     const salt = bcrypt.genSaltSync(10);
     const mkHash = bcrypt.hashSync(mk, salt);
 
-    const kq = hv.themhocvien(
+    const kq = await hv.themhocvien(
       mahv,
       hoten,
       gt,
@@ -103,7 +119,8 @@ class AdminHocVienController {
       sdtph,
       nganh,
       truongdh,
-      cv
+      cv,
+      cn
     );
     if (kq === 1) {
       req.flash("success", "Thêm học viên thành công.");
@@ -113,12 +130,7 @@ class AdminHocVienController {
       res.redirect(`/admin/hocvien`);
     }
   }
-  kqthem(req, res) {
-    res.locals.quyen = "Quản trị viên";
-    res.locals.ten = req.session.ten;
-    const ma = req.query.ma;
-    res.render(`./admin/hocvien/kqthem`, { ma: ma });
-  }
+
   async xemhocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;

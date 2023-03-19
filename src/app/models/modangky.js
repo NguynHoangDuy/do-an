@@ -1,5 +1,23 @@
 const con = require("../../config/db");
 class MoDangKy {
+  async xemDsLop(maKHCC) {
+    const dslop = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `SELECT MA_LOP,khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${maKHCC}'`,
+          (err, kq) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(kq);
+            }
+          }
+        );
+      });
+    };
+    const kq = await dslop();
+    return kq;
+  }
   listMoDangKy(offset, perPage) {
     const list = () => {
       return new Promise((resolve, reject) => {

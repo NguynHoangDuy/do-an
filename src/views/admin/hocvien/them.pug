@@ -28,6 +28,13 @@ block container
 					.create-item.w-100
 						label(for='email') Email
 						input(type='email', id='email', name='email', required)
+				if (!admin)
+					.create-group.mt-2
+						.create-item.w-100
+							label(for='maCN') Chọn khóa học
+							select.not-focus(class="form-control", id="maCN", name="maCN")
+								for dsMa in dsMaKH
+									option(value= dsMa.MA_CHI_NHANH)= dsMa.TEN_CHI_NHANH		
 				.create-group.mt-2
 					.create-item.w-100
 						p Đối tượng
