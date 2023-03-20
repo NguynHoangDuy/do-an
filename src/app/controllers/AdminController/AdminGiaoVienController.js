@@ -11,9 +11,9 @@ class AdminGiaoVienController {
     const offset = (page - 1) * perPage;
     if (!hoten) {
       const gv = new GiaoVien();
-      const totalCount = await gv.demGv("");
+      const totalCount = await gv.demGv("", req.session.chinhanh);
       const totalPages = Math.ceil(totalCount / perPage);
-      const listGv = await gv.getAllGv(offset, perPage);
+      const listGv = await gv.getAllGv(offset, perPage, req.session.chinhanh);
       res.render("./admin/giaovien/", {
         listGv: listGv,
         current: page,
@@ -23,9 +23,14 @@ class AdminGiaoVienController {
       });
     } else {
       const gv = new GiaoVien();
-      const totalCount = await gv.demGv(hoten);
+      const totalCount = await gv.demGv(hoten, req.session.chinhanh);
       const totalPages = Math.ceil(totalCount / perPage);
-      const listGv = await gv.timkiemGiaoVien(offset, perPage, hoten);
+      const listGv = await gv.timkiemGiaoVien(
+        offset,
+        perPage,
+        hoten,
+        req.session.chinhanh
+      );
       res.render("./admin/giaovien", {
         listGv: listGv,
         current: page,

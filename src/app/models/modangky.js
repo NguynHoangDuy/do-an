@@ -18,11 +18,17 @@ class MoDangKy {
     const kq = await dslop();
     return kq;
   }
-  listMoDangKy(offset, perPage) {
+  listMoDangKy(offset, perPage, cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     const list = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `SELECT MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE mo_dang_ky.TINH_TRANG = '1' Limit ${offset}, ${perPage};`,
+          `SELECT MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE (mo_dang_ky.TINH_TRANG = '1') ${chiNhanh} Limit ${offset}, ${perPage};`,
           (err, kq) => {
             if (err) {
               reject(err);
@@ -36,12 +42,18 @@ class MoDangKy {
     return list();
   }
 
-  async demMoDangKy(maKH = "", tenKH = "") {
+  demMoDangKy(maKH = "", tenKH = "", cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     if (maKH || tenKH) {
       const count = () => {
         return new Promise((resolve, reject) => {
           con.query(
-            `select count(*) as count FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where mo_dang_ky.TINH_TRANG = '1' and TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}"`,
+            `select count(*) as count FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}") ${chiNhanh}`,
             (err, kq) => {
               if (err) {
                 reject(0);
@@ -57,7 +69,7 @@ class MoDangKy {
       const count = () => {
         return new Promise((resolve, reject) => {
           con.query(
-            `select count(*) as count FROM mo_dang_ky where mo_dang_ky.TINH_TRANG = '1' `,
+            `select count(*) as count FROM mo_dang_ky where (mo_dang_ky.TINH_TRANG = '1') ${chiNhanh}`,
             (err, kq) => {
               if (err) {
                 reject(0);
@@ -72,11 +84,17 @@ class MoDangKy {
     }
   }
 
-  timkiemKH(offset, perPage, maKH, tenKH) {
+  timkiemKH(offset, perPage, maKH, tenKH, cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     const timkiem = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `select MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where mo_dang_ky.TINH_TRANG = '1' and (TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}") Limit ${offset}, ${perPage}`,
+          `select MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and (TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}")) ${chiNhanh} Limit ${offset}, ${perPage}`,
           (err, kq) => {
             if (err) {
               resolve([]);

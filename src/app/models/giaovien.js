@@ -1,10 +1,6 @@
 const con = require("../../config/db");
 
 class GiaoVien {
-  constructor(ma_gv) {
-    this.ma_gv = ma_gv;
-  }
-
   dsGv() {
     const ds = () => {
       return new Promise((resolve, reject) => {
@@ -19,11 +15,17 @@ class GiaoVien {
     };
     return ds();
   }
-  demGv(ho_ten) {
+  demGv(ho_ten, cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     const count = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `select count(*) as count from giao_vien where HO_TEN like "%${ho_ten}%"`,
+          `select count(*) as count from giao_vien where (HO_TEN like "%${ho_ten}%") ${chiNhanh}`,
           (err, kq) => {
             if (err) {
               reject(0);
@@ -36,11 +38,17 @@ class GiaoVien {
     };
     return count();
   }
-  getAllGv(offset, perPage) {
+  getAllGv(offset, perPage, cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `where MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     const gv = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `Select * from giao_vien Limit ${offset}, ${perPage}`,
+          `Select * from giao_vien ${chiNhanh} Limit ${offset}, ${perPage}`,
           (err, kq) => {
             if (err) {
               reject([]);
@@ -54,11 +62,17 @@ class GiaoVien {
     };
     return gv();
   }
-  timkiemGiaoVien(offset, perPage, hoten) {
+  timkiemGiaoVien(offset, perPage, hoten, cn) {
+    let chiNhanh;
+    if (cn) {
+      chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+      chiNhanh = ``;
+    }
     const gv = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `Select * from giao_vien where HO_TEN like "%${hoten}%" Limit ${offset}, ${perPage}`,
+          `Select * from giao_vien where (HO_TEN like "%${hoten}%") ${chiNhanh} Limit ${offset}, ${perPage}`,
           (err, kq) => {
             if (err) {
               con;

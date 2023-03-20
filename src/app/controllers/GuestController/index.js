@@ -27,8 +27,6 @@ class GuestController {
                   req.session.chinhanh = result[0].MA_CHI_NHANH;
                   res.redirect("./admin");
                 } else {
-                  console.log(result[0].MAT_KHAU);
-                  console.log("sai");
                   res.redirect("/dangnhap");
                 }
               });
@@ -52,8 +50,6 @@ class GuestController {
                             req.session.chinhanh = result[0].MA_CHI_NHANH;
                             res.redirect("./giaovien");
                           } else {
-                            console.log(result[0].MAT_KHAU);
-                            console.log("sai");
                             res.redirect("/dangnhap");
                           }
                         }
@@ -79,8 +75,6 @@ class GuestController {
                                       result[0].MA_CHI_NHANH;
                                     res.redirect("./hocvien");
                                   } else {
-                                    console.log(result[0].MAT_KHAU);
-                                    console.log("sai");
                                     res.redirect("/dangnhap");
                                   }
                                 }

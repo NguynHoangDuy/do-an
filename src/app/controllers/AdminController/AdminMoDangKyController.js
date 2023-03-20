@@ -32,9 +32,17 @@ class AdminKhoaHocController {
     }
 
     if (!makh && !tenkh) {
-      const totalCount = await modangky.demMoDangKy();
+      const totalCount = await modangky.demMoDangKy(
+        "",
+        "",
+        req.session.chinhanh
+      );
       const totalPages = Math.ceil(totalCount / perPage);
-      const listKH = await modangky.listMoDangKy(offset, perPage);
+      const listKH = await modangky.listMoDangKy(
+        offset,
+        perPage,
+        req.session.chinhanh
+      );
       res.render("./admin/modangky", {
         listKH,
         formatDate,
@@ -46,9 +54,19 @@ class AdminKhoaHocController {
         tk: false,
       });
     } else {
-      const totalCount = await modangky.demMoDangKy(makh, tenkh);
+      const totalCount = await modangky.demMoDangKy(
+        makh,
+        tenkh,
+        req.session.chinhanh
+      );
       const totalPages = Math.ceil(totalCount / perPage);
-      const listKH = await modangky.timkiemKH(offset, perPage, makh, tenkh);
+      const listKH = await modangky.timkiemKH(
+        offset,
+        perPage,
+        makh,
+        tenkh,
+        req.session.chinhanh
+      );
       res.render("./admin/modangky", {
         listKH,
         formatDate,

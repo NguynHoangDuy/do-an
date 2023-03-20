@@ -1,29 +1,19 @@
 @import url(/css/reset.css);
 @import url(/css/login.css);
 @import url(/css/admin.css);
-
-@media screen and (min-width: 768px) {
-  .container {
-    width: 750px;
-    margin: 0 auto;
-  }
-}
-@media screen and (min-width: 992px) {
-  .container {
-    width: 970px;
-    margin: 0 auto;
-  }
-}
+@import url(/css/header.css);
+@import url(/css/banner.css);
 
 @media screen and (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1170px !important;
     margin: 0 auto;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .container {
+    max-width: unset !important;
     padding: 0 20px;
   }
 }
