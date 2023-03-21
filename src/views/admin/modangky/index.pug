@@ -60,6 +60,13 @@ block container
                                             select.not-focus(class="form-control", id="tt", name="tt", required)
                                                 option(value="1") Cho phép đăng ký  
                                                 option(value="0") Không cho phép đăng ký
+                                    if (!admin)
+                                        .create-group.mt-2
+                                            .create-item.w-100
+                                                label(for='maCN') Chọn chi nhánh
+                                                select.not-focus(class="form-control", id="maCN", name="chinhanh")
+                                                    for dsCN in dsMaCN
+                                                        option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH  
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                     button.btn.btn-success(type="submit") Thêm khóa học
@@ -163,6 +170,13 @@ block container
                                                                     select.not-focus(class="form-control", id="tt", name="tt", required)
                                                                         option(value="1") Cho phép đăng ký  
                                                                         option(value="0") Không cho phép đăng ký
+                                                            if (!admin)
+                                                                .create-group.mt-2
+                                                                    .create-item.w-100
+                                                                        label(for='maCN') Chọn chi nhánh
+                                                                        select.not-focus(class="form-control", id="maCN", name="chinhanh")
+                                                                            for dsCN in dsMaCN
+                                                                                option(value= dsCN.MA_CHI_NHANH selected=dsCN.MA_CHI_NHANH==kh.MA_CHI_NHANH?true:false)= dsCN.TEN_CHI_NHANH 
                                                         .modal-footer
                                                             button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                                             button.btn.btn-success(type="submit") Cập nhật 
@@ -170,9 +184,9 @@ block container
                                             i(class="fa fa-trash") 
                                         +confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận xóa khóa học', 'Bạn có chắc chắn muốn xóa khóa học này?', 'Xóa', `/admin/modangky/xoa?makhcc=${kh.MA_KHCC}`)
                 if (!tk)
-                    +pagination(current, pages, "/admin/khoahoc", "/admin/khoahoc?trang=")
+                    +pagination(current, pages, "/admin/modangky", "/admin/modangky?trang=")
                 else 
-                    +pagination(current, pages, `/admin/khoahoc?maKH=${makh}&tenKH=${tenKH}`, `/admin/khoahoc?maKH=${makh}&tenKH=${tenKH}&trang=`)
+                    +pagination(current, pages, `/admin/modangky?maKH=${makh}&tenKH=${tenKH}`, `/admin/modangky?maKH=${makh}&tenKH=${tenKH}&trang=`)
             .flex.flex-end.mt-4
                 a.button(href="/admin") Trở về
 

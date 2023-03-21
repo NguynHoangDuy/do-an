@@ -165,16 +165,18 @@ class HocVien {
     nganh,
     truongdh,
     cv,
-    tinh_trang
+    tinh_trang,
+    cn
   ) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `UPDATE hoc_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}',DOI_TUONG='${dt}',TINH_TRANG='${tinh_trang}', LOP ='${lop}', TRUONG='${truong}', PHU_HUYNH='${phuhuynh}', SDT_PH='${sdtph}', NGANH='${nganh}', TRUONG_DH='${truongdh}', CV='${cv}' WHERE MA_HV='${ma_hv}'`,
+          `UPDATE hoc_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}',DOI_TUONG='${dt}',TINH_TRANG='${tinh_trang}', LOP ='${lop}', TRUONG='${truong}', PHU_HUYNH='${phuhuynh}', SDT_PH='${sdtph}', NGANH='${nganh}', TRUONG_DH='${truongdh}', CV='${cv}', MA_CHI_NHANH='${cn}' WHERE MA_HV='${ma_hv}'`,
           (err, dt) => {
             if (err) {
               resolve(0);
             } else {
+              console.log(dt);
               resolve(1);
             }
           }

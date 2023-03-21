@@ -37,6 +37,13 @@ block container
                         .create-item.w-100
                             label(for='email') Email
                             input(type='email', id='email', name='email', value= hv[0].EMAIL)
+                    if (!admin)
+                        .create-group.mt-2
+                            .create-item.w-100
+                                label(for='maCN') Chọn chi nhánh
+                                select.not-focus(class="form-control", id="maCN", name="chinhanh")
+                                    for dsCN in dsMaCN
+                                        option(value= dsCN.MA_CHI_NHANH selected=dsCN.MA_CHI_NHANH==hv[0].MA_CHI_NHANH?true:false)= dsCN.TEN_CHI_NHANH       
                     .create-group.mt-2
                         .create-item.w-100
                             p Đối tượng

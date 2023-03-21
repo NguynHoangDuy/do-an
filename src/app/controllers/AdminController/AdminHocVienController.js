@@ -67,8 +67,8 @@ class AdminHocVienController {
     res.locals.ten = req.session.ten;
     const chiNhanh = new ChiNhanh();
     const admin = req.session.chinhanh;
-    const dsMaKH = await chiNhanh.xemChiNhanh();
-    res.render("./admin/hocvien/them", { dsMaKH, admin });
+    const dsMaCN = await chiNhanh.xemChiNhanh();
+    res.render("./admin/hocvien/them", { dsMaCN, admin });
   }
   async themhocvien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -93,7 +93,7 @@ class AdminHocVienController {
     if (req.session.chinhanh) {
       cn = req.session.chinhanh;
     } else {
-      cn = req.boy.chinhanh;
+      cn = req.body.chinhanh;
     }
     const hv = new HocVien();
     const mahv = await hv.layMaHV();
@@ -136,6 +136,8 @@ class AdminHocVienController {
     res.locals.ten = req.session.ten;
     const ma = req.query.mahv;
     const hv = new HocVien();
+    const chiNhanh = new ChiNhanh();
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     function formatDate(date) {
       if (date !== null) {
         const year = date.getFullYear();
@@ -147,13 +149,17 @@ class AdminHocVienController {
       }
     }
     const kqHv = await hv.xemthongtin(ma);
-    res.render("./admin/hocvien/xem", { hv: kqHv, formatDate });
+    res.render("./admin/hocvien/xem", { hv: kqHv, formatDate, dsMaCN });
   }
   async suahocvien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     const ma = req.query.mahv;
     const hv = new HocVien();
+
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     function formatDate(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -161,7 +167,7 @@ class AdminHocVienController {
       return `${year}-${month}-${day}`;
     }
     const kqHv = await hv.xemthongtin(ma);
-    res.render("./admin/hocvien/sua", { hv: kqHv, formatDate });
+    res.render("./admin/hocvien/sua", { hv: kqHv, formatDate, dsMaCN, admin });
   }
   async suahocvien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -184,8 +190,16 @@ class AdminHocVienController {
       cv,
       tinhtrang,
     } = req.body;
+
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.body.chinhanh;
+    }
+    console.log(cn);
     const hv = new HocVien();
-    const kq = hv.capnhathocvien(
+    const kq = await hv.capnhathocvien(
       ma,
       hoten,
       gt,
@@ -201,7 +215,8 @@ class AdminHocVienController {
       nganh,
       truongdh,
       cv,
-      tinhtrang
+      tinhtrang,
+      cn
     );
     if (kq === 1) {
       req.flash("success", "Cập nhật học viên thành công.");
@@ -211,10 +226,10 @@ class AdminHocVienController {
       res.redirect(`/admin/hocvien/suahocvien?mahv=${ma}`);
     }
   }
-  xoahocvien(req, res) {
+  async xoahocvien(req, res) {
     const ma = req.query.mahv;
     const hv = new HocVien();
-    const kq = hv.xoahocvien(ma);
+    const kq = await hv.xoahocvien(ma);
     if (kq === 1) {
       req.flash("success", "Xóa học viên thành công.");
       res.redirect(`/admin/hocvien/`);
@@ -234,7 +249,7 @@ class AdminHocVienController {
       .padStart(2, "0")}${date.getFullYear()}`;
     const salt = bcrypt.genSaltSync(10);
     const mkHash = await bcrypt.hashSync(mk, salt);
-    const kq = gv.resetMK(magv, mkHash);
+    const kq = await gv.resetMK(magv, mkHash);
     if (kq === 1) {
       req.flash("success", "Cập nhật mật khẩu thành công.");
       res.redirect(`/admin/hocvien`);

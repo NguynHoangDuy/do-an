@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const GiaoVien = require("../../models/giaovien");
+const ChiNhanh = require("../../models/chinhanh");
 
 class AdminGiaoVienController {
   async index(req, res) {
@@ -42,16 +43,24 @@ class AdminGiaoVienController {
     }
   }
 
-  themgiaovien(req, res) {
+  async themgiaovien(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
-    res.render("./admin/giaovien/them");
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaCN = await chiNhanh.xemChiNhanh();
+    res.render("./admin/giaovien/them", { admin, dsMaCN });
   }
   async themgiaovien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     const { hoten, gt, ngaysinh, sdt, diachi, email, trinhdo } = req.body;
-
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.body.chinhanh;
+    }
     let anh_dd;
     if (req.file) {
       anh_dd = req.file.filename;
@@ -72,7 +81,8 @@ class AdminGiaoVienController {
       email,
       mkHash,
       trinhdo,
-      anh_dd
+      anh_dd,
+      cn
     );
     if (kq === 1) {
       req.flash("success", "Thêm giáo viên thành công.");
@@ -88,6 +98,8 @@ class AdminGiaoVienController {
     res.locals.ten = req.session.ten;
     const magv = req.query.magv;
     const gv = new GiaoVien();
+    const chiNhanh = new ChiNhanh();
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     const kq = await gv.xemthongtin(magv);
     function formatDate(date) {
       if (date !== "0000-00-00") {
@@ -102,6 +114,7 @@ class AdminGiaoVienController {
     res.render("./admin/giaovien/xem", {
       kq,
       formatDate,
+      dsMaCN,
     });
   }
   async suathongtin(req, res) {
@@ -109,6 +122,9 @@ class AdminGiaoVienController {
     res.locals.ten = req.session.ten;
     const magv = req.query.magv;
     const gv = new GiaoVien();
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     const kq = await gv.xemthongtin(magv);
     function formatDate(date) {
       if (date !== "0000-00-00") {
@@ -123,6 +139,8 @@ class AdminGiaoVienController {
     res.render("./admin/giaovien/sua", {
       kq,
       formatDate,
+      dsMaCN,
+      admin,
     });
   }
   async suathongtin_action(req, res) {
@@ -137,7 +155,13 @@ class AdminGiaoVienController {
       anh_dd = req.file.filename;
     } else anh_dd = kq.ANH_DD;
     console.log(anh_dd);
-    const kqCN = gv.capnhatgiaovien(
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.body.chinhanh;
+    }
+    const kqCN = await gv.capnhatgiaovien(
       magv,
       hoten,
       gt,
@@ -146,20 +170,22 @@ class AdminGiaoVienController {
       diachi,
       email,
       trinhdo,
-      anh_dd
+      anh_dd,
+      cn
     );
     if (kqCN === 1) {
       req.flash("success", "Cập nhật giáo viên thành công.");
       res.redirect(`/admin/giaovien/xemgiaovien?magv=${magv}`);
     } else {
-      res.render("/admin/giaovien/sua", { kq });
+      req.flash("fail", "Cập nhật giáo viên không thành công.");
+      res.redirect(`/admin/giaovien/xemgiaovien?magv=${magv}`);
     }
   }
 
-  xoagiaovien(req, res) {
+  async xoagiaovien(req, res) {
     const magv = req.query.magv;
     const gv = new GiaoVien();
-    const kq = gv.xoagiaovien(magv);
+    const kq = await gv.xoagiaovien(magv);
     if (kq === 1) {
       req.flash("success", "Xóa giáo viên thành công.");
       res.redirect(`/admin/giaovien`);
@@ -179,7 +205,7 @@ class AdminGiaoVienController {
       .padStart(2, "0")}${date.getFullYear()}`;
     const salt = bcrypt.genSaltSync(10);
     const mkHash = await bcrypt.hashSync(mk, salt);
-    const kq = gv.resetMK(magv, mkHash);
+    const kq = await gv.resetMK(magv, mkHash);
     if (kq === 1) {
       req.flash("success", "Cập nhật mật khẩu thành công.");
       res.redirect(`/admin/giaovien`);

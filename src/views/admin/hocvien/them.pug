@@ -31,10 +31,10 @@ block container
 				if (!admin)
 					.create-group.mt-2
 						.create-item.w-100
-							label(for='maCN') Chọn khóa học
-							select.not-focus(class="form-control", id="maCN", name="maCN")
-								for dsMa in dsMaKH
-									option(value= dsMa.MA_CHI_NHANH)= dsMa.TEN_CHI_NHANH		
+							label(for='maCN') Chọn chi nhánh
+							select.not-focus(class="form-control", id="maCN", name="chinhanh")
+								for dsCN in dsMaCN
+									option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH		
 				.create-group.mt-2
 					.create-item.w-100
 						p Đối tượng

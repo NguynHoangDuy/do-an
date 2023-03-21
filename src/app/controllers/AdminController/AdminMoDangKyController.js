@@ -1,11 +1,14 @@
 const MoDangKy = require("../../models/modangky");
 const KhoaHoc = require("../../models/khoahoc");
-
+const ChiNhanh = require("../../models/chinhanh");
 class AdminKhoaHocController {
   async index(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     let perPage = 2;
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     let page = parseInt(req.query.trang) || 1;
     const offset = (page - 1) * perPage;
     const makh = req.query.maKH;
@@ -52,6 +55,8 @@ class AdminKhoaHocController {
         perPage: perPage,
         dsMaKH,
         tk: false,
+        admin,
+        dsMaCN,
       });
     } else {
       const totalCount = await modangky.demMoDangKy(
@@ -78,6 +83,8 @@ class AdminKhoaHocController {
         tk: true,
         makh,
         tenkh,
+        admin,
+        dsMaCN,
       });
     }
   }
@@ -102,9 +109,22 @@ class AdminKhoaHocController {
     const maKHCC = req.query.makhcc;
 
     const { makh, ngaybd, ngaykt, hocphi, tt } = req.body;
-
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.body.chinhanh;
+    }
     const modangky = new MoDangKy();
-    const kq = await modangky.capnhat(maKHCC, makh, ngaybd, ngaykt, hocphi, tt);
+    const kq = await modangky.capnhat(
+      maKHCC,
+      makh,
+      ngaybd,
+      ngaykt,
+      hocphi,
+      tt,
+      cn
+    );
     if (kq === 1) {
       req.flash("success", "Cập nhật thành công.");
       res.redirect(`/admin/modangky`);

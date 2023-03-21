@@ -39,6 +39,13 @@ block container
 					.create-item.w-100
 						label(for='trinhdo') Trình độ
 						input(type='text', id='trinhdo', name='trinhdo')
+				if (!admin)
+					.create-group.mt-2
+						.create-item.w-100
+							label(for='maCN') Chọn chi nhánh
+							select.not-focus(class="form-control", id="maCN", name="chinhanh")
+								for dsCN in dsMaCN
+									option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH	
 				.button-main.mt-4.text-center
 					button(type='submit') Lưu thông tin
 			.flex.flex-end.mt-4

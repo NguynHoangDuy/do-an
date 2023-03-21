@@ -103,6 +103,13 @@ block container
                                                                     select.not-focus(class="form-control", id="tt", name="tt", required)
                                                                         option(value="1") Cho phép đăng ký  
                                                                         option(value="0") Không cho phép đăng ký
+                                                            if (!admin)
+                                                                .create-group.mt-2
+                                                                    .create-item.w-100
+                                                                        label(for='maCN') Chọn chi nhánh
+                                                                        select.not-focus(class="form-control", id="maCN", name="chinhanh")
+                                                                            for dsCN in dsMaCN
+                                                                                option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH  
                                                         .modal-footer
                                                             button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                                             button.btn.btn-success(type="submit") Mở đăng ký   

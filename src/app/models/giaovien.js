@@ -113,12 +113,13 @@ class GiaoVien {
     email,
     matkhau,
     trinhdo,
-    anh_dd
+    anh_dd,
+    cn
   ) {
     let kqThem = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `INSERT INTO giao_vien (MA_GV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, TRINH_DO, ANH_DD) VALUES ('${ma_gv}','GV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${trinhdo}','${anh_dd}')`,
+          `INSERT INTO giao_vien (MA_GV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, TRINH_DO, ANH_DD, MA_CHI_NHANH) VALUES ('${ma_gv}','GV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}','${email}','${matkhau}','${trinhdo}','${anh_dd}', '${cn}')`,
           (err, result) => {
             if (err) {
               resolve(0);
@@ -162,14 +163,16 @@ class GiaoVien {
     diachi,
     email,
     trinhdo,
-    anh_dd
+    anh_dd,
+    cn
   ) {
     let kq = () => {
       return new Promise((resolve, reject) => {
         con.query(
-          `UPDATE giao_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}', ANH_DD='${anh_dd}', TRINH_DO='${trinhdo}' WHERE MA_GV='${ma_gv}'`,
+          `UPDATE giao_vien SET HO_TEN='${ho_ten}',GIOI_TINH='${gt}',NGAY_SINH='${ngaysinh}',SDT='${sdt}',DIA_CHI='${diachi}',EMAIL='${email}', ANH_DD='${anh_dd}', TRINH_DO='${trinhdo}', MA_CHI_NHANH='${cn}' WHERE MA_GV='${ma_gv}'`,
           (err, dt) => {
             if (err) {
+              console.log(err);
               resolve(0);
             } else {
               resolve(1);

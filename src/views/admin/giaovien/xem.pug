@@ -50,6 +50,12 @@ block container
                             .create-item.w-100
                                 label(for='trinhdo') Trình độ
                                 input(type='text', id='trinhdo', name='trinhdo', value= kq.TRINH_DO, disabled)
+                        .create-group.mt-2
+                            .create-item.w-100
+                                label(for='maCN') Chọn chi nhánh
+                                select.not-focus(class="form-control", id="maCN", name="maCN", disabled)
+                                    for dsCN in dsMaCN
+                                        option(value= dsCN.MA_CHI_NHANH selected=dsCN.MA_CHI_NHANH==kq.MA_CHI_NHANH?true:false)= dsCN.TEN_CHI_NHANH
             else
                 p.title Không có thông tin
 

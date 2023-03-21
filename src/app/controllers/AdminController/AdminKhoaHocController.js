@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const KhoaHoc = require("../../models/khoahoc");
-
+const ChiNhanh = require("../../models/chinhanh");
 class AdminKhoaHocController {
   async index(req, res) {
     res.locals.quyen = "Quản trị viên";
@@ -11,7 +11,9 @@ class AdminKhoaHocController {
     const makh = req.query.maKH;
     const tenkh = req.query.tenKH;
     const khoaHoc = new KhoaHoc();
-
+    const chiNhanh = new ChiNhanh();
+    const admin = req.session.chinhanh;
+    const dsMaCN = await chiNhanh.xemChiNhanh();
     if (!makh && !tenkh) {
       const totalCount = await khoaHoc.demKH();
       const totalPages = Math.ceil(totalCount / perPage);
@@ -22,6 +24,8 @@ class AdminKhoaHocController {
         pages: totalPages,
         perPage: perPage,
         tk: false,
+        admin,
+        dsMaCN,
       });
     } else {
       const totalCount = await khoaHoc.demKH(makh, tenkh);
@@ -36,6 +40,8 @@ class AdminKhoaHocController {
         tk: true,
         makh,
         tenkh,
+        admin,
+        dsMaCN,
       });
     }
   }
@@ -89,8 +95,14 @@ class AdminKhoaHocController {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
     const { makh, ngaybd, ngaykt, hocphi, tt } = req.body;
+    let cn;
+    if (req.session.chinhanh) {
+      cn = req.session.chinhanh;
+    } else {
+      cn = req.body.chinhanh;
+    }
     const khoahoc = new KhoaHoc();
-    const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, hocphi, tt);
+    const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, hocphi, tt, cn);
     if (kq === 1) {
       req.flash("success", "Mở đăng ký thành công.");
       res.redirect(`/admin/khoahoc`);
