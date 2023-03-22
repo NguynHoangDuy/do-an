@@ -31,8 +31,6 @@
 }
 .header {
   &-logo {
-    top: 50%;
-    transform: translateY(-50%);
     &-text {
       font-size: 32px;
       color: #37393f;
@@ -44,10 +42,6 @@
       font-weight: bold;
       font-style: italic;
     }
-  }
-  &-logo {
-    width: 70px;
-    height: 70px;
   }
 
   &-menu {
