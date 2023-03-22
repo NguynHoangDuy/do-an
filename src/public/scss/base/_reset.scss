@@ -1,3 +1,4 @@
+// Reset/normalize
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -127,17 +128,14 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-body {
-  box-sizing: border-box;
-  /* overflow: hidden; */
-  font-family: "muli", sans-serif !important;
-}
-
-input,
-button {
-  outline: none;
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }

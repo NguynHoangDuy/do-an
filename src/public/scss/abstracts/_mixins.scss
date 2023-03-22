@@ -1,0 +1,61 @@
+// Sass Mixins
+
+@mixin position-center-middle() {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+ }
+ 
+ @mixin position-left-middle() {
+     position: absolute;
+     top: 50%;
+     left: 0;
+     transform: translateY(-50%);
+ }
+ 
+ @mixin position-left-middle-param($left) {
+     position: absolute;
+     top: 50%;
+     left: $left;
+     transform: translateY(-50%);
+ }
+ 
+ @mixin position-right-middle() {
+     position: absolute;
+     top: 50%;
+     right: 0;
+     transform: translateY(-50%);
+ }
+ 
+ @mixin position-right-middle-param($right) {
+     position: absolute;
+     top: 50%;
+     right: $right;
+     transform: translateY(-50%);
+ }
+ 
+ @mixin position-over-left-middle($m_right) {
+     position: absolute;
+     top: 50%;
+     right: 100%;
+     margin-right: $m_right;
+     transform: translateY(-50%);
+ }
+ 
+ @mixin position-over-right-middle($m_left) {
+     position: absolute;
+     top: 50%;
+     left: 100%;
+     margin-left: $m_left;
+     transform: translateY(-50%);
+ }
+ 
+ //Flexbox
+ @mixin flex-container($direction: row, $spacing: space-between, $alignment: null) {
+     display: flex;
+     flex-direction: $direction;
+     justify-content: $spacing;
+     align-items: $alignment;
+ }
+ 
