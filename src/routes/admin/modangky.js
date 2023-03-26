@@ -24,6 +24,18 @@ router.use(
   AdminController.moDangKy
 );
 router.use(
+  "/danhsachlop/:makh",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.danhSachLop
+);
+router.use(
+  "/thoikhoabieu/:malop",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.xemtkb
+);
+router.use(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),

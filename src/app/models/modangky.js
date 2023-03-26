@@ -1,5 +1,25 @@
 const con = require("../../config/db");
 class MoDangKy {
+  xemTKB(maLop) {
+    const tkb = () => {
+      return new Promise((resolve, reject) => {
+        con.query(
+          `SELECT thoi_khoa_bieu.MA_LOP as MA_LOP, thoi_khoa_bieu.MA_THU as MA_THU, thoi_khoa_bieu.MA_TG as MA_TG, thoi_khoa_bieu.MA_PHONG as MA_PHONG, TEN_LOP, TG_BD, TG_KT, TEN_THU FROM thoi_khoa_bieu INNER JOIN lop on thoi_khoa_bieu.MA_LOP = lop.MA_LOP 
+        INNER JOIN thoi_gian on thoi_khoa_bieu.MA_TG = thoi_gian.MA_TG 
+        INNER JOIN lich_hoc on thoi_khoa_bieu.MA_THU = lich_hoc.MA_THU
+        WHERE thoi_khoa_bieu.MA_LOP = '${maLop}'`,
+          (err, kq) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(kq);
+            }
+          }
+        );
+      });
+    };
+    return tkb();
+  }
   async xemDsLop(maKHCC) {
     const dslop = () => {
       return new Promise((resolve, reject) => {

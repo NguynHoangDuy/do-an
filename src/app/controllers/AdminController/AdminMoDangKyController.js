@@ -88,6 +88,14 @@ class AdminKhoaHocController {
       });
     }
   }
+  async danhSachLop(req, res) {
+    const maKH = req.params.makh;
+    const moDangKy = new MoDangKy();
+    const dslop = await moDangKy.xemDsLop(maKH);
+    if (dslop) {
+      res.json(dslop);
+    }
+  }
   async moDangKy(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
@@ -146,6 +154,15 @@ class AdminKhoaHocController {
     } else {
       req.flash("fail", "Xóa không thành công.");
       res.redirect(`/admin/modangky`);
+    }
+  }
+
+  async xemtkb(req, res) {
+    const malop = req.params.malop;
+    const moDangKy = new MoDangKy();
+    const dsTkb = await moDangKy.xemTKB(malop);
+    if (dsTkb) {
+      res.json(dsTkb);
     }
   }
 }
