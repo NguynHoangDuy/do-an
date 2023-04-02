@@ -54,6 +54,7 @@ class AdminGiaoVienController {
   async themgiaovien_action(req, res) {
     res.locals.quyen = "Quản trị viên";
     res.locals.ten = req.session.ten;
+    console.log(req.file.path)
     const { hoten, gt, ngaysinh, sdt, diachi, email, trinhdo } = req.body;
     let cn;
     if (req.session.chinhanh) {
@@ -63,7 +64,7 @@ class AdminGiaoVienController {
     }
     let anh_dd;
     if (req.file) {
-      anh_dd = req.file.filename;
+      anh_dd = req.file.path;
     } else anh_dd = "";
     const gv = new GiaoVien();
     const maGv = await gv.layMaGV();
@@ -152,9 +153,8 @@ class AdminGiaoVienController {
     const kq = await gv.xemthongtin(magv);
     let anh_dd;
     if (req.file) {
-      anh_dd = req.file.filename;
+      anh_dd = req.file.path;
     } else anh_dd = kq.ANH_DD;
-    console.log(anh_dd);
     let cn;
     if (req.session.chinhanh) {
       cn = req.session.chinhanh;

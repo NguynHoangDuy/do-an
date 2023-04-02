@@ -1,7 +1,6 @@
 const checkLogged = require("../../middleware/checkLogin");
 const checkAuthor = require("../../middleware/checkPermission");
 const addImage = require("../../middleware/addImage");
-const updateImage = require("../../middleware/updateImage");
 const express = require("express");
 const router = express.Router();
 
@@ -42,7 +41,7 @@ router.post(
   "/capnhatgiaovien",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
-  updateImage.single("anh_dd"),
+  addImage.single("anh_dd"),
   AdminController.suathongtin_action
 );
 router.get(

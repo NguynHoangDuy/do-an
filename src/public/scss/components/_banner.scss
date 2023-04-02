@@ -7,4 +7,58 @@
     object-fit: cover;
     pointer-events: none;
   }
+  &-content {
+    background-image: url("/img/background-banner-content.png");
+    padding: 60px 0;
+    .headline {
+      &::before {
+        content: "";
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background: url("/img/icon-enlish.svg");
+        transform: translateY(-50%);
+      }
+    }
+
+    &-main {
+      width: 55%;
+    }
+    &-img {
+      width: 40%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    &-desc {
+      font-size: 20px;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 40px;
+
+      &::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background: url("/img/icon-mark.svg");
+        transform: translateY(-50%);
+      }
+    }
+
+    &-note {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  &-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
