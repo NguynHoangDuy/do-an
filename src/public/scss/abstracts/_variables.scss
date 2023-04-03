@@ -22,9 +22,6 @@ $container-max-widths: (
 //   z-index: 1051 !important;
 // }
 
-table {
-  text-align: center;
-}
 .headline {
   text-transform: uppercase;
   font-size: 40px;
@@ -34,4 +31,11 @@ table {
   span {
     color: rgb(255, 140, 0);
   }
+}
+main{
+  margin-top: 174px;
+}
+
+body{
+  overflow-x: hidden;
 }

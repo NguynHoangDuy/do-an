@@ -15,7 +15,7 @@ block container
                 for gv in listGv
                     a(href="/admin/giaovien/xemgiaovien?magv="+gv.MA_GV).member-entry
                         .member-img.mr-20
-                            img.img-rounded(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="avatar")
+                            img.img-rounded(src=gv.ANH_DD, alt="avatar")
                         .member-detail
                             h4.text-20.mb-3= gv.HO_TEN
                             .row.info-list

@@ -19,8 +19,7 @@ block container
                                 th(scope="col", class="border-0 text-uppercase font-medium") Họ và tên
                                 th(scope="col", class="border-0 text-uppercase font-medium") Giới tính
                                 th(scope="col", class="border-0 text-uppercase font-medium") Số điện thoại
-                                th(scope="col", class="border-0 text-uppercase font-medium") Email
-                                th(scope="col", class="border-0 text-uppercase font-medium") Địa chỉ
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chi Nhánh
                                 th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
                         tbody
                             - stt = 1
@@ -37,9 +36,7 @@ block container
                                     td
                                         p.text-overflow(class="font-medium mb-0")= hv.SDT
                                     td
-                                        p.text-overflow(class="font-medium mb-0")= hv.EMAIL
-                                    td
-                                        p.text-overflow(class="font-medium mb-0")= hv.DIA_CHI
+                                        p.text-overflow(class="font-medium mb-0")= hv.MA_CHI_NHANH
                                     td
                                         a(href="/admin/hocvien/xemhocvien?mahv="+hv.MA_HV, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-info") 

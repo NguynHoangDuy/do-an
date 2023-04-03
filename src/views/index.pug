@@ -2,7 +2,17 @@ extends layout/layout
 block container
 	main 
 		section.banner
-			img.banner-img(src="/img/banner-home.jpg", alt="")
+			.hero-swiper
+				.swiper-wrapper
+					.swiper-slide
+						img.banner-img(src="/img/banner-home.jpg", alt="")
+					.swiper-slide
+						img.banner-img(src="/img/banner-home.jpg", alt="")
+					.swiper-slide
+						img.banner-img(src="/img/banner-home.jpg", alt="")
+				.swiper-button-next
+				.swiper-button-prev
+				.swiper-pagination
 		.banner-content
 			.container
 				.banner-group
@@ -19,24 +29,4 @@ block container
 							p.banner-content-desc Nên "chọn mặt gửi vàng" tại trung tâm nào?
 						p.banner-content-note Đó đều là những trăn trở của các học viên đang có mong muốn học tiếng anh. ALF sẽ giải đáp những trăn trở đó cho các bạn
 					img.banner-content-img(src="/img/child-asian-20230111034140-svi2d.jpg", alt="")
-		section.why-not
-			.container
-				h2.headline.text-center Vì sao nên <span>học tiếng anh </span> từ sớm?
-				.why-not-group
-					.why-not-item
-						h5.why-not-title Tiếng Anh chính là cây cầu kết nối chúng ta với nền tri thức nhân loại
-						p.why-not-desc Tiếng Anh là ngôn ngữ chính thức trong các lĩnh vực như công nghệ, y học, khoa học máy tính. Với những người đang làm việc hay học tập liên quan đến những lĩnh vực này, thành thạo tiếng Anh không đơn thuần là một lợi thế mà còn là một điều bắt buộc. Bởi hằng ngày bạn sẽ phải tiếp xúc và nghiên cứu từng chồng tài liệu bằng tiếng Anh.
-					.why-not-item
-						h5.why-not-title Tiếng Anh giỏi mang đến cơ hội học tập trong những trường đại học tuyệt vời nhất thế giới
-						p.why-not-desc Hầu hết những ngôi trường danh giá hàng đầu thế giới đều ở các nước nói tiếng Anh như Havard (Mỹ), Yale (Mỹ), Oxford (Anh). Vậy nên việc biết tiếng Anh là một yếu tố bắt buộc nếu bạn muốn học tập ở đó.
-					.why-not-item
-						h5.why-not-title Học tiếng Anh tốt là chìa khoá mở cánh cửa thành công trong sự nghiệp của bạn
-						p.why-not-desc Tiếng Anh đặc biệt quan trọng cho những người làm việc trong tập đoàn nước ngoài. Thành thạo tiếng Anh ngoài việc giúp bạn giao tiếp với đối tác, khách hàng hay đồng nghiệp, nó còn mang lại nhiều cơ hội thăng tiến cho bạn. Hãy để ý mà xem, ngày nay, hầu hết những công ty, tổ chức trong hay ngoài nước đều đang tìm kiếm và đánh giá cao những người có trình độ tiếng Anh tốt.
-					.why-not-item
-						h5.why-not-title Tiếng Anh sẽ giúp bạn có thêm nhiều người bạn mới hơn!
-						p.why-not-desc Bạn sẽ dễ dàng kết bạn với rất rất nhiều người nếu bạn biết tiếng Anh. Hồi đi học, nhờ biết tiếng Anh mà tôi quen được nhiều bạn đến từ mọi nơi trên thế giới. Có những người bạn, đến giờ vẫn giữ liên lạc và trò chuyện cùng nhau. Chúng tôi trưởng thành cùng nhau. Dù cách nhau nửa vòng trái đất thì một trong hai người sẽ luôn ở đó, sẵn sàng lắng nghe.
-
-
-							
-
-
+		

@@ -1,25 +1,30 @@
 // Header
 
-.topbar {
-  background: #0e2244;
-  &-item {
-    max-width: 100px;
-    color: #ffffff;
-  }
-}
 .top-bar {
   padding: 10px 0;
-  background: #37393f;
-  &-icon {
-    width: 20px;
-    height: 20px;
-    & + p {
-      color: #ffffff;
-    }
-  }
-  &-content {
+  background: #49796b;
+  &-content{
     display: flex;
     justify-content: space-between;
+    padding: 5px 20px;
+  }
+  &-info{
+    &--item{
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+
+      .social-icon{
+        font-size: 20px;
+        color: #ffffff;
+        padding-right: 10px;
+      }
+      p{
+        font-size: 20px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+    }
   }
   &-social {
     font-size: 20px;
@@ -27,18 +32,33 @@
 }
 
 .social-link {
-  color: #40ddb6;
+  color: #ffffff;
 }
 .header {
+
+  &.header-fixed{
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+  }
   &-logo {
+    max-width: 214px;
+    margin-right: 115px;
     &-text {
-      font-size: 40px;
-      color: #37393f;
+      background: #35a866;
+      font-size: 60px;
       font-weight: bold;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      transform: rotate(-8deg);
+      text-align: center;
     }
     &-sub {
-      font-size: 20px;
-      color: #40ddb6;
+      font-size: 30px;
+      color: #35a866;
       font-weight: bold;
       font-style: italic;
     }
@@ -47,44 +67,43 @@
   &-menu {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 20px 30px 10px 75px;
     &-logo {
+      max-width: 214px;
+      margin-right: 115px;
       display: flex;
       align-items: center;
     }
     &-content {
       margin-left: 20px;
     }
+    &-desktop{
+      margin: 0 auto;
+    }
     &-group {
       display: flex;
       align-items: center;
+      margin-bottom: 0;
     }
     &-item {
       margin: 0 20px;
-    }
-    &-link {
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      color: #37393f;
-      border: 2px solid;
-      border-radius: 10px;
-      position: relative;
-      background: white;
-
-      &::before {
-        content: "";
-        position: absolute;
-        width: 100%;
+      &:hover{
+        & a{
+          border-bottom: 3px solid #35a866;
+        }
+      }
+      & a{
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        color: #2b2926;
+        position: relative;
+        display: inline-block;
         height: 100%;
-        background: green;
-        z-index: -1;
-        top: 10px;
-        left: 10px;
-        border-radius: 10px;
+        word-break: unset;
+        padding-bottom: 10px;
       }
     }
+    
   }
 }

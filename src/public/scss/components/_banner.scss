@@ -1,11 +1,10 @@
 .banner {
   width: 100%;
-  height: 500px;
   &-img {
+    height: auto;
+    max-height: 842px;
     width: 100%;
-    height: 100%;
     object-fit: cover;
-    pointer-events: none;
   }
   &-content {
     background-image: url("/img/background-banner-content.png");
