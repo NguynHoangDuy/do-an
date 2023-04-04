@@ -1,6 +1,24 @@
 const con = require("../../config/db");
 
 class HocVien {
+
+  dangnhap(username){
+    const login = ()=>{
+      return new Promise((resolve, reject) => {
+        con.query(
+          `SELECT * FROM hoc_vien WHERE MA_HV='${username}'`,
+          (err, result) => {
+            if(err){
+              reject(err)
+            }
+            else {
+              resolve(result)
+            }
+          })
+      })
+    }
+    return login()
+  }
   demHv(hoten, sdt, cn) {
     const count = () => {
       let chiNhanh;

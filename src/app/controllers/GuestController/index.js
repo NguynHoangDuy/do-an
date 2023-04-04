@@ -1,99 +1,80 @@
-const con = require("../../../config/db");
+const QuanTriVien = require("../../models/quantrivien");
+const HocVien = require("../../models/hocvien");
+const GiaoVien = require("../../models/giaovien");
 const bcrypt = require("bcrypt");
 class GuestController {
   index(req, res) {
-    res.render("index", { title: "Hey " });
+    res.render("index");
   }
   loginForm(req, res) {
     res.render("login");
   }
 
-  dangnhap(req, res) {
+  async dangnhap(req, res) {
+    const qtv = new QuanTriVien();
+    const gv = new GiaoVien();
+    const hv = new HocVien();
     const { username, password } = req.body;
+    let loginQTV = await qtv.dangnhap(username);
+    let loginGV = await gv.dangnhap(username);
+    let loginHV = await hv.dangnhap(username);
     if (username && password) {
-      con.query(
-        `SELECT * FROM quan_tri_vien WHERE MA_QTV='${username}'`,
-        (err, result) => {
-          if (err) {
-            res.redirect("/dangnhap");
+      if (
+        loginQTV.length === 0 &&
+        loginGV.length === 0 &&
+        loginHV.length === 0
+      ) {
+        res.redirect("/dangnhap");
+        return;
+      }
+      if (loginQTV.length !== 0) {
+        bcrypt.compare(password, loginQTV[0].MAT_KHAU, (err, kq) => {
+          if (kq) {
+            req.session.loggedin = true;
+            req.session.quyen = loginQTV[0].MA_QUYEN;
+            req.session.ten = loginQTV[0].MA_QTV;
+            req.session.username = loginQTV[0].MA_QTV;
+            req.session.chinhanh = loginQTV[0].MA_CHI_NHANH;
+            res.redirect("./admin");
+            return;
           } else {
-            if (result.length !== 0) {
-              bcrypt.compare(password, result[0].MAT_KHAU, (err, kq) => {
-                if (kq) {
-                  req.session.loggedin = true;
-                  req.session.quyen = result[0].MA_QUYEN;
-                  req.session.ten = result[0].MA_QTV;
-                  req.session.username = result[0].MA_QTV;
-                  req.session.chinhanh = result[0].MA_CHI_NHANH;
-                  res.redirect("./admin");
-                } else {
-                  res.redirect("/dangnhap");
-                }
-              });
-            } else {
-              con.query(
-                `SELECT * FROM giao_vien WHERE MA_GV='${username}'`,
-                (err, result) => {
-                  if (err) {
-                    res.redirect("/dangnhap");
-                  } else {
-                    if (result.length !== 0) {
-                      bcrypt.compare(
-                        password,
-                        result[0].MAT_KHAU,
-                        (err, kq) => {
-                          if (kq) {
-                            req.session.loggedin = true;
-                            req.session.quyen = result[0].MA_QUYEN;
-                            req.session.ten = result[0].HO_TEN;
-                            req.session.username = result[0].MA_GV;
-                            req.session.chinhanh = result[0].MA_CHI_NHANH;
-                            res.redirect("./giaovien");
-                          } else {
-                            res.redirect("/dangnhap");
-                          }
-                        }
-                      );
-                    } else {
-                      con.query(
-                        `SELECT * FROM hoc_vien WHERE MA_HV='${username}'`,
-                        (err, result) => {
-                          if (err) {
-                            res.redirect("/dangnhap");
-                          } else {
-                            if (result.length !== 0) {
-                              bcrypt.compare(
-                                password,
-                                result[0].MAT_KHAU,
-                                (err, kq) => {
-                                  if (kq) {
-                                    req.session.loggedin = true;
-                                    req.session.quyen = result[0].MA_QUYEN;
-                                    req.session.ten = result[0].HO_TEN;
-                                    req.session.username = result[0].MA_HV;
-                                    req.session.chinhanh =
-                                      result[0].MA_CHI_NHANH;
-                                    res.redirect("./hocvien");
-                                  } else {
-                                    res.redirect("/dangnhap");
-                                  }
-                                }
-                              );
-                            } else {
-                              console.log("Invalid username");
-                              res.redirect("/dangnhap");
-                            }
-                          }
-                        }
-                      );
-                    }
-                  }
-                }
-              );
-            }
+            res.redirect("/dangnhap");
+            return;
           }
+        });
+      }
+    }
+    if (loginGV.length !== 0) {
+      bcrypt.compare(password, loginGV[0].MAT_KHAU, (err, kq) => {
+        if (kq) {
+          req.session.loggedin = true;
+          req.session.quyen = loginGV[0].MA_QUYEN;
+          req.session.ten = loginGV[0].HO_TEN;
+          req.session.username = loginGV[0].MA_GV;
+          req.session.chinhanh = loginGV[0].MA_CHI_NHANH;
+          res.redirect("./giaovien");
+          return;
+        } else {
+          res.redirect("/dangnhap");
+          return;
         }
-      );
+      });
+    }
+    if (loginHV.length !== 0) {
+      bcrypt.compare(password, loginHV[0].MAT_KHAU, (err, kq) => {
+        if (kq) {
+          req.session.loggedin = true;
+          req.session.quyen = loginHV[0].MA_QUYEN;
+          req.session.ten = loginHV[0].HO_TEN;
+          req.session.username = loginHV[0].MA_HV;
+          req.session.chinhanh = loginHV[0].MA_CHI_NHANH;
+          res.redirect("./hocvien");
+          return;
+        } else {
+          res.redirect("/dangnhap");
+          return;
+        }
+      });
     }
   }
   dangxuat(req, res) {

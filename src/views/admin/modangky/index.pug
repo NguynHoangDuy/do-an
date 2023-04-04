@@ -98,7 +98,7 @@ block container
 									td
 										p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_BD)
 									td
-										p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_KT)
+										p.text-overflow(class="font-medium mb-0")= kh.TG_KT + " tháng"
 									td
 										button(data-toggle="modal", data-makh=`${kh.MA_KHCC}`,data-target=`#ds${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle button-dslop")
 											i(class="fa fa-info")
@@ -152,7 +152,7 @@ block container
 															.create-group.mt-2
 																.create-item.w-100
 																	label(for='ngaykt') Ngày kết thúc
-																	input(type='date', id='ngaykt', name='ngaykt', value= formatDate(kh.TG_KT), required)
+																	input(type='number', id='ngaykt', name='ngaykt', value=kh.TG_KT, required)
 															.create-group.mt-2
 																.create-item.w-100
 																	label(for='hocphi') Học phí

@@ -1,6 +1,24 @@
 const con = require("../../config/db");
 
 class GiaoVien {
+
+  dangnhap(username){
+    const login = ()=>{
+      return new Promise((resolve, reject) => {
+        con.query(
+          `SELECT * FROM giao_vien WHERE MA_GV='${username}'`,
+          (err, result) => {
+            if(err){
+              reject(err)
+            }
+            else {
+              resolve(result)
+            }
+          })
+      })
+    }
+    return login()
+  }
   dsGv() {
     const ds = () => {
       return new Promise((resolve, reject) => {

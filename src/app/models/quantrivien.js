@@ -4,6 +4,23 @@ class QuanTriVien {
     this.maQtv = maQtv;
   }
 
+  dangnhap(username){
+    const login = ()=>{
+      return new Promise((resolve, reject) => {
+        con.query(
+          `SELECT * FROM quan_tri_vien WHERE MA_QTV='${username}'`,
+          (err, result) => {
+            if(err){
+              reject(err)
+            }
+            else {
+              resolve(result)
+            }
+          })
+      })
+    }
+    return login()
+  }
   async getTK() {
     const gv = () => {
       return new Promise((resolve, reject) => {
