@@ -4,15 +4,10 @@ block container
 		section.banner
 			.hero-swiper
 				.swiper-wrapper
-					.swiper-slide
-						img.banner-img(src="/img/banner-home.jpg", alt="")
-						.banner-overlay
-					.swiper-slide
-						img.banner-img(src="/img/banner-home.jpg", alt="")
-						.banner-overlay
-					.swiper-slide
-						img.banner-img(src="/img/banner-home.jpg", alt="")
-						.banner-overlay
+					for item in banner
+						.swiper-slide
+							img.banner-img(src=item.url, alt="")
+							.banner-overlay
 				.swiper-button-next
 				.swiper-button-prev
 				.swiper-pagination

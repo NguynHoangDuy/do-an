@@ -1,7 +1,7 @@
 const con = require("../../../config/db");
 
 class HomePage {
-  bannerImge() {
+  bannerImage() {
     return new Promise((resolve, reject) => {
       con.query("SELECT * FROM `banner_home`", (err, kq) => {
         if (err) {

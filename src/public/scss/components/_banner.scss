@@ -1,29 +1,38 @@
 .banner {
   width: 100%;
-  .hero-swiper{
+  .hero-swiper {
     position: relative;
   }
-
-  .swiper-button-prev{
+  .swiper-pagination-bullet {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    opacity: 0.4;
+  }
+  .swiper-pagination-bullet-active {
+    background: #35a864;
+    opacity: 1;
+  }
+  .swiper-button-prev {
     color: #dbdbdb;
-    opacity: .5;
+    opacity: 0.5;
     left: 20px;
     right: auto;
-    &::after{
+    &::after {
       font-size: 40px;
     }
   }
-  .swiper-button-next{
+  .swiper-button-next {
     color: #dbdbdb;
-    opacity: .5;
+    opacity: 0.5;
     right: 20px;
     left: auto;
-    &::after{
+    &::after {
       font-size: 40px;
     }
   }
 
-  .swiper-wrapper{
+  .swiper-wrapper {
     position: relative;
   }
   &-img {
@@ -34,11 +43,11 @@
     z-index: 0;
   }
 
-  .banner-overlay{
+  .banner-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    box-shadow: inset 0 0 0 100vh rgba(0,0,0,.2);
+    // box-shadow: inset 0 0 0 100vh rgba(0, 0, 0, 0.1);
     z-index: 9;
     top: 0;
     left: 0;

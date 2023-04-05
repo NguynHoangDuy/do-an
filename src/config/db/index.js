@@ -7,5 +7,12 @@ var con = mysql.createConnection({
   database: "alf",
 });
 
-con.connect(() => console.log("Connect suscesion"));
+con.connect((err) => {
+  if (err) {
+    console.log(err);
+    console.log("Thất bại");
+  } else {
+    console.log("Thành công");
+  }
+});
 module.exports = con;

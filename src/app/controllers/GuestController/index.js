@@ -1,10 +1,14 @@
 const QuanTriVien = require("../../models/quantrivien");
 const HocVien = require("../../models/hocvien");
 const GiaoVien = require("../../models/giaovien");
+const HomePage = require("../../models/homePage");
 const bcrypt = require("bcrypt");
 class GuestController {
-  index(req, res) {
-    res.render("index");
+  async index(req, res) {
+    const home = new HomePage();
+    const banner = await home.bannerImage();
+    console.log(banner);
+    res.render("index", { banner });
   }
   loginForm(req, res) {
     res.render("login");
