@@ -39,3 +39,7 @@ main{
 body{
   overflow-x: hidden;
 }
+
+body *{
+  transition: all 0.3s ease-in-out;
+}

@@ -1,4 +1,5 @@
 const QuanTriVien = require("../../models/quantrivien");
+const Banner = require("../../models/homePage/banner");
 const bcrypt = require("bcrypt");
 class AdminController {
   index(req, res) {
@@ -61,6 +62,15 @@ class AdminController {
       req.flash("fail", "Xóa tài khoản không khoản thành công.");
       res.redirect(`/admin/quantrivien`);
     }
+  }
+
+  async banner(req, res){
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const banner = new Banner()
+    const bannerList = await banner.bannerImage()
+    console.log(bannerList)
+    res.render("./admin/banner", {bannerList})
   }
 }
 

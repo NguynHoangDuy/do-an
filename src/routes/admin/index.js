@@ -30,6 +30,12 @@ router.use(
   AdminController.quanTriVien
 );
 router.use(
+  "/banner",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.banner
+);
+router.use(
   "/",
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),

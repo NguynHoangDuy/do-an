@@ -1,0 +1,33 @@
+extends ../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Quản lý banner
+            .d-flex.justify-content-end
+                button.button(data-toggle="modal" ,data-target=`#themhinh`) Thêm hình
+                .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themhinh`)
+                    .modal-dialog(role='document', style="max-width: 60%")
+                        .modal-content
+                            form(action="/admin/quantrivien/themqtv", method="post") 
+                                .modal-header
+                                    h5.modal-title#confirm-modal-title Thêm hình
+                                    button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    div.text-center
+                                        label.d-block.mb-2(for="anh_dd") 
+                                            img.img-account-profile.banner-input.mb-2(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+                                        input.d-none(type="file", name="anh_dd", id="anh_dd")
+                                        label.button(for="anh_dd") Tải ảnh lên 
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                    button.btn.btn-success(type="submit") Thêm
+            .banner-content
+                .banner-group
+                    for item in bannerList
+                        .banner-item
+                            img.banner-img(src=item.url, alt="banner-image")
+                            .banner-remove
+                                button.banner-remove-btn(data-toggle="modal" ,data-target=`#xoa${item.id}`) 
+                                    i.fa.fa-trash
+                                +confirm-modal(`xoa${item.id}`,'Xác nhận xóa hình', 'Bạn có chắc chắn muốn xóa hình này?', 'Xóa', `/admin/quantrivien/xoaqtv?maqtv=`)
