@@ -4,10 +4,11 @@ const adminHocVienRouter = require("./admin/hocvien");
 const adminGiaoVienRouter = require("./admin/giaovien");
 const adminKhoaHocRouter = require("./admin/khoahoc");
 const adminMoDangKyRouter = require("./admin/modangky");
+const adminBaiVietRouter = require("./admin/baiviet");
 const giaoVienRouter = require("./giaovien");
 const hocVienRouter = require("./hocvien");
-
 function route(app) {
+  app.use("/admin/baiviet", adminBaiVietRouter);
   app.use("/admin/modangky", adminMoDangKyRouter);
   app.use("/admin/khoahoc", adminKhoaHocRouter);
   app.use("/admin/hocvien", adminHocVienRouter);

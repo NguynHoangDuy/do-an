@@ -8,7 +8,7 @@ block container
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themhinh`)
                     .modal-dialog(role='document', style="max-width: 60%")
                         .modal-content
-                            form(action="/admin/quantrivien/themqtv", method="post") 
+                            form(action="/admin/banner/them", method="post", enctype="multipart/form-data") 
                                 .modal-header
                                     h5.modal-title#confirm-modal-title Thêm hình
                                     button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -17,11 +17,15 @@ block container
                                     div.text-center
                                         label.d-block.mb-2(for="anh_dd") 
                                             img.img-account-profile.banner-input.mb-2(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
-                                        input.d-none(type="file", name="anh_dd", id="anh_dd")
+                                        input.d-none(type="file", name="banner-url", id="anh_dd")
                                         label.button(for="anh_dd") Tải ảnh lên 
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                     button.btn.btn-success(type="submit") Thêm
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages) 
             .banner-content
                 .banner-group
                     for item in bannerList
@@ -30,4 +34,4 @@ block container
                             .banner-remove
                                 button.banner-remove-btn(data-toggle="modal" ,data-target=`#xoa${item.id}`) 
                                     i.fa.fa-trash
-                                +confirm-modal(`xoa${item.id}`,'Xác nhận xóa hình', 'Bạn có chắc chắn muốn xóa hình này?', 'Xóa', `/admin/quantrivien/xoaqtv?maqtv=`)
+                                +confirm-modal(`xoa${item.id}`,'Xác nhận xóa hình', 'Bạn có chắc chắn muốn xóa hình này?', 'Xóa', `/admin/banner/xoa?id=${item.id}`)

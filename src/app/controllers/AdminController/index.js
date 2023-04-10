@@ -72,6 +72,43 @@ class AdminController {
     console.log(bannerList)
     res.render("./admin/banner", {bannerList})
   }
+  async addBanner(req, res){
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    console.log(req.file.path)
+    let bannerUrl = req.file.path;
+    if(bannerUrl)
+    {
+      const banner = new Banner()
+      const kq = await banner.them(bannerUrl)
+
+      if (kq===1) {
+        req.flash("success", "Thêm hình thành công.");
+        res.redirect(`/admin/banner`);
+      } else {
+        req.flash("fail", "Thêm hình không thành công.");
+        res.redirect(`/admin/banner`);
+      }
+    }
+    else{
+      req.flash("fail", "Thêm hình không thành công.");
+      res.redirect(`/admin/banner`);
+    }
+  }
+  async removeBanner(req, res){
+    res.locals.quyen = "Quản trị viên";
+    res.locals.ten = req.session.ten;
+    const id = req.query.id
+    const banner = new Banner()
+    const kq = await banner.xoa(id)
+    if (kq===1) {
+      req.flash("success", "Xóa hình thành công.");
+      res.redirect(`/admin/banner`);
+    } else {
+      req.flash("fail", "Xóa hình không thành công.");
+      res.redirect(`/admin/banner`);
+    }
+  }
 }
 
 module.exports = new AdminController();

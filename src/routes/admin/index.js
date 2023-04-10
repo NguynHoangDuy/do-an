@@ -1,5 +1,6 @@
 const checkLogged = require("../../middleware/checkLogin");
 const checkAuthor = require("../../middleware/checkPermission");
+const uploadImage = require("../../middleware/uploadImage");
 const express = require("express");
 const router = express.Router();
 
@@ -28,6 +29,19 @@ router.use(
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.quanTriVien
+);
+router.post(
+  "/banner/them",
+  checkLogged.checkLoggedIn,
+  uploadImage.single("banner-url"),
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.addBanner
+);
+router.use(
+  "/banner/xoa",
+  checkLogged.checkLoggedIn,
+  checkAuthor.checkPermission(["QTV"]),
+  AdminController.removeBanner
 );
 router.use(
   "/banner",

@@ -14,11 +14,12 @@ class Banner {
   }
   them(url) {
     return new Promise((resolve, reject) => {
-      con.query(`INSERT INTO banner_home(url) VALUES ('${url}')`, (err, kq) => {
+      con.query(`INSERT INTO banner_home (url) VALUES ('${url}')`, (err, kq) => {
         if (err) {
+          console.log(err)
           reject(err);
         } else {
-          resolve(kq);
+          resolve(1);
         }
       });
     });
@@ -29,7 +30,7 @@ class Banner {
         if (err) {
           reject(err);
         } else {
-          resolve(kq);
+          resolve(1);
         }
       });
     });
