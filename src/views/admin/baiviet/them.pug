@@ -1,0 +1,35 @@
+extends ../../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Thêm bài viết
+			form.bg-white.create-form.mb-4(action="/admin/baiviet/thembaiviet", method="post", enctype="multipart/form-data")
+				div.post-img
+					p Ảnh bài viết
+						div.text-center
+							label.d-block.mb-2(for="anh_dd") 
+								img.img-account-profile.mb-4(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+							input.d-none(type="file", name="hinh_anh", id="anh_dd")
+							label.button(for="anh_dd") Tải ảnh lên 
+				.create-group.mt-2
+					.create-item.w-100
+						label(for='tieu_de') Tiêu đề
+						input(type='text', id='tieu_de', name='tieu_de', required)
+				//- .create-group.mt-2
+				//-     .create-item
+				//-         label(for='maDM') Danh mục
+				//-         select.not-focus(class="form-control", id="maCN", name="chinhanh")
+				//-             for dsCN in dsMaCN
+				//-                 option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH	
+				.create-group.mt-2
+					.create-item.w-100
+						label(for='noi_dung') Nội dung
+						textarea( cols="30", rows="10", name="noi_dung" id="noi_dung")
+								 
+				.button-main.mt-4.text-center
+					button(type='submit') Lưu thông tin
+			.flex.flex-end.mt-4
+				a.button(href="/admin/hocvien") Trở về
+				
+
+

@@ -1,0 +1,44 @@
+extends ../../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Quản lý thông tin giáo viên
+            .flex.justify-around
+                a.button(href="/admin/baiviet/thembaiviet") Thêm bài viết 
+                form.search-form-full(action="/admin/giaovien", method="get", role="form")
+                            input(type="text", name="timkiem", value= hoten,placeholder="Tìm kiếm")
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages)
+            .bg-white.p-40.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Tiêu đề
+                                th(scope="col", class="border-0 text-uppercase font-medium") Ngày đăng
+                                th(scope="col", class="border-0 text-uppercase font-medium") Người đăng
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+                        tbody
+                            - stt = 1
+                            for bv in bvList 
+                                tr
+                                    td(class="pl-4")= (perPage * current) - (perPage - stt++)
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= bv.tieu_de
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= formatDate(bv.ngay_tao)
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= bv.ma_qtv
+                                    td
+                                        a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-edit") 
+                                        button(data-toggle="modal" ,data-target=`#${bv.id}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-trash") 
+                                    +confirm-modal(`${bv.id}`,'Xác nhận xóa bài viết', 'Bạn có chắc chắn muốn bài viết này?', 'Xóa', ``)
+                +pagination(current, pages, "/admin/baiviet", "/admin/baiviet?trang=")
+            .flex.flex-end.mt-4
+                a.button(href="/admin") Trở về
+

@@ -10,6 +10,20 @@ class BaiViet {
     this.ma_qtv = ma_qtv;
   }
 
+  count() {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT count(*) as count FROM bai_viet";
+      db.query(query, (err, res) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          resolve(res[0].count);
+        }
+      });
+    });
+  }
+
   create(baiviet) {
     const query = "INSERT INTO bai_viet SET ?";
     return new Promise((resolve, reject) => {
@@ -38,9 +52,9 @@ class BaiViet {
     });
   }
 
-  getAll() {
+  getAll(offset, perPage) {
     return new Promise((resolve, reject) => {
-      const query = "SELECT * FROM bai_viet";
+      const query = `SELECT * FROM bai_viet Limit ${offset}, ${perPage}`;
       db.query(query, (err, res) => {
         if (err) {
           console.log(err);
