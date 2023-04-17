@@ -5,6 +5,13 @@ const uploadImage = require("../../middleware/uploadImage");
 const express = require("express");
 const router = express.Router();
 
+router.get(
+    "/xoa/:id",
+    checkLogged.checkLoggedIn,
+    checkAuthor.checkPermission(["QTV"]),
+    AdminBaiVietController.xoa
+);
+
 router.post(
     "/thembaiviet",
     uploadImage.single("hinh_anh"),
@@ -18,7 +25,19 @@ router.get(
     checkAuthor.checkPermission(["QTV"]),
     AdminBaiVietController.them
 );
-
+router.get(
+    "/:id",
+    checkLogged.checkLoggedIn,
+    checkAuthor.checkPermission(["QTV"]),
+    AdminBaiVietController.xem
+);
+router.post(
+    "/:id",
+    uploadImage.single("hinh_anh"),
+    checkLogged.checkLoggedIn,
+    checkAuthor.checkPermission(["QTV"]),
+    AdminBaiVietController.capnhat
+);
 router.use(
     "/",
     checkLogged.checkLoggedIn,

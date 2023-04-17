@@ -33,11 +33,11 @@ block container
                                     td
                                         p.text-overflow(class="font-medium mb-0")= bv.ma_qtv
                                     td
-                                        a(href="", class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                        a(href=`/admin/baiviet/${bv.id}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-edit") 
-                                        button(data-toggle="modal" ,data-target=`#${bv.id}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                        button(data-toggle="modal" ,data-target=`#xoa${bv.id}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
                                             i(class="fa fa-trash") 
-                                    +confirm-modal(`${bv.id}`,'Xác nhận xóa bài viết', 'Bạn có chắc chắn muốn bài viết này?', 'Xóa', ``)
+                                    +confirm-modal(`xoa${bv.id}`,'Xác nhận xóa bài viết', 'Bạn có chắc chắn muốn bài viết này?', 'Xóa', `/admin/baiviet/xoa/${bv.id}`)
                 +pagination(current, pages, "/admin/baiviet", "/admin/baiviet?trang=")
             .flex.flex-end.mt-4
                 a.button(href="/admin") Trở về

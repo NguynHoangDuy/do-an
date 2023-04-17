@@ -32,6 +32,59 @@ class AdminBaiVietController {
 
         res.render("./admin/baiviet/them");
     }
+    async xem(req, res) {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const id = req.params.id;
+        const baiviet = new BaiViet();
+
+        const posts = await baiviet.getById(id);
+        const post = posts[0];
+        res.render("./admin/baiviet/xem", { post });
+    }
+    async xoa(req, res) {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const id = req.params.id;
+        const baiviet = new BaiViet();
+        const kq = await baiviet.remove(id);
+        if (kq === 1) {
+            req.flash("success", "Cập nhật bài viết thành công.");
+            res.redirect("/admin/baiviet");
+        } else {
+            req.flash("fail", "Cập nhật bài viết không thành công");
+            res.redirect("/admin/baiviet");
+        }
+    }
+    async capnhat(req, res) {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const id = req.params.id;
+
+        const baiviet = new BaiViet();
+        let hinh_anh;
+        const { tieu_de, noi_dung } = req.body;
+        const posts = await baiviet.getById(id);
+        if (req.file) {
+            hinh_anh = req.file.path;
+        } else hinh_anh = posts[0].hinh_anh;
+
+        const post = {
+            tieu_de,
+            noi_dung,
+            hinh_anh,
+        };
+
+        const kq = await baiviet.updateById(id, post);
+        if (kq === 1) {
+            req.flash("success", "Cập nhật bài viết thành công.");
+            res.redirect("/admin/baiviet");
+        } else {
+            req.flash("fail", "Cập nhật bài viết không thành công");
+            res.redirect("/admin/baiviet");
+        }
+    }
+
     async themAction(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
@@ -40,13 +93,13 @@ class AdminBaiVietController {
         if (req.file) {
             hinh_anh = req.file.path;
         } else hinh_anh = "";
-        const strWithoutDiacritics = iconv.encode(tieu_de, "ascii").toString();
-        const url = strWithoutDiacritics
-            .replace(/[^a-zA-Z0-9]/g, "-")
-            .normalize("NFKD")
-            .toLowerCase()
-            .replace(/\s+/g, "-");
-        console.log(url);
+        // const strWithoutDiacritics = iconv.encode(tieu_de, "ascii").toString();
+        // const url = strWithoutDiacritics
+        //     .replace(/[^a-zA-Z0-9]/g, "-")
+        //     .normalize("NFKD")
+        //     .toLowerCase()
+        //     .replace(/\s+/g, "-");
+
         const ngay_tao = new Date();
         const ma_qtv = req.session.username;
         const post = {
@@ -56,7 +109,6 @@ class AdminBaiVietController {
             ngay_tao,
             trang_thai: "true",
             ma_qtv,
-            url,
         };
         const baiviet = new BaiViet();
         const kq = await baiviet.create(post);

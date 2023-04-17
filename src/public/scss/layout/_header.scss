@@ -1,109 +1,130 @@
 // Header
 
 .top-bar {
-  padding: 10px 0;
-  background: #49796b;
-  &-content{
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 20px;
-  }
-  &-info{
-    &--item{
-      display: flex;
-      align-items: center;
-      margin-right: 20px;
-
-      .social-icon{
-        font-size: 20px;
-        color: #ffffff;
-        padding-right: 10px;
-      }
-      p{
-        font-size: 20px;
-        font-weight: bold;
-        color: #ffffff;
-      }
+    padding: 10px 0;
+    background: #49796b;
+    &-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 20px;
     }
-  }
-  &-social {
-    font-size: 20px;
-  }
+    &-info {
+        &--item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+
+            .social-icon {
+                font-size: 20px;
+                color: #ffffff;
+                padding-right: 10px;
+            }
+            p {
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffffff;
+            }
+        }
+    }
+    &-social {
+        font-size: 20px;
+    }
 }
 
 .social-link {
-  color: #ffffff;
+    color: #ffffff;
 }
 .header {
-
-  &.header-fixed{
-    position: fixed;
-    background-color: #fff;
-    width: 100%;
-    top: 0;
-    z-index: 999;
-  }
-  &-logo {
-    max-width: 214px;
-    margin-right: 115px;
-    &-text {
-      background: #35a866;
-      font-size: 60px;
-      font-weight: bold;
-      color: #ffffff;
-      padding: 10px 20px;
-      border-radius: 20px;
-      transform: rotate(-8deg);
-      text-align: center;
+    &.header-fixed {
+        position: fixed;
+        background-color: #fff;
+        width: 100%;
+        top: 0;
+        z-index: 999;
     }
-    &-sub {
-      font-size: 30px;
-      color: #35a866;
-      font-weight: bold;
-      font-style: italic;
-    }
-  }
-
-  &-menu {
-    display: flex;
-    align-items: center;
-    padding: 20px 30px 10px 75px;
     &-logo {
-      max-width: 214px;
-      margin-right: 115px;
-      display: flex;
-      align-items: center;
-    }
-    &-content {
-      margin-left: 20px;
-    }
-    &-desktop{
-      margin: 0 auto;
-    }
-    &-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0;
-    }
-    &-item {
-      margin: 0 20px;
-      &:hover{
-        & a{
-          border-bottom: 3px solid #35a866;
+        max-width: 214px;
+        margin-right: 115px;
+        &-text {
+            background: #35a866;
+            font-size: 60px;
+            font-weight: bold;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transform: rotate(-8deg);
+            text-align: center;
         }
-      }
-      & a{
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 28px;
-        color: #2b2926;
-        position: relative;
-        display: inline-block;
-        height: 100%;
-        word-break: unset;
-        padding-bottom: 10px;
-      }
+        &-sub {
+            font-size: 30px;
+            color: #35a866;
+            font-weight: bold;
+            font-style: italic;
+        }
     }
-    
-  }
+
+    &-menu {
+        display: flex;
+        align-items: center;
+        padding: 20px 30px 10px 75px;
+        &-logo {
+            max-width: 214px;
+            margin-right: 115px;
+            display: flex;
+            align-items: center;
+        }
+        &-content {
+            margin-left: 20px;
+        }
+        &-desktop {
+            margin: 0 auto;
+        }
+        &-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+        &-item {
+            margin: 0 20px;
+            &:hover {
+                & a {
+                    border-bottom: 3px solid #35a866;
+                }
+            }
+            & a {
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 28px;
+                color: #2b2926;
+                position: relative;
+                display: inline-block;
+                height: 100%;
+                word-break: unset;
+                padding-bottom: 10px;
+            }
+        }
+        &-login {
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 3px solid black;
+            span {
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 28px;
+                color: #2b2926;
+                position: relative;
+                display: inline-block;
+                height: 100%;
+                word-break: unset;
+                padding-bottom: 10px;
+            }
+            &:hover {
+                border: 3px solid #35a866;
+                background: #35a866;
+                span {
+                    color: white;
+                }
+            }
+        }
+    }
 }

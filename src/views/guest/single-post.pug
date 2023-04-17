@@ -1,0 +1,8 @@
+extends ../layout/layout
+block container
+	main 
+		.container
+			if (post)
+				h2.post-single-headline= post.tieu_de
+				.post-single-content!= post.noi_dung
+				

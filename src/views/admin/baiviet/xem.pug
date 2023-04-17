@@ -3,18 +3,21 @@ block container
 	.dash-main
 		.container
 			p.title Bài viết
-			form.bg-white.create-form.mb-4(action="/admin/baiviet/thembaiviet", method="post", enctype="multipart/form-data")
+			.flex.flex-end
+				button.mr-10.button(data-toggle="modal" ,data-target=`#${post.id}`) Xóa 
+				+confirm-modal(`${post.id}`,'Xác nhận xóa bài viết', 'Bạn có chắc chắn muốn xóa bài viết này?', 'Xóa', `/admin/hocvien/xoahocvien?mahv=${post.id}`) 
+			form.bg-white.create-form.mb-4(action=`/admin/baiviet/${post.id}`, method="post", enctype="multipart/form-data")
 				div.post-img
 					p Ảnh bài viết
 						div.text-center
 							label.d-block.mb-2(for="anh_dd") 
-								img.img-account-profile.mb-4(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
-							input.d-none(type="file", name="hinh_anh", id="anh_dd")
+								img.img-account-profile.mb-4(src=post.hinh_anh, alt="")
+							input.d-none(type="file", name="hinh_anh", id="anh_dd", value=post.hinh_anh)
 							label.button(for="anh_dd") Tải ảnh lên 
 				.create-group.mt-2
 					.create-item.w-100
 						label(for='tieu_de') Tiêu đề
-						input(type='text', id='tieu_de', name='tieu_de', required)
+						input(type='text', id='tieu_de', name='tieu_de', required, value=post.tieu_de)
 				//- .create-group.mt-2
 				//-     .create-item
 				//-         label(for='maDM') Danh mục
@@ -24,7 +27,8 @@ block container
 				.create-group.mt-2
 					.create-item.w-100
 						label(for='noi_dung') Nội dung
-						textarea( cols="30", rows="10", name="noi_dung" id="noi_dung")
+						textarea( cols="30", rows="10", name="noi_dung" id="noi_dung")= post.noi_dung
+							
 								 
 				.button-main.mt-4.text-center
 					button(type='submit') Lưu thông tin
