@@ -1,6 +1,6 @@
 const db = require("../../config/db");
-class Lop {
-    themLop(tkb) {
+class ThoiKhoaBieu {
+    themTKB(tkb) {
         const query = `INSERT INTO thoi_khoa_bieu SET ?`;
         return new Promise((resolve, reject) => {
             db.query(query, tkb, (error, results) => {
@@ -12,7 +12,7 @@ class Lop {
         });
     }
 
-    xoaLop(tkb) {
+    xoaTKB(tkb) {
         const query = `DELETE FROM thoi_khoa_bieu WHERE MA_LOP=?, MA_THU=?, MA_TG=?, MA_PHONG=?`;
         const { MA_LOP, MA_THU, MA_TG, MA_PHONG } = tkb;
         return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ class Lop {
         });
     }
 
-    capNhatLop(tkbOld, tkbNew) {
+    capNhatTKB(tkbOld, tkbNew) {
         const query = `UPDATE lop SET ?  MA_LOP=?, MA_THU=?, MA_TG=?, MA_PHONG=?`;
         const { MA_LOP, MA_THU, MA_TG, MA_PHONG } = tkbOld;
         return new Promise((resolve, reject) => {
@@ -47,4 +47,4 @@ class Lop {
     }
 }
 
-module.exports = Lop;
+module.exports = ThoiKhoaBieu;

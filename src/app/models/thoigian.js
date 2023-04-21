@@ -16,4 +16,4 @@ class ThoiGian {
     }
 }
 
-module.exports = ThoiGian();
+module.exports = ThoiGian;

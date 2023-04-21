@@ -15,12 +15,12 @@ $container-max-widths: (
 * {
   font-size: 18px;
 }
-// .modal:nth-of-type(even) {
-//   z-index: 1052 !important;
-// }
-// .modal-backdrop.show:nth-of-type(even) {
-//   z-index: 1051 !important;
-// }
+.modal:nth-of-type(even) {
+  z-index: 1052 !important;
+}
+.modal-backdrop.show:nth-of-type(even) {
+  z-index: 1051 !important;
+}
 
 .headline {
   text-transform: uppercase;

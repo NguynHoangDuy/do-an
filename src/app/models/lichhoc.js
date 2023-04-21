@@ -13,4 +13,4 @@ class LichHoc {
     }
 }
 
-module.exports = LichHoc();
+module.exports = LichHoc;

@@ -1,7 +1,8 @@
 const MoDangKy = require("../../models/modangky");
 const KhoaHoc = require("../../models/khoahoc");
 const ChiNhanh = require("../../models/chinhanh");
-const GiaoVien = require("../../models/giaovien");
+const ThoiGian = require("../../models/thoigian");
+const LichHoc = require("../../models/lichhoc");
 class AdminKhoaHocController {
     async index(req, res) {
         res.locals.quyen = "Quản trị viên";
@@ -17,6 +18,11 @@ class AdminKhoaHocController {
         const khoahoc = new KhoaHoc();
         const dsMaKH = await khoahoc.dsKhoaHocAll();
         const modangky = new MoDangKy();
+
+        const tg = new ThoiGian();
+        const tgList = await tg.getThoiGian();
+        const lh = new LichHoc();
+        const lhList = await lh.getLichHoc();
 
         function formatMoney(num) {
             return Number(num).toLocaleString("vi-VN", {
@@ -58,6 +64,8 @@ class AdminKhoaHocController {
                 tk: false,
                 admin,
                 dsMaCN,
+                tgList,
+                lhList,
             });
         } else {
             const totalCount = await modangky.demMoDangKy(
@@ -86,6 +94,8 @@ class AdminKhoaHocController {
                 tenkh,
                 admin,
                 dsMaCN,
+                tgList,
+                lhList,
             });
         }
     }

@@ -5,9 +5,10 @@ class Lop {
         return new Promise((resolve, reject) => {
             db.query(query, lop, (error, results) => {
                 if (error) {
-                    return reject(error);
+                    console.log(error)
+                    reject(error);
                 }
-                return resolve(results.insertId);
+                 resolve(results.insertId);
             });
         });
     }
@@ -18,22 +19,23 @@ class Lop {
         return new Promise((resolve, reject) => {
             db.query(query, maLop, (error, results) => {
                 if (error) {
-                    return reject(error);
+                    reject(error);
                 }
-                return resolve(1);
+                 resolve(1);
             });
         });
     }
 
-    capNhatLop(lop, maLop) {
-        const query = `UPDATE lop SET ? WHERE MA_LOP = ?`;
+    capNhatLop(MA_GV, SO_LUONG, maLop) {
+        const query = `UPDATE lop SET MA_GV = ?, SO_LUONG = ? WHERE MA_LOP = ?`;
 
         return new Promise((resolve, reject) => {
-            db.query(query, [lop, maLop], (error, results) => {
+            db.query(query, [MA_GV, SO_LUONG, maLop], (error, results) => {
                 if (error) {
-                    return reject(error);
+                    console.log(error)
+                    reject(error);
                 }
-                return resolve(1);
+                 resolve(1);
             });
         });
     }

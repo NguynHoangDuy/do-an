@@ -100,9 +100,9 @@ block container
 									td
 										p.text-overflow(class="font-medium mb-0")= kh.TG_KT + " tháng"
 									td
-										button(data-toggle="modal", data-makh=`${kh.MA_KHCC}`,data-target=`#ds${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle button-dslop")
+										button(data-toggle="modal", data-makh=`${kh.MA_KHCC}`, data-macn=`${kh.MA_CHI_NHANH}`, data-tenkh=`${kh.TEN_KH}`,data-target=`#ds${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle button-dslop")
 											i(class="fa fa-info")
-										.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `ds${kh.MA_KHCC}`)
+										.modal.fade(tabindex='-1', role='dialog',  data-backdrop="false", aria-labelledby='confirm-modal-title', aria-hidden='true', id= `ds${kh.MA_KHCC}`)
 											.modal-dialog.mw-70(role='document')
 												.modal-content
 													form(action=`/admin/khoahoc/modangky`, method="post") 
@@ -113,7 +113,7 @@ block container
 														.modal-body
 															h2.text-center DANH SÁCH CÁC LỚP
 															.flex.justify-content-end
-																a.button(data-toggle="modal" ,data-target=`#molop` id="button_molop") Thêm lớp
+																a.button(data-toggle="modal" ,data-target=`#molop` class="button_molop") Thêm lớp
 															.table-responsive
 																table.table.no-wrap.user-table.mb-0 
 																	thead
@@ -183,10 +183,10 @@ block container
 			.flex.flex-end.mt-4
 				a.button(href="/admin") Trở về
 			.modal-list
-				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `molop`)
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', data-backdrop="false", aria-hidden='true', id= `molop`)
 					.modal-dialog.mw-70(role='document')
 						.modal-content
-							form(action="/admin/modangky/modangky", method="post") 
+							form(action="", method="post") 
 								.modal-header
 									h5.modal-title#confirm-modal-title Thêm lớp
 									button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -195,8 +195,8 @@ block container
 									.create-group.mt-2
 										.create-item.w-100
 											label(for='makh') Khóa học
-											input(type="text", id="MA_KH_THEM", value="", readonly)
-											input(type="text",id="MA_KHCC_THEM", name="MA_KHCC", value="", style="display: none;")
+											input(type="text", id="MA_KH_THEM", class="MA_KH_THEM", value="", readonly)
+											input(type="text",id="MA_KHCC_THEM", class="MA_KHCC_THEM", name="MA_KHCC", value="", style="display: none;")
 									.create-group.mt-2
 										.create-item.w-100
 											label(for='TEN_LOP') Tên lớp
@@ -211,5 +211,77 @@ block container
 											input(type='number', id='SO_LUONG', name='SO_LUONG',  required)
 								.modal-footer
 									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
-									button.btn.btn-success(type="submit") Thêm lớp
+									button.btn.btn-success(type="submit", id="them-lop-mdk", data-dismiss='modal', aria-label='Close') Thêm lớp
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', data-backdrop="false", aria-hidden='true', id= `capnhatlop`)
+					.modal-dialog.mw-70(role='document')
+						.modal-content
+							form(action="", method="post") 
+								.modal-header
+									h5.modal-title#confirm-modal-title Cập nhật lớp
+									button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+										span(aria-hidden='true') &times;
+								.modal-body
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='makh') Khóa học
+											input(type="text", id="MA_KH_CN", class="MA_KH_THEM", value="", readonly)
+											input(type="text",id="MA_LOP_CN", class="MA_KHCC_THEM", name="MA_KHCC", value="", style="display: none;")
+											input(type="text",id="MA_KHCC_CN", class="MA_KHCC_THEM", name="MA_KHCC", value="", style="display: none;")
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='TEN_LOP') Tên lớp
+											input(type='text', id='TEN_LOP_CN', name='TEN_LOP',required)
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='MA_GV_THEM_LOP') Giáo viên
+											select.not-focus(class="form-control", id="MA_GV_CN", name="MA_GV")
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='SO_LUONG') Số lượng
+											input(type='number', id='SO_LUONG_CN', name='SO_LUONG',  required)
+								.modal-footer
+									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+									button.btn.btn-success(type="submit", id="capnhat-lop-mdk", data-dismiss='modal', aria-label='Close') Cập nhật
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id="remove-lop")
+					.modal-dialog(role='document')
+						.modal-content
+							.modal-header
+								h5.modal-title#confirm-modal-title Xóa lớp
+								button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+									span(aria-hidden='true') &times;
+							.modal-body
+								input(type="text",id="MA_LOP_RM", style="display: none;")
+								input(type="text",id="MA_KHCC_RM", style="display: none;")
+								p Bạn có muốn xóa lớp này không?
+							.modal-footer
+								button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+								a.btn.btn-danger(type="submit", id="xoa-lop-mdk", data-dismiss='modal') Xóa 
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themtkb-modal`)
+					.modal-dialog(role='document')
+						.modal-content
+							form(action="", method="post") 
+								.modal-header
+									h5.modal-title#confirm-modal-title Thêm thời khóa biểu
+									button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+										span(aria-hidden='true') &times;
+								.modal-body
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='tkb-thu') Thứ
+											select.not-focus(class="form-control", id="tkb-thu", name="tkb-thu", required)
+												for lh in lhList
+													option(value= lh.MA_THU )= lh.TEN_THU
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='tkb-tg') Thời gian
+											select.not-focus(class="form-control", id="tkb-tg", name="tkb-tg", required)
+												for tg in tgList
+													option(value= tg.MA_TG )= tg.TG_BD+"-"+tg.TG_KT
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='tkb-phong') Phòng
+											select.not-focus(class="form-control", id="tkb-phong", name="tkb-phong", required)
 
+								.modal-footer
+									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+									button.btn.btn-success(type="submit", id="form-mo-dk-tkb", data-dismiss='modal') Thêm thời khóa biểu

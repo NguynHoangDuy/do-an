@@ -25,7 +25,7 @@ class MoDangKy {
         const dslop = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `SELECT MA_LOP, khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN, mo_dang_ky.MA_CHI_NHANH, SO_LUONG, (SELECT COUNT(*) FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP) as SO_LUONG_HT  FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${maKHCC}'`,
+                    `SELECT MA_LOP, khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN, mo_dang_ky.MA_CHI_NHANH, SO_LUONG, giao_vien.MA_GV, mo_dang_ky.MA_KHCC, (SELECT COUNT(*) FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP) as SO_LUONG_HT FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${maKHCC}'`,
                     (err, kq) => {
                         if (err) {
                             reject(err);
