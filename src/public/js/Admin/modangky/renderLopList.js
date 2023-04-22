@@ -23,7 +23,7 @@ export function renderLopList(courseId) {
                     html += "</tr>";
 
                     let modalHtml = `
-          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal-title"   aria-hidden="true" id="tkb${item.MA_LOP}">
+          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal-title" data-backdrop="false",  aria-hidden="true" id="tkb${item.MA_LOP}">
           <div class="modal-dialog mw-70" role="document">
             <div class="modal-content">
               <form action="/admin/modangky/modangky" method="post">
@@ -35,7 +35,7 @@ export function renderLopList(courseId) {
                 </div>
                 <div class="modal-body">
                 <h2 class="text-center">THỜI KHÓA BIỂU</h2>
-                <div class="flex flex-end"><a class="button" data-toggle="modal" data-target="#themtkb-modal">Thêm thời khóa biểu</a></div>
+                <div class="flex flex-end"><a class="button them-tkb-btn" data-malop="${item.MA_LOP}" data-toggle="modal" data-target="#themtkb-modal">Thêm thời khóa biểu</a></div>
                 
                 <div class="table-responsive">
                   <table class="table no-wrap user-table mb-0">
@@ -64,7 +64,15 @@ export function renderLopList(courseId) {
                     $(".modal-list").html($(".modal-list").html() + modalHtml);
                 });
                 $(`#dslop${courseId}`).html(html);
-                renderTKBList();
+
+                if ($(".tkb-btn")) {
+                    const tkbBtn = $(".tkb-btn");
+                    tkbBtn.click(function (event) {
+                        const modalTKB = $(this);
+                        const malop = modalTKB.data("malop");
+                        renderTKBList(malop);
+                    });
+                }
             } else {
                 $(`#dslop${courseId}`).html(
                     `<tr > <td colspan= '7' class="text-center">Không có lớp nào</td> </tr>`

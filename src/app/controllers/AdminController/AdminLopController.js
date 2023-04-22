@@ -29,6 +29,13 @@ class AdminLopController {
         const kq = await tkb.themTKB(tkbTT);
         res.json(kq);
     }
+    async xoaTkb(req, res) {
+        const { MA_THU, MA_LOP, MA_TG, MA_PHONG } = req.body;
+        const tkbTT = { MA_THU, MA_LOP, MA_TG, MA_PHONG };
+        const tkb = new TKB();
+        const kq = await tkb.xoaTKB(tkbTT);
+        res.json(kq);
+    }
 }
 
 module.exports = new AdminLopController();
