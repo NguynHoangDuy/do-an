@@ -4,10 +4,11 @@ class MoDangKy {
         const tkb = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `SELECT thoi_khoa_bieu.MA_LOP as MA_LOP, thoi_khoa_bieu.MA_THU as MA_THU, thoi_khoa_bieu.MA_TG as MA_TG, thoi_khoa_bieu.MA_PHONG as MA_PHONG, TEN_LOP, thoi_gian.TG_BD, thoi_gian.TG_KT, TEN_THU, mo_dang_ky.MA_CHI_NHANH FROM thoi_khoa_bieu INNER JOIN lop on thoi_khoa_bieu.MA_LOP = lop.MA_LOP 
+                    `SELECT thoi_khoa_bieu.MA_LOP as MA_LOP, thoi_khoa_bieu.MA_THU as MA_THU, thoi_khoa_bieu.MA_TG as MA_TG, thoi_khoa_bieu.MA_PHONG as MA_PHONG, TEN_LOP, thoi_gian.TG_BD, thoi_gian.TG_KT, TEN_THU, mo_dang_ky.MA_CHI_NHANH, TEN_PHONG FROM thoi_khoa_bieu INNER JOIN lop on thoi_khoa_bieu.MA_LOP = lop.MA_LOP 
                     INNER JOIN thoi_gian on thoi_khoa_bieu.MA_TG = thoi_gian.MA_TG 
                     INNER JOIN lich_hoc on thoi_khoa_bieu.MA_THU = lich_hoc.MA_THU
                     INNER JOIN mo_dang_ky on mo_dang_ky.MA_KHCC = lop.MA_KHCC
+                    INNER JOIN phong_hoc on thoi_khoa_bieu.MA_PHONG = phong_hoc.MA_PHONG
                     WHERE thoi_khoa_bieu.MA_LOP = '${maLop}'`,
                     (err, kq) => {
                         if (err) {

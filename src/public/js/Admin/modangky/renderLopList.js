@@ -35,7 +35,7 @@ export function renderLopList(courseId) {
                 </div>
                 <div class="modal-body">
                 <h2 class="text-center">THỜI KHÓA BIỂU</h2>
-                <div class="flex flex-end"><a class="button them-tkb-btn" data-malop="${item.MA_LOP}" data-toggle="modal" data-target="#themtkb-modal">Thêm thời khóa biểu</a></div>
+                <div class="flex flex-end"><a class="button them-tkb-btn" data-malop="${item.MA_LOP}" data-macn="${item.MA_CHI_NHANH}" data-toggle="modal" data-target="#themtkb-modal">Thêm thời khóa biểu</a></div>
                 
                 <div class="table-responsive">
                   <table class="table no-wrap user-table mb-0">

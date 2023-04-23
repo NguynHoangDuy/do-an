@@ -1,3 +1,4 @@
+import { getListPhong } from "./getListPhong.js";
 import { renderLopList } from "./renderLopList.js";
 import { renderTKBList } from "./renderTKB.js";
 
@@ -55,7 +56,9 @@ export function inputCapNhat() {
     $(document).on("click", ".them-tkb-btn", function (e) {
         const dl = $(this);
         const malop = dl.data("malop");
+        const macn = dl.data("macn");
         $("#MA_LOP_TKB").val(malop);
+        $("#MA_CN_TKB").val(macn);
     });
 }
 
@@ -120,7 +123,7 @@ export function removeLop() {
             },
         });
 
-        $("#capnhatlop").modal().hide();
+        $("#remove-lop").modal().hide();
     });
 }
 export function addTKBLop() {
@@ -170,7 +173,14 @@ export function removeTKB() {
                 // Xử lý lỗi nếu có
             },
         });
+    });
+}
 
-        $("#capnhatlop").modal().hide();
+export function changeSelectTKB() {
+    $(document).on("change", "#tkb-thu", function (e) {
+        getListPhong();
+    });
+    $(document).on("change", "#tkb-tg", function (e) {
+        getListPhong();
     });
 }

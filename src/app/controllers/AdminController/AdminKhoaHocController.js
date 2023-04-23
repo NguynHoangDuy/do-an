@@ -99,7 +99,8 @@ class AdminKhoaHocController {
     async moDangKy(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
-        const { makh, ngaybd, ngaykt, hocphi, tt } = req.body;
+        let tt = 1;
+        const { makh, ngaybd, ngaykt, hocphi } = req.body;
         let cn;
         if (req.session.chinhanh) {
             cn = req.session.chinhanh;

@@ -1,3 +1,4 @@
+import { getListPhong } from "./getListPhong.js";
 import { renderLopList } from "./renderLopList.js";
 
 export function getListClassCourse() {
@@ -10,7 +11,8 @@ export function getListClassCourse() {
             const tenKH = modal.data("tenkh");
             const maCn = modal.data("macn");
             getListGv(maCn);
-            getListPhong(maCn);
+            setCN_TKB(maCn);
+            getListPhong();
             setInputThemLop(tenKH, courseId);
             renderLopList(courseId);
         });
@@ -32,24 +34,13 @@ function getListGv(macn) {
     });
 }
 
-function getListPhong(macn) {
-    $.ajax({
-        url: `/api/phonghoc/${macn}`,
-        type: "GET",
-        dataType: "json",
-        success: (listPH) => {
-            let html = "";
-            listPH.forEach((item) => {
-                html += `<option value="${item.MA_PHONG}">${item.MA_PHONG} - ${item.DIA_CHI}</option>`;
-            });
-            $("#tkb-phong").html(html);
-        },
-    });
-}
-
 function setInputThemLop(tenKH, makhcc) {
     $(".button_molop").on("click", () => {
         document.querySelector("#MA_KH_THEM").value = tenKH;
         document.querySelector("#MA_KHCC_THEM").value = makhcc;
     });
+}
+function setCN_TKB(macn) {
+    $("#MA_CN_TKB").val(macn);
+    console.log($("#MA_CN_TKB").val());
 }

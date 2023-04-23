@@ -48,18 +48,12 @@ block container
 											input(type='date', id='ngaybd', name='ngaybd',required)
 									.create-group.mt-2
 										.create-item.w-100
-											label(for='ngaykt') Ngày kết thúc
+											label(for='ngaykt') Thời gian kết thúc (Tháng)
 											input(type='number', id='ngaykt', name='ngaykt',  required)
 									.create-group.mt-2
 										.create-item.w-100
 											label(for='hocphi') Học phí
 											input(type='number', id='hocphi', name='hocphi',  required)
-									.create-group.mt-2
-										.create-item.w-100
-											label(for='tt') Tình trạng
-											select.not-focus(class="form-control", id="tt", name="tt", required)
-												option(value="1") Cho phép đăng ký  
-												option(value="0") Không cho phép đăng ký
 									if (!admin)
 										.create-group.mt-2
 											.create-item.w-100
@@ -151,7 +145,7 @@ block container
 																	input(type='date', id='ngaybd', name='ngaybd',value= formatDate(kh.TG_BD),required)
 															.create-group.mt-2
 																.create-item.w-100
-																	label(for='ngaykt') Ngày kết thúc
+																	label(for='ngaykt') Thời gian kết thúc (tháng)
 																	input(type='number', id='ngaykt', name='ngaykt', value=kh.TG_KT, required)
 															.create-group.mt-2
 																.create-item.w-100
@@ -267,6 +261,7 @@ block container
 								.modal-body
 									.create-group.mt-2
 										input(type="text",id="MA_LOP_TKB", style="display: none;")
+										input(type="text",id="MA_CN_TKB", style="display: none;")
 										.create-item.w-100
 											label(for='tkb-thu') Thứ
 											select.not-focus(class="form-control", id="tkb-thu", name="tkb-thu", required)
@@ -277,12 +272,11 @@ block container
 											label(for='tkb-tg') Thời gian
 											select.not-focus(class="form-control", id="tkb-tg", name="tkb-tg", required)
 												for tg in tgList
-													option(value= tg.MA_TG )= tg.TG_BD+"-"+tg.TG_KT
+													option(value= tg.MA_TG, data-tgbd= tg.TG_BD, data-tgkt= tg.TG_KT )= tg.TG_BD+" - "+tg.TG_KT
 									.create-group.mt-2
 										.create-item.w-100
 											label(for='tkb-phong') Phòng
 											select.not-focus(class="form-control", id="tkb-phong", name="tkb-phong", required)
-
 								.modal-footer
 									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
 									button.btn.btn-success(type="submit", id="them-tkb-submit", data-dismiss='modal') Thêm thời khóa biểu

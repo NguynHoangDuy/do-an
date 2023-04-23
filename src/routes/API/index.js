@@ -4,5 +4,5 @@ const router = express.Router();
 const APIController = require("../../app/controllers/APIController");
 
 router.get("/giaovien/:macn", APIController.getListGv);
-router.get("/phonghoc/:macn", APIController.getListPh);
+router.get("/phonghoc", APIController.getListPh);
 module.exports = router;

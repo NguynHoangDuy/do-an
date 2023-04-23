@@ -9,9 +9,9 @@ class APIController {
         res.json(listGv);
     }
     async getListPh(req, res) {
-        const ma_cn = req.params.macn;
+        const { MA_CN, MA_THU, TG_BD, TG_KT } = req.query;
         const ph = new PhongHoc();
-        const listPh = await ph.getPhonghocByCn(ma_cn);
+        const listPh = await ph.getPhonghocByCn(MA_CN, MA_THU, TG_BD, TG_KT);
         res.json(listPh);
     }
 }
