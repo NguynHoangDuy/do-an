@@ -1,0 +1,36 @@
+extends ../../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Danh sách mở đăng ký
+            .flex.flex-end 
+                a.button(href="/admin/dmkh") Trở về
+            .bg-white.p-20.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Mã khóa học
+                                th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
+                                th(scope="col", class="border-0 text-uppercase font-medium") Số lượng
+                                th(scope="col", class="border-0 text-uppercase font-medium") Mở đăng ký
+                                th(scope="col", class="border-0 text-uppercase font-medium") Cập nhật
+                        tbody
+                            - stt = 1
+                            for kh in listKH 
+                                tr
+                                    td(class="pl-4")= stt++
+                                    td
+                                        p.mw-100.text-overflow(class="font-medium mb-0")= kh.MA_KH
+                                    td
+                                        p.mw-100.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+                                    td
+                                        p.mw-100.text-overflow(class="font-medium mb-0")= kh.SO_LUONG
+                                    td
+                                        a(href=`/admin/dmkh/khoahoc/${kh.MA_DM}/${kh.MA_KH}` ,class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-info")
+                                    td
+                                        a(href=`/admin/khoahoc`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-edit")
+

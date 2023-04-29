@@ -1,0 +1,86 @@
+extends ../../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Danh sách học viên
+            .flex.justify-around 
+                button.button(data-toggle="modal" ,data-target=`#timkiem`) Tìm kiếm 
+                .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `timkiem`)
+                    .modal-dialog(role='document')
+                        .modal-content
+                            form(action="", method="get") 
+                                .modal-header
+                                    h5.modal-title#confirm-modal-title Tìm kiếm học viên
+                                    button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='maHv') Mã học viên
+                                            input(type='text', id='maHv', name='maHv', value = mahv)
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='tenHv') Tên học viên
+                                            input(type='text', id='tenHv', name='tenHv', value= tenhv)
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                    button.btn.btn-success(type="submit") Tìm kiếm
+                a.button(data-toggle="modal" ,data-target=`#themkh`) Thêm học viên
+                .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themkh`)
+                    .modal-dialog(role='document')
+                        .modal-content
+                            form(action="", method="post") 
+                                .modal-header
+                                    h5.modal-title#confirm-modal-title Thêm học viên
+                                    button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='maHv') Mã học viên
+                                            input(type='text', id='maHv', name='maHv', value = mahv)
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                    button.btn.btn-success(type="submit") Thêm học viên
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages) 
+            .bg-white.p-20.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Tên lớp
+                                th(scope="col", class="border-0 text-uppercase font-medium") Họ và tên
+                                th(scope="col", class="border-0 text-uppercase font-medium") Số điện thoại
+                                th(scope="col", class="border-0 text-uppercase font-medium") Học phí
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+                        tbody
+                            - stt = 1
+                            for hv in listHv 
+                                tr
+                                    td(class="pl-4")= !tk?`${(perPage * current) - (perPage - stt++)}`:`${stt++}`
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.TEN_LOP
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.SDT
+                                    td
+                                        if (hv.HOC_PHI === 1)
+                                            p.text-overflow(class="font-medium mb-0") Đã đóng 
+                                        else 
+                                            a(data-toggle="modal" ,data-target=`#hp${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                                i(class="fa fa-info")
+                                            +confirm-modal(`hp${hv.MA_HV}`,'Xác nhận đóng học phí', 'Hãy xác nhận đóng học phí', 'Xác nhận', `/admin/lop/hocvien/${hv.MA_LOP}/hp/${hv.MA_HV}`) 
+                                    td
+                                        button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-trash") 
+                                        +confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/lop/hocvien/${hv.MA_LOP}/xoa/${hv.MA_HV}`)
+                if (!tk)
+                    +pagination(current, pages, "/admin/hocvien", "/admin/hocvien?trang=")
+            .flex.flex-end.mt-4
+                a.button(href="/admin") Trở về
+

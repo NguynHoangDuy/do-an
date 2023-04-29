@@ -1,0 +1,75 @@
+extends ../../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Quản lý khóa học
+            .flex.flex-end
+                a.button(data-toggle="modal" ,data-target=`#themdm`) Thêm danh mục
+                .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themdm`)
+                    .modal-dialog.mw-70(role='document')
+                        .modal-content
+                            form(action="/admin/dmkh/them", method="post") 
+                                .modal-header
+                                    h5.modal-title#confirm-modal-title Thêm danh mục mới
+                                    button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='tenKH') Tên danh mục
+                                            input(type='text', id='tenKH', name='tenDM', required)
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                    button.btn.btn-success(type="submit") Thêm danh mục
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages) 
+            .bg-white.p-20.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
+                                th(scope="col", class="border-0 text-uppercase font-medium") Danh sách khóa học
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+                        tbody
+                            - stt = 1
+                            for dm in listDM 
+                                tr
+                                    td(class="pl-4")= stt++
+                                    td
+                                        p.mw-100.text-overflow(class="font-medium mb-0")= dm.TEN_DM
+                                    td
+                                         a(href=`/admin/dmkh/khoahoc/${dm.MA_DM}`, class="btn btn-outline-info btn-circle btn-lg btn-circle")
+                                            i(class="fa fa-info")
+                                    td
+                                        button(data-toggle="modal" ,data-target=`#capnhat${dm.MA_DM}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-edit")
+                                        .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capnhat${dm.MA_DM}`)
+                                            .modal-dialog.mw-70(role='document')
+                                                .modal-content
+                                                    form(action=`/admin/dmkh/sua?madm=${dm.MA_DM}`, method="post") 
+                                                        .modal-header
+                                                            h5.modal-title#confirm-modal-title Cập nhật khóa học
+                                                            button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                span(aria-hidden='true') &times;
+                                                        .modal-body
+                                                            .create-group.mt-2
+                                                                .create-item.w-100
+                                                                    label(for='tenKH') Tên danh mục
+                                                                    input(type='text', id='tenKH', name='tenDM', value= dm.TEN_DM, required)
+                                                        .modal-footer
+                                                            button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                                            button.btn.btn-success(type="submit") Cập nhật
+                                        button(data-toggle="modal" ,data-target=`#xoa${dm.MA_DM}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-trash") 
+                                        +confirm-modal(`xoa${dm.MA_DM}`,'Xác nhận xóa danh mục', 'Bạn có chắc chắn muốn xóa danh mục này?', 'Xóa', `/admin/dmkh/xoa?madm=${dm.MA_DM}`)
+                if (!tk)
+                    +pagination(current, pages, "/admin/khoahoc", "/admin/khoahoc?trang=")
+                else 
+                    +pagination(current, pages, `/admin/khoahoc?maKH=${makh}&tenKH=${tenKH}`, `/admin/khoahoc?maKH=${makh}&tenKH=${tenKH}&trang=`)
+            .flex.flex-end.mt-4
+                a.button(href="/admin") Trở về
+

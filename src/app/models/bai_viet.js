@@ -1,15 +1,5 @@
 const db = require("../../config/db");
 class BaiViet {
-    constructor(id, tieu_de, noi_dung, hinh_anh, ngay_tao, trang_thai, ma_qtv) {
-        this.id = id;
-        this.tieu_de = tieu_de;
-        this.noi_dung = noi_dung;
-        this.hinh_anh = hinh_anh;
-        this.ngay_tao = ngay_tao;
-        this.trang_thai = trang_thai;
-        this.ma_qtv = ma_qtv;
-    }
-
     count() {
         return new Promise((resolve, reject) => {
             const query = "SELECT count(*) as count FROM bai_viet";

@@ -26,7 +26,7 @@ class MoDangKy {
         const dslop = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `SELECT MA_LOP, khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN, mo_dang_ky.MA_CHI_NHANH, SO_LUONG, giao_vien.MA_GV, mo_dang_ky.MA_KHCC, (SELECT COUNT(*) FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP) as SO_LUONG_HT FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${maKHCC}'`,
+                    `SELECT MA_LOP, khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN, mo_dang_ky.MA_CHI_NHANH, SO_LUONG, giao_vien.MA_GV, mo_dang_ky.MA_KHCC, (SELECT COUNT(*) FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP) as SO_LUONG_HT FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${maKHCC}' and lop.XOA = "0"`,
                     (err, kq) => {
                         if (err) {
                             reject(err);
@@ -50,7 +50,7 @@ class MoDangKy {
         const list = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `SELECT MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI, MA_CHI_NHANH FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE (mo_dang_ky.TINH_TRANG = '1') ${chiNhanh} Limit ${offset}, ${perPage};`,
+                    `SELECT MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI, MA_CHI_NHANH FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE (mo_dang_ky.TINH_TRANG = '1' AND mo_dang_ky.XOA = "0") ${chiNhanh} Limit ${offset}, ${perPage};`,
                     (err, kq) => {
                         if (err) {
                             reject(err);
@@ -75,7 +75,7 @@ class MoDangKy {
             const count = () => {
                 return new Promise((resolve, reject) => {
                     con.query(
-                        `select count(*) as count FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}") ${chiNhanh}`,
+                        `select count(*) as count FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and TEN_KH like "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}") ${chiNhanh} AND mo_dang_ky.XOA = "0"`,
                         (err, kq) => {
                             if (err) {
                                 reject(0);
@@ -91,7 +91,7 @@ class MoDangKy {
             const count = () => {
                 return new Promise((resolve, reject) => {
                     con.query(
-                        `select count(*) as count FROM mo_dang_ky where (mo_dang_ky.TINH_TRANG = '1') ${chiNhanh}`,
+                        `select count(*) as count FROM mo_dang_ky where (mo_dang_ky.TINH_TRANG = '1') ${chiNhanh} AND mo_dang_ky.XOA = "0"`,
                         (err, kq) => {
                             if (err) {
                                 reject(0);
@@ -116,7 +116,7 @@ class MoDangKy {
         const timkiem = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `select MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and (TEN_KH = "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}")) ${chiNhanh} Limit ${offset}, ${perPage}`,
+                    `select MA_KHCC ,khoa_hoc.MA_KH as MA_KH, TEN_KH, TG_BD, TG_KT, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH where (mo_dang_ky.TINH_TRANG = '1' and (TEN_KH like "%${tenKH}%" or mo_dang_ky.MA_KH = "${maKH}")) ${chiNhanh} AND mo_dang_ky.XOA = "0" Limit ${offset}, ${perPage}`,
                     (err, kq) => {
                         if (err) {
                             resolve([]);
@@ -152,7 +152,7 @@ class MoDangKy {
         const xoa = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `DELETE FROM mo_dang_ky WHERE MA_KHCC = '${maKHCC}'`,
+                    `UPDATE mo_dang_ky SET XOA='1' WHERE MA_KHCC = '${maKHCC}'`,
                     (err, kq) => {
                         if (err) {
                             reject(err);

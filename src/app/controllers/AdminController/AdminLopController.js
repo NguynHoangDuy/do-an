@@ -3,7 +3,8 @@ const TKB = require("../../models/thoikhoabieu");
 class AdminLopController {
     async addNewLop(req, res) {
         const { SO_LUONG, TEN_LOP, MA_GV, MA_KHCC } = req.body;
-        const lopTT = { SO_LUONG, TEN_LOP, MA_GV, MA_KHCC };
+        const XOA = 0
+        const lopTT = { SO_LUONG, TEN_LOP, MA_GV, MA_KHCC, XOA };
         const lop = new Lop();
         const kq = await lop.themLop(lopTT);
         res.json(kq);

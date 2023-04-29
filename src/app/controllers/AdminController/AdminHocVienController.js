@@ -5,7 +5,7 @@ class AdminHocVienController {
     async index(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
-        let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+        let perPage = 20; // số lượng sản phẩm xuất hiện trên 1 page
         let page = parseInt(req.query.trang) || 1;
         const offset = (page - 1) * perPage;
         const hv = new HocVien();

@@ -43,6 +43,12 @@ block container
                                         .create-item.w-100
                                             label(for='tenKH') Tên khóa học
                                             input(type='text', id='tenKH', name='tenKH', required)
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='dmkh') Danh mục khóa học
+                                            select.not-focus(class="form-control", id="dmkh", name="dmkh", required)
+                                                for dm in listDM
+                                                    option(value= dm.MA_DM)= dm.TEN_DM
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                     button.btn.btn-success(type="submit") Thêm khóa học
@@ -92,7 +98,7 @@ block container
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='ngaykt') Thời gian kết thúc (Tháng)
-                                                                    input(type='date', id='ngaykt', name='ngaykt',  required)
+                                                                    input(type='number', id='ngaykt', name='ngaykt',  required)
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='hocphi') Học phí
@@ -127,6 +133,12 @@ block container
                                                                 .create-item.w-100
                                                                     label(for='tenKH') Tên khóa học
                                                                     input(type='text', id='tenKH', name='tenKH', value= kh.TEN_KH, required)
+                                                            .create-group.mt-2
+                                                                .create-item.w-100
+                                                                    label(for='dmkh') Danh mục khóa học
+                                                                    select.not-focus(class="form-control", id="dmkh", name="dmkh", required)
+                                                                        for dm in listDM
+                                                                            option(value= dm.MA_DM, selected= dm.MA_DM==kh.MA_DM?true:false )= dm.TEN_DM
                                                         .modal-footer
                                                             button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
                                                             button.btn.btn-success(type="submit") Cập nhật

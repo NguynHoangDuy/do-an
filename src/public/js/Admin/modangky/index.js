@@ -8,6 +8,7 @@ import {
     removeLop,
     removeTKB,
 } from "./addLop.js";
+import { loadTKB } from "./loadTKB.js";
 
 export function modangky() {
     addLop();
@@ -18,4 +19,5 @@ export function modangky() {
     removeTKB();
     changeSelectTKB();
     getListClassCourse();
+    loadTKB()
 }

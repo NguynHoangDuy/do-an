@@ -1,16 +1,18 @@
-const bcrypt = require("bcrypt");
 const KhoaHoc = require("../../models/khoahoc");
 const ChiNhanh = require("../../models/chinhanh");
+const { getAll } = require("../../models/dm_kh");
 class AdminKhoaHocController {
     async index(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
-        let perPage = 2;
+        let perPage = 10;
         let page = parseInt(req.query.trang) || 1;
         const offset = (page - 1) * perPage;
         const makh = req.query.maKH;
         const tenkh = req.query.tenKH;
         const khoaHoc = new KhoaHoc();
+        const listDM = await getAll();
+
         const chiNhanh = new ChiNhanh();
         const admin = req.session.chinhanh;
         const dsMaCN = await chiNhanh.xemChiNhanh();
@@ -26,6 +28,7 @@ class AdminKhoaHocController {
                 tk: false,
                 admin,
                 dsMaCN,
+                listDM,
             });
         } else {
             const totalCount = await khoaHoc.demKH(makh, tenkh);
@@ -47,16 +50,17 @@ class AdminKhoaHocController {
                 tenkh,
                 admin,
                 dsMaCN,
+                listDM,
             });
         }
     }
     async themKhoaHoc(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
-        const { maKH, tenKH } = req.body;
+        const { maKH, tenKH, dmkh } = req.body;
 
         const khoahoc = new KhoaHoc();
-        const kq = await khoahoc.themkhoahoc(maKH, tenKH);
+        const kq = await khoahoc.themkhoahoc(maKH, tenKH, dmkh);
         if (kq === 1) {
             req.flash("success", "Thêm khóa học thành công.");
             res.redirect(`/admin/khoahoc`);
@@ -70,10 +74,10 @@ class AdminKhoaHocController {
         res.locals.ten = req.session.ten;
         const old = req.query.makh;
 
-        const { maKH, tenKH } = req.body;
+        const { maKH, tenKH, dmkh } = req.body;
 
         const khoahoc = new KhoaHoc();
-        const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, old);
+        const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, dmkh, old);
         if (kq === 1) {
             req.flash("success", "Cập nhật khóa học thành công.");
             res.redirect(`/admin/khoahoc`);

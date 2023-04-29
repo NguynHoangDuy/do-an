@@ -1,0 +1,66 @@
+extends ../../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Danh sách lớp
+			.flex.flex-end 
+				a.button(href="/admin/dmkh") Trở về
+			.bg-white.p-20.radius-16.mt-2
+				.table-responsive
+					table.table.no-wrap.user-table.mb-0 
+						thead
+							tr.borderbottom
+								th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+								th(scope="col", class="border-0 text-uppercase font-medium") Mã KH
+								th(scope="col", class="border-0 text-uppercase font-medium") Tên Lớp
+								th(scope="col", class="border-0 text-uppercase font-medium") Giáo Viên
+								th(scope="col", class="border-0 text-uppercase font-medium") Số lượng
+								th(scope="col", class="border-0 text-uppercase font-medium") Danh sách học viên
+								th(scope="col", class="border-0 text-uppercase font-medium") Thời khóa biểu
+								th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+						tbody
+							- stt = 1
+							for lop in listLop
+								tr
+									td(class="pl-4")= stt++
+									td
+										p.mw-100.text-overflow(class="font-medium mb-0")= lop.MA_KH
+									td
+										p.mw-100.text-overflow(class="font-medium mb-0")= lop.TEN_LOP
+									td
+										p.mw-100.text-overflow(class="font-medium mb-0")= lop.HO_TEN
+									td
+										p.mw-100.text-overflow(class="font-medium mb-0")= lop.SO_LUONG_HT+"/"+lop.SO_LUONG
+									td
+										a(href=`/admin/lop/hocvien/${lop.MA_LOP}` ,class="btn btn-outline-info btn-circle btn-lg btn-circle " , )
+											i(class="fa fa-info")
+									td
+										a(data-toggle="modal" ,data-target=`#tkb${lop.MA_LOP}`,class="btn btn-outline-info btn-circle btn-lg btn-circle btn-tkb", data-malop= lop.MA_LOP)
+											i(class="fa fa-info")
+										.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-modal-title", data-backdrop="false", aria-hidden="true", id=`tkb${lop.MA_LOP}`)
+											.modal-dialog.mw-70(role="document")
+												.modal-content
+													.modal-header
+														h5.modal-title#confirm-modal-title Thời khóa biểu
+														button.close-alert.close(type="button", data-dismiss="modal", aria-label="Close")
+															span(aria-hidden="true") &times;
+													.modal-body
+														h2.text-center THỜI KHÓA BIỂU
+														.table-responsive
+															table.table.no-wrap.user-table.mb-0
+																thead
+																	tr.borderbottom
+																		th.border-0.text-uppercase.font-medium(scope="col") Tên lớp
+																		th.border-0.text-uppercase.font-medium(scope="col") Thứ
+																		th.border-0.text-uppercase.font-medium(scope="col") Thời gian
+																		th.border-0.text-uppercase.font-medium(scope="col") Phòng
+																tbody(id=`tkb_lop${lop.MA_LOP}`)
+													.modal-footer
+														button.btn.btn-secondary(type="button", data-dismiss="modal") Hủy
+									td 
+										button(data-toggle="modal" ,data-target=`#capnhat${lop.MA_LOP}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+											i(class="fa fa-edit")
+										button(data-toggle="modal" ,data-target=`#xoa${lop.MA_LOP}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+											i(class="fa fa-trash")
+
+							
