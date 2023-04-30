@@ -1,4 +1,7 @@
-import { getListClassCourse } from "./getListClassCourse.js";
+import {
+    getListClassCourse,
+    getListClassCourseHV,
+} from "./getListClassCourse.js";
 import {
     addLop,
     addTKBLop,
@@ -19,5 +22,6 @@ export function modangky() {
     removeTKB();
     changeSelectTKB();
     getListClassCourse();
-    loadTKB()
+    loadTKB();
+    getListClassCourseHV();
 }

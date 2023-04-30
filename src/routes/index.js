@@ -8,6 +8,8 @@ const adminBaiVietRouter = require("./admin/baiviet");
 const adminDanhMucKHRouter = require("./admin/danhmuc");
 const adminLopRouter = require("./admin/lop");
 const giaoVienRouter = require("./giaovien");
+const hocVienDKKhoaHocRouter = require("./hocvien/dangkykhoahoc");
+const hocVienDKLopRouter = require("./hocvien/dangkylop");
 const hocVienRouter = require("./hocvien");
 const guestBaiVietRouter = require("./guest/baiviet");
 const APIRouter = require("./API/index");
@@ -21,6 +23,8 @@ function route(app) {
     app.use("/admin/lop", adminLopRouter);
     app.use("/admin", adminRouter);
     app.use("/giaovien", giaoVienRouter);
+    app.use("/hocvien/dangkykhoahoc", hocVienDKKhoaHocRouter);
+    app.use("/hocvien/dangkylop", hocVienDKLopRouter);
     app.use("/hocvien", hocVienRouter);
     app.use("/baiviet", guestBaiVietRouter);
     app.use("/api", APIRouter);

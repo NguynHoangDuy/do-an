@@ -165,6 +165,79 @@ class MoDangKy {
         };
         return xoa();
     }
+
+    getMoDangKyHv(mahv, macn) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `SELECT mo_dang_ky.MA_KHCC, TEN_KH, mo_dang_ky.MA_KH, TG_BD, TG_KT, TINH_TRANG, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE mo_dang_ky.MA_CHI_NHANH = "${macn}" AND TINH_TRANG = 1 AND mo_dang_ky.MA_KHCC NOT IN (SELECT danh_sach_khoa_hoc_dang_ky.MA_KHCC FROM danh_sach_khoa_hoc_dang_ky WHERE danh_sach_khoa_hoc_dang_ky.MA_HV = "${mahv}" )`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(kq);
+                    }
+                }
+            );
+        });
+    }
+    getHvDangKy(mahv) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `SELECT mo_dang_ky.MA_KHCC, LOP, TEN_KH, mo_dang_ky.MA_KH, TG_BD, TG_KT, TINH_TRANG, HOC_PHI FROM mo_dang_ky INNER JOIN danh_sach_khoa_hoc_dang_ky on mo_dang_ky.MA_KHCC = danh_sach_khoa_hoc_dang_ky.MA_KHCC INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE TINH_TRANG = 1 AND danh_sach_khoa_hoc_dang_ky.MA_HV = "${mahv}"`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(kq);
+                    }
+                }
+            );
+        });
+    }
+    dangKy(mahv, makhcc) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `INSERT INTO danh_sach_khoa_hoc_dang_ky(MA_KHCC, MA_HV) VALUES ('${makhcc}','${mahv}')`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(1);
+                    }
+                }
+            );
+        });
+    }
+
+    huyDangKy(mahv, makhcc) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `DELETE FROM danh_sach_khoa_hoc_dang_ky WHERE MA_HV = "${mahv}" and MA_KHCC = "${makhcc}"`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(1);
+                    }
+                }
+            );
+        });
+    }
+
+    dsLopHV(makhcc, mahv) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `SELECT MA_LOP, khoa_hoc.MA_KH as MA_KH, TEN_KH, TEN_LOP, HO_TEN, mo_dang_ky.MA_CHI_NHANH, SO_LUONG, giao_vien.MA_GV, mo_dang_ky.MA_KHCC, (SELECT COUNT(*) FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP) as SO_LUONG_HT FROM khoa_hoc INNER JOIN mo_dang_ky on khoa_hoc.MA_KH = mo_dang_ky.MA_KH INNER JOIN lop on lop.MA_KHCC = mo_dang_ky.MA_KHCC INNER JOIN giao_vien on lop.MA_GV = giao_vien.MA_GV WHERE mo_dang_ky.MA_KHCC = '${makhcc}' and lop.XOA = "0" and MA_LOP NOT IN (SELECT danh_sach_hoc_vien_lop.MA_LOP FROM danh_sach_hoc_vien_lop WHERE danh_sach_hoc_vien_lop.MA_HV = "${mahv}")`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(kq);
+                    }
+                }
+            );
+        });
+    }
 }
 
 module.exports = MoDangKy;

@@ -1,0 +1,84 @@
+extends ../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Danh sách đăng ký
+			.flex.justify-around
+				a.button(data-toggle="modal" ,data-target=`#dsmodangky`) Danh sách khóa học
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `dsmodangky`)
+					.modal-dialog.mw-70(role='document')
+						.modal-content
+							form(action="/admin/modangky/modangky", method="post") 
+								.modal-header
+									h5.modal-title#confirm-modal-title Danh sách khóa học
+									button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+										span(aria-hidden='true') &times;
+								.modal-body
+									.table-responsive
+										table.table.no-wrap.user-table.mb-0 
+											thead
+												tr.borderbottom
+													th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+													th(scope="col", class="border-0 text-uppercase font-medium") Mã khóa học
+													th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
+													th(scope="col", class="border-0 text-uppercase font-medium") Thời gian bắt đầu
+													th(scope="col", class="border-0 text-uppercase font-medium") Học phí
+													th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+											tbody
+												- stt = 1
+												for kh in listMDK 
+													tr
+														td(class="pl-4")= stt++
+														td
+															p.text-overflow(class="font-medium mb-0")= kh.MA_KH
+														td
+															p.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+														td
+															p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_BD)
+														td
+															p.text-overflow(class="font-medium mb-0")= kh.HOC_PHI
+														td
+															a(href=`/hocvien/dangkykhoahoc/dangky/${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+																i(class="fa fa-info") 
+												if listMDK.length === 0
+													tr 
+														td(colspan="6") Không có khóa học nào
+								.modal-footer
+									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+			if messages.success
+				+alert(messages)
+			if messages.fail
+				+alertNot(messages) 
+			.bg-white.p-20.radius-16.mt-2
+				.table-responsive
+					table.table.no-wrap.user-table.mb-0 
+						thead
+							tr.borderbottom
+								th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+								th(scope="col", class="border-0 text-uppercase font-medium") Mã khóa học
+								th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
+								th(scope="col", class="border-0 text-uppercase font-medium") Thời gian bắt đầu
+								th(scope="col", class="border-0 text-uppercase font-medium") Học phí
+								th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+						tbody
+							- stt = 1
+							for kh in listDK 
+								tr
+									td(class="pl-4")= stt++
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.MA_KH
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+									td
+										p.text-overflow(class="font-medium mb-0")= formatDate(kh.TG_BD)
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.HOC_PHI
+									td
+										button(data-toggle="modal" ,data-target=`#xoa${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+											i(class="fa fa-trash") 
+										+confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận hủy đăng ký', 'Bạn có chắc chắn muốn hủy đăng ký khóa học này?', 'Hủy đăng ký', `/hocvien/dangkykhoahoc/huydangky/${kh.MA_KHCC}`)
+							if listDK.length === 0
+								tr 
+									td(colspan="6") Không có khóa học nào
+			.flex.flex-end.mt-4
+				a.button(href="/admin/dmkh/khoahoc") Trở về

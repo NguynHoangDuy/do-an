@@ -1,5 +1,5 @@
 import { getListPhong } from "./getListPhong.js";
-import { renderLopList } from "./renderLopList.js";
+import { renderLopList, renderLopListHv } from "./renderLopList.js";
 
 export function getListClassCourse() {
     if ($(".button-dslop").length) {
@@ -18,7 +18,18 @@ export function getListClassCourse() {
         });
     }
 }
-
+export function getListClassCourseHV() {
+    if ($(".hv-lop").length) {
+        const btn = $(".hv-lop");
+        btn.on("click", function (event) {
+            // Nút button được nhấn để mở modal
+            const modal = $(this); // Modal hiện tại
+            const makhcc = modal.data("makhcc");
+            const mahv = modal.data("mahv");
+            renderLopListHv(makhcc, mahv);
+        });
+    }
+}
 function getListGv(macn) {
     $.ajax({
         url: `/api/giaovien/${macn}`,
