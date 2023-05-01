@@ -136,11 +136,11 @@ class KhoaHoc {
         return kq();
     }
 
-    moDangKy(maKH, tgBD, tgKT, hocphi, tt, cn) {
+    moDangKy(maKH, tgBD, tgKT, hocphi, cn) {
         const moDK = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `INSERT INTO mo_dang_ky (MA_KH, TG_BD, TG_KT, HOC_PHI, TINH_TRANG, MA_CHI_NHANH, XOA) VALUES ('${maKH}','${tgBD}','${tgKT}','${hocphi}','${tt}', '${cn}', '0')`,
+                    `INSERT INTO mo_dang_ky (MA_KH, TG_BD, TG_KT, HOC_PHI, TINH_TRANG, MA_CHI_NHANH, XOA) VALUES ('${maKH}','${tgBD}','${tgKT}','${hocphi}','1', '${cn}', '0')`,
                     (err, kq) => {
                         if (err) {
                             console.log(err);

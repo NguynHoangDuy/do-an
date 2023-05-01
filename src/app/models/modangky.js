@@ -169,7 +169,7 @@ class MoDangKy {
     getMoDangKyHv(mahv, macn) {
         return new Promise((resolve, reject) => {
             con.query(
-                `SELECT mo_dang_ky.MA_KHCC, TEN_KH, mo_dang_ky.MA_KH, TG_BD, TG_KT, TINH_TRANG, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE mo_dang_ky.MA_CHI_NHANH = "${macn}" AND TINH_TRANG = 1 AND mo_dang_ky.MA_KHCC NOT IN (SELECT danh_sach_khoa_hoc_dang_ky.MA_KHCC FROM danh_sach_khoa_hoc_dang_ky WHERE danh_sach_khoa_hoc_dang_ky.MA_HV = "${mahv}" )`,
+                `SELECT mo_dang_ky.MA_KHCC, TEN_KH, mo_dang_ky.MA_KH, TG_BD, TG_KT, TINH_TRANG, HOC_PHI FROM mo_dang_ky INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE mo_dang_ky.MA_CHI_NHANH = "${macn}" AND mo_dang_ky.XOA = "0" AND TINH_TRANG = 1 AND mo_dang_ky.MA_KHCC NOT IN (SELECT danh_sach_khoa_hoc_dang_ky.MA_KHCC FROM danh_sach_khoa_hoc_dang_ky WHERE danh_sach_khoa_hoc_dang_ky.MA_HV = "${mahv}" )`,
                 (err, kq) => {
                     if (err) {
                         reject(err);

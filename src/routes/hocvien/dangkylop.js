@@ -6,6 +6,8 @@ const router = express.Router();
 const HocVienController = require("../../app/controllers/HocVienController/HocVienDangKyController");
 
 router.get("/dslop", HocVienController.danhSachLop);
+router.use("/dangky/:malop", HocVienController.hvDangKy);
+router.use("/huydangky/:malop", HocVienController.hvHuyDangKy);
 router.use(
     "/",
     checkLogged.checkLoggedIn,

@@ -110,7 +110,7 @@ class AdminKhoaHocController {
     async moDangKy(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
-        const { makh, ngaybd, ngaykt, hocphi, tt } = req.body;
+        const { makh, ngaybd, ngaykt, hocphi } = req.body;
         const khoahoc = new KhoaHoc();
         let cn;
         if (req.session.chinhanh) {
@@ -118,7 +118,7 @@ class AdminKhoaHocController {
         } else {
             cn = req.body.chinhanh;
         }
-        const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, hocphi, tt, cn);
+        const kq = await khoahoc.moDangKy(makh, ngaybd, ngaykt, hocphi, cn);
         if (kq === 1) {
             req.flash("success", "Mở đăng ký thành công.");
             res.redirect(`/admin/modangky`);

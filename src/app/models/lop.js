@@ -93,6 +93,35 @@ class Lop {
             );
         });
     }
+
+    xoaLop(malop, mahv) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `DELETE FROM danh_sach_hoc_vien_lop
+                WHERE MA_HV = "${mahv}"
+                AND MA_LOP IN (SELECT MA_LOP FROM lop WHERE MA_KHCC = (SELECT MA_KHCC FROM lop WHERE MA_LOP = "${malop}"))`,
+                (error, res) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(1);
+                }
+            );
+        });
+    }
+    xoaHocVienLop(tenlop, mahv) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `DELETE FROM danh_sach_hoc_vien_lop WHERE MA_HV = "${mahv}" AND MA_LOP IN (SELECT MA_LOP FROM lop WHERE TEN_LOP ="${tenlop}")`,
+                (error, res) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(1);
+                }
+            );
+        });
+    }
     xoaHocVien(malop, mahv) {
         return new Promise((resolve, reject) => {
             db.query(

@@ -104,7 +104,7 @@ export function renderLopListHv(makhcc, mahv) {
                     html += `<td> ${item.HO_TEN}</td>`;
                     html += `<td> ${item.SO_LUONG_HT} / ${item.SO_LUONG} </td>`;
                     html += `<td> <a data-toggle="modal" data-target= '#tkb${item.MA_LOP}' data-malop="${item.MA_LOP}" class="btn btn-primary btn-sm tkb-btn"><i class="fa fa-info-circle"></i> </a></td>`;
-                    html += `<td> <a class="btn btn-primary btn-sm edit-btn dang-ky-lop" data-malop="${item.MA_LOP}" data-mahv = "${mahv}" ><i class="fa fa-info-circle"></i> </a></td>`;
+                    html += `<td> <a class="btn btn-primary btn-sm edit-btn" href="/hocvien/dangkylop/dangky/${item.MA_LOP}"><i class="fa fa-info-circle"></i> </a></td>`;
                     html += "</tr>";
 
                     let modalHtml = `
@@ -146,7 +146,6 @@ export function renderLopListHv(makhcc, mahv) {
                     $(".modal-list").html($(".modal-list").html() + modalHtml);
                 });
                 $(`#dslop${makhcc}`).html(html);
-
                 if ($(".tkb-btn")) {
                     const tkbBtn = $(".tkb-btn");
                     tkbBtn.click(function (event) {

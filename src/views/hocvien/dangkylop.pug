@@ -52,14 +52,14 @@ block container
 																			th(scope="col", class="border-0 text-uppercase font-medium") Giáo Viên
 																			th(scope="col", class="border-0 text-uppercase font-medium") Số lượng
 																			th(scope="col", class="border-0 text-uppercase font-medium") Thời khóa biểu
-																			th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+																			th(scope="col", class="border-0 text-uppercase font-medium") Đăng ký
 																	tbody(id=`dslop${kh.MA_KHCC}`)
 														.modal-footer
 															button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy 
 									td
 										button(data-toggle="modal" ,data-target=`#xoa${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
 											i(class="fa fa-trash") 
-										+confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận hủy đăng ký', 'Bạn có chắc chắn muốn hủy đăng ký khóa học này?', 'Hủy đăng ký', `/hocvien/dangkykhoahoc/huydangky/${kh.MA_KHCC}`)
+										+confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận hủy đăng ký', 'Bạn có chắc chắn muốn hủy đăng ký khóa học này?', 'Hủy đăng ký', `/hocvien/dangkylop/huydangky/${kh.LOP}`)
 							if listDK.length === 0
 								tr 
 									td(colspan="6") Không có khóa học nào

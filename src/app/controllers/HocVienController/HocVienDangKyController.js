@@ -1,4 +1,5 @@
 const MoDangKy = require("../../models/modangky");
+const Lop = require("../../models/lop");
 class HocVienDangKyController {
     async index(req, res) {
         res.locals.quyen = "Học viên";
@@ -60,6 +61,46 @@ class HocVienDangKyController {
         const modangky = new MoDangKy();
         const listDK = await modangky.getHvDangKy(mahv);
         res.render("./hocvien/dangkylop", { listDK, mahv });
+    }
+
+    async hvDangKy(req, res) {
+        res.locals.quyen = "Học viên";
+        res.locals.ten = req.session.ten;
+        const mahv = req.session.username;
+        const malop = req.params.malop;
+        const lop = new Lop();
+        const xoa = await lop.xoaLop(malop, mahv);
+        console.log(malop, mahv);
+        if (xoa === 1) {
+            const kq = await lop.themHocVien(malop, mahv);
+            if (kq === 1) {
+                req.flash("success", "Đăng ký thành công.");
+                res.redirect(`/hocvien/dangkylop`);
+            } else {
+                req.flash("fail", "Đăng ký không thành công");
+                res.redirect(`/hocvien/dangkylop`);
+            }
+        } else {
+            req.flash("fail", "Đăng ký không thành công");
+            res.redirect(`/hocvien/dangkylop`);
+        }
+    }
+    async hvHuyDangKy(req, res) {
+        res.locals.quyen = "Học viên";
+        res.locals.ten = req.session.ten;
+        const mahv = req.session.username;
+        const malop = req.params.malop;
+        const lop = new Lop();
+        console.log(malop, mahv);
+
+        const kq = await lop.xoaHocVienLop(malop, mahv);
+        if (kq === 1) {
+            req.flash("success", "Hủy đăng ký thành công.");
+            res.redirect(`/hocvien/dangkylop`);
+        } else {
+            req.flash("fail", "Hủy đăng ký không thành công");
+            res.redirect(`/hocvien/dangkylop`);
+        }
     }
 
     async danhSachLop(req, res) {
