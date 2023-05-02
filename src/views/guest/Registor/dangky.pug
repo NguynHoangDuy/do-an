@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="/css/main.css")
+		title= title
+	body(class=bodyClass)
+		.login-container
+			.login-main
+				.login-body
+					p.login-title.color-main Đăng ký
+					form.login-form(action='/xacnhandangky', method='POST')
+						.login-group
+							label(for='email') Email
+							input(type='text', id='email', name='email')
+						.login-group
+							label(for='password') Mật khẩu
+							input(type='password', id='password', name='password')
+						.create-group.mt-2
+							.create-item.w-100
+								label(for='maCN') Chọn chi nhánh
+								select.not-focus(class="form-control", id="maCN", name="chinhanh", style="height: 64px")
+									for dsCN in dsMaCN
+										option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH
+						.login-group.flex-center.my-4
+							button(type='submit') Đăng ký
+				.login-desc
+					p.login-title.color-white Hello, Friend !
+					p.login-text Thank you for taking the time to explore our website. We hope you find it informative and helpful.
+

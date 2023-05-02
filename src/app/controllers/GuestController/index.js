@@ -4,6 +4,9 @@ const GiaoVien = require("../../models/giaovien");
 const HomePage = require("../../models/homePage");
 const BaiViet = require("../../models/bai_viet");
 const bcrypt = require("bcrypt");
+const ChiNhanh = require("../../models/chinhanh");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 class GuestController {
     async index(req, res) {
         const home = new HomePage();
@@ -13,7 +16,75 @@ class GuestController {
         res.render("index", { banner, posts });
     }
     loginForm(req, res) {
-        res.render("login");
+        res.render("guest/Registor/login");
+    }
+    async dangKyForm(req, res) {
+        const chiNhanh = new ChiNhanh();
+        const dsMaCN = await chiNhanh.xemChiNhanh();
+        res.render("guest/Registor/dangky", { dsMaCN });
+    }
+    xacNhan(req, res) {
+        const token = crypto.randomBytes(3).toString("hex");
+        const user = { ...req.body, confirm: token };
+
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            auth: {
+                user: "duy.nh.61cntt@ntu.edu.vn",
+                pass: "0932491613",
+            },
+        });
+
+        const mailOptions = {
+            from: req.body.email,
+            to: user.email,
+            subject: "Xác nhận tài khoản của bạn",
+            text: `Mã xác nhận đăng ký học viên của bạn là: ${token}`,
+        };
+        transporter.sendMail(mailOptions, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        req.session.registor = user;
+        res.render("guest/Registor/confirm-email");
+    }
+    async xacNhanAction(req, res) {
+        const madk = req.body.madk;
+        const user = req.session.registor;
+        console.log(user);
+        const hoten = user.email.substring(0, user.email.indexOf("@"));
+        const salt = bcrypt.genSaltSync(10);
+        const mk = bcrypt.hashSync(user.password, salt);
+        if (madk === user.confirm) {
+            const hv = new HocVien();
+            const mahv = await hv.layMaHV();
+            console.log(mahv);
+            const kq = await hv.dangKyHV(
+                mahv,
+                hoten,
+                user.email,
+                mk,
+                user.chinhanh
+            );
+            if (kq === 1) {
+                req.flash(
+                    "noti",
+                    `<p>Đăng ký thành công</p>
+                <p>Tên đăng nhập: ${mahv}</p> 
+                <p>Vui lòng đăng nhập và cập nhật thông tin cá nhân</p>`
+                );
+                res.redirect(`/dangnhap`);
+            } else {
+                req.flash("noti", `<p>Đăng ký không thành công</p>`);
+                res.redirect(`/dangky`);
+            }
+        } else {
+            req.flash("noti", `<p>Đăng ký không thành công</p>`);
+            res.redirect(`/dangky`);
+        }
     }
 
     async dangnhap(req, res) {

@@ -1,0 +1,89 @@
+extends ../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Cập nhật thông tin
+			if messages.success
+				+alert(messages)
+			if messages.fail
+				+alertNot(messages) 
+			form.bg-white.create-form.mb-4(action="/hocvien/capnhatthongtin", method="post", enctype="multipart/form-data")
+				div
+					p Ảnh đại diện
+						div.text-center
+							label.d-block.mb-2(for="anh_dd")
+								img.img-account-profile.rounded-circle.mb-2(src=hv[0].HINH_DD?hv[0].HINH_DD:"http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+							input.d-none(type="file", name="anh_dd", id="anh_dd")
+							label.button(for="anh_dd") Tải ảnh lên 
+				.create-group.mt-2
+						.create-item
+							label(for='hoten') Họ và tên
+							input(type='text', id='hoten', name='hoten', value= hv[0].HO_TEN)
+						.create-item
+							label(for='gt') Giới tính
+							select.not-focus(class="form-control", id="gt", name="gt")
+								option(value="1", selected =(hv[0].GIOI_TINH==1?true:false)) Nam  
+								option(value="0", selected =(hv[0].GIOI_TINH==0?true:false)) Nữ
+				.create-group.mt-2
+					.create-item
+						label(for='tinhtrang') Tình trạng
+						select.not-focus(class="form-control", id="tinhtrang", name="tinhtrang")
+							option(value="1", selected =(hv[0].TINH_TRANG==1?true:false)) Còn học  
+							option(value="0", selected =(hv[0].TINH_TRANG==0?true:false)) Nghỉ học
+				.create-group.mt-2
+					.create-item
+						label(for='ngaysinh') Ngày sinh   
+						input(type='date', id='ngaysinh', name='ngaysinh', value= hv[0].NGAY_SINH!="0000-00-00"?formatDate(hv[0].NGAY_SINH):"")
+					.create-item
+						label(for='sdt') Số điện thoại
+						input(type='text', id='sdt', name='sdt',value= hv[0].SDT)
+				.create-group.mt-2
+					.create-item.w-100
+						label(for='diachi') Địa chỉ
+						input(type='text', id='diachi', name='diachi', value= hv[0].DIA_CHI)
+				.create-group.mt-2
+					.create-item.w-100
+						label(for='email') Email
+						input(type='email', id='email', name='email', value= hv[0].EMAIL)      
+				.create-group.mt-2
+					.create-item.w-100
+						p Đối tượng
+						.check-dt.mt-3
+							input(type="radio", id="hs", name="dt", class="form-check-input", value="HS", checked=(hv[0].DOI_TUONG=="HS"?true:false))
+							label.mx-3(for="hs", class="form-check-label") Học sinh
+							input(type="radio", id="sv", name="dt", class="form-check-input", value="SV",checked=(hv[0].DOI_TUONG=="SV"?true:false))
+							label.mx-3(for="sv", class="form-check-label") Sinh viên
+							input(type="radio", id="dtk", name="dt", class="form-check-input", value="DTK",checked=(hv[0].DOI_TUONG=="DTK"?true:false))
+							label.mx-3(for="dtk", class="form-check-label") Đối tượng khác
+							.hs-content.mt-4
+								.create-group.mt-2
+									.create-item
+										label(for='lop') Lớp
+										input(type='text', id='lop', name='lop', value= hv[0].LOP)
+									.create-item
+										label(for='truong') Trường
+										input(type='text', id='truong', name='truong', value= hv[0].TRUONG)        
+								.create-group.mt-2
+									.create-item
+										label(for='phuhuynh') Phụ huynh
+										input(type='text', id='phuhuynh', name='phuhuynh', value= phuhuynh)
+									.create-item
+										label(for='sdt-ph') Số điện thoại phụ huynh
+										input(type='text', id='sdt-ph', name='sdtph',value= hv[0].SDT_PH)  
+							.sv-content.mt-4
+								.create-group.mt-2
+									.create-item
+										label(for='nganh') Ngành
+										input(type='text', id='nganh', name='nganh', value= hv[0].NGANH)
+									.create-item
+										label(for='truongdh') Trường
+										input(type='text', id='truongdh', name='truongdh', value= hv[0].TRUONG_DH)              
+							.dtk-content.mt-4
+								.create-group.mt-2
+									.create-item.w-100
+										label(for='cv') Công việc
+										input(type='text', id='cv', name='cv', value= hv[0].CV)             
+				.button-main.mt-4.text-center.overflow-hidden
+					button.p-15.mr-10(type='submit') Cập nhật
+			.flex.flex-end.mt-4
+				a(href="/hocvien").button.flex-end Trở về  

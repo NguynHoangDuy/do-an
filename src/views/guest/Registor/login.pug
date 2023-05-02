@@ -7,6 +7,17 @@ html(lang="en")
 		link(rel="stylesheet", href="/css/main.css")
 		title= title
 	body(class=bodyClass)
+		if messages.noti
+			.modal.fade#noti-modal(tabindex='-1', role='dialog', aria-labelledby='noti-modal-label', aria-hidden='true', class="show-modal")
+				.modal-dialog.modal-dialog-centered(role='document')
+					.modal-content
+						.modal-header
+							button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+								span(aria-hidden='true') &times;
+						.modal-body
+							!= messages.noti
+						.modal-footer
+							button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 		.login-container
 			.login-main
 				.login-body
@@ -18,11 +29,16 @@ html(lang="en")
 						.login-group
 							label(for='password') Mật khẩu
 							input(type='password', id='password', name='password')
-						.login-group.flex-right
+						.login-group.flex-row.justify-content-between
+							a(href="/dangky") Đăng ký
 							a(href="") Quên mật khẩu 
-						.login-group.flex-center
+						.login-group.flex-center.my-4
 							button(type='submit') Đăng nhập
 				.login-desc
 					p.login-title.color-white Hello, Friend !
 					p.login-text Thank you for taking the time to explore our website. We hope you find it informative and helpful.
+		script(src="https://code.jquery.com/jquery-3.1.1.min.js")  
+		script(src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js")  
+		script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js")
+		script( type="module" ,src="/js/main.js")  
 

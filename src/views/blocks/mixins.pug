@@ -1,65 +1,65 @@
 mixin confirm-modal(index,title, content, confirmBtnText, confirmBtnHref)
-  .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= index)
-    .modal-dialog(role='document')
-      .modal-content
-        .modal-header
-          h5.modal-title#confirm-modal-title #{title}
-          button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') &times;
-        .modal-body
-          p= content
-        .modal-footer
-          button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
-          a.btn.btn-danger(href=confirmBtnHref) #{confirmBtnText}
+	.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= index)
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5.modal-title#confirm-modal-title #{title}
+					button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') &times;
+				.modal-body
+					p= content
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+					a.btn.btn-danger(href=confirmBtnHref) #{confirmBtnText}
 mixin formatDate(date)
-  - const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
-  - const formattedDate = new Date(date).toLocaleDateString('vi-VN', options)
-  - const [day, month, year] = formattedDate.split('/')
-  - const formattedDateStr = year + '-' + month + '-' + day
-  p #{formattedDateStr}
+	- const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+	- const formattedDate = new Date(date).toLocaleDateString('vi-VN', options)
+	- const [day, month, year] = formattedDate.split('/')
+	- const formattedDateStr = year + '-' + month + '-' + day
+	p #{formattedDateStr}
 mixin pagination(current, pages, link_first, link)
-  .pagination.row
-    if (pages > 0)
-      nav.mx-auto
-        ul.pagination.justify-center
-          if (Number(current) === 1)
-            li.page-item.disabled
-              a.page-link(href= link_first) Đầu
-          else
-            li.page-item
-              a.page-link(href= link_first) Đầu
-          if (Number(current) > 3)
-            - index = Number(current) - 2
-          else 
-            - index = 1
-          if (Number(index) !== 1)
-            li.page-item.disabled
-              a.page-link(href="#") ...
-          while (index < Number(current) + 2 && Number(index) <= pages)
-            if ( Number(index) === current)
-              li.page-item.active
-                a.page-link(href= link + index)= index
-              - index++
-            else
-              li.page-item
-                a.page-link(href= link + index)= index
-              - index++
-          if (index === current + 2 && index < pages)
-            li.page-item.disabled
-              a.page-link(href="#") ...
-          if (current === pages)
-            li.page-item.disabled
-              a.page-link(href= link+pages) Cuối
-          else 
-            li.page-item
-              a.page-link(href= link+pages) Cuối
+	.pagination.row
+		if (pages > 0)
+			nav.mx-auto
+				ul.pagination.justify-center
+					if (Number(current) === 1)
+						li.page-item.disabled
+							a.page-link(href= link_first) Đầu
+					else
+						li.page-item
+							a.page-link(href= link_first) Đầu
+					if (Number(current) > 3)
+						- index = Number(current) - 2
+					else 
+						- index = 1
+					if (Number(index) !== 1)
+						li.page-item.disabled
+							a.page-link(href="#") ...
+					while (index < Number(current) + 2 && Number(index) <= pages)
+						if ( Number(index) === current)
+							li.page-item.active
+								a.page-link(href= link + index)= index
+							- index++
+						else
+							li.page-item
+								a.page-link(href= link + index)= index
+							- index++
+					if (index === current + 2 && index < pages)
+						li.page-item.disabled
+							a.page-link(href="#") ...
+					if (current === pages)
+						li.page-item.disabled
+							a.page-link(href= link+pages) Cuối
+					else 
+						li.page-item
+							a.page-link(href= link+pages) Cuối
 
 
 mixin alert(messages)
-  .alert.alert-success
-    button.close-alert.close(data-dismiss="alert") &times;
-    = messages.success
+	.alert.alert-success
+		button.close-alert.close(data-dismiss="alert") &times;
+		= messages.success
 mixin alertNot(messages)
-  .alert.alert-warning
-    button.close-alert.close(data-dismiss="alert") &times;
-    = messages.fail
+	.alert.alert-warning
+		button.close-alert.close(data-dismiss="alert") &times;
+		= messages.fail

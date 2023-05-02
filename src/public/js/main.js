@@ -12,6 +12,7 @@ changeInputFile();
 modangky();
 hocVien();
 
+$("#noti-modal").modal("show");
 if ($("#noi_dung")) {
     CKEDITOR.replace("noi_dung", { height: "800px" });
 }
