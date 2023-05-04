@@ -36,7 +36,6 @@
 }
 .header {
     &.header-fixed {
-        position: fixed;
         background-color: #fff;
         width: 100%;
         top: 0;
@@ -45,6 +44,7 @@
     &-logo {
         max-width: 214px;
         margin-right: 115px;
+        border-radius: 50%;
         &-text {
             background: #35a866;
             font-size: 60px;
@@ -66,10 +66,10 @@
     &-menu {
         display: flex;
         align-items: center;
-        padding: 20px 30px 10px 75px;
+        justify-content: space-between;
+        padding: 20px 30px 20px 75px;
         &-logo {
             max-width: 214px;
-            margin-right: 115px;
             display: flex;
             align-items: center;
         }
@@ -86,11 +86,6 @@
         }
         &-item {
             margin: 0 20px;
-            &:hover {
-                & a {
-                    border-bottom: 3px solid #35a866;
-                }
-            }
             & a {
                 font-weight: bold;
                 font-size: 24px;
@@ -116,6 +111,7 @@
                 display: inline-block;
                 height: 100%;
                 word-break: unset;
+                // background: #fff;
                 padding-bottom: 10px;
             }
             &:hover {
@@ -126,5 +122,35 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 1368px) {
+    .header-menu {
+        padding-left: 30px;
+    }
+    .header-menu-item a {
+        font-size: 20px;
+    }
+    .header-menu-login {
+        padding: 10px 5px;
+    }
+    .header-menu-login span {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 1279px) {
+    .header-menu {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .header-menu-item a {
+        font-size: 16px;
+    }
+    .header-menu-login {
+        padding: 10px 5px;
+    }
+    .header-menu-login span {
+        font-size: 16px;
     }
 }

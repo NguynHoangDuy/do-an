@@ -41,6 +41,19 @@ class ThoiKhoaBieu {
             );
         });
     }
+    getTKbGV(magv) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `SELECT TEN_LOP, MA_THU, MA_TG, phong_hoc.TEN_PHONG FROM thoi_khoa_bieu INNER JOIN lop on lop.MA_LOP = thoi_khoa_bieu.MA_LOP INNER JOIN mo_dang_ky on mo_dang_ky.MA_KHCC = lop.MA_KHCC INNER JOIN giao_vien ON giao_vien.MA_GV = lop.MA_GV INNER JOIN phong_hoc on phong_hoc.MA_PHONG = thoi_khoa_bieu.MA_PHONG WHERE mo_dang_ky.TINH_TRANG = 1 AND giao_vien.MA_GV = "${magv}"`,
+                (error, results) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return resolve(results);
+                }
+            );
+        });
+    }
 }
 
 module.exports = ThoiKhoaBieu;

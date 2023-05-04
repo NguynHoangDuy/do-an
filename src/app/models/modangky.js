@@ -224,6 +224,21 @@ class MoDangKy {
         });
     }
 
+    getTenLop(mahv, makhcc) {
+        return new Promise((resolve, reject) => {
+            con.query(
+                `SELECT * FROM danh_sach_khoa_hoc_dang_ky WHERE MA_HV = "${mahv}" and MA_KHCC = "${makhcc}"`,
+                (err, kq) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(kq[0].LOP);
+                    }
+                }
+            );
+        });
+    }
+
     dsLopHV(makhcc, mahv) {
         return new Promise((resolve, reject) => {
             con.query(

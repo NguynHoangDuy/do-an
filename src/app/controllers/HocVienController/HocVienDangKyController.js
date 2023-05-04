@@ -44,10 +44,19 @@ class HocVienDangKyController {
         const mahv = req.session.username;
         const makhcc = req.params.makhcc;
         const modangky = new MoDangKy();
+        const tenLop = await modangky.getTenLop(mahv, makhcc);
         const kq = await modangky.huyDangKy(mahv, makhcc);
+
         if (kq === 1) {
-            req.flash("success", "Hủy đăng ký thành công.");
-            res.redirect(`/hocvien/dangkykhoahoc`);
+            const lop = new Lop();
+            const res = await lop.xoaHocVienLop(tenLop, mahv);
+            if (res === 1) {
+                req.flash("success", "Hủy đăng ký thành công.");
+                res.redirect(`/hocvien/dangkykhoahoc`);
+            } else {
+                req.flash("fail", "Hủy đăng ký không thành công");
+                res.redirect(`/hocvien/dangkykhoahoc`);
+            }
         } else {
             req.flash("fail", "Hủy đăng ký không thành công");
             res.redirect(`/hocvien/dangkykhoahoc`);

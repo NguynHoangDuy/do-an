@@ -7,8 +7,7 @@ class Lop {
                 if (error) {
                     console.log(error);
                     reject(error);
-                }
-                resolve(results.insertId);
+                } else resolve(results.insertId);
             });
         });
     }
@@ -20,8 +19,7 @@ class Lop {
             db.query(query, maLop, (error, results) => {
                 if (error) {
                     reject(error);
-                }
-                resolve(1);
+                } else resolve(1);
             });
         });
     }
@@ -34,8 +32,7 @@ class Lop {
                 if (error) {
                     console.log(error);
                     reject(error);
-                }
-                resolve(1);
+                } else resolve(1);
             });
         });
     }
@@ -47,8 +44,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(res);
+                    } else resolve(res);
                 }
             );
         });
@@ -60,8 +56,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(res[0].DEM);
+                    } else resolve(res[0].DEM);
                 }
             );
         });
@@ -73,8 +68,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(res);
+                    } else resolve(res);
                 }
             );
         });
@@ -87,8 +81,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(1);
+                    } else resolve(1);
                 }
             );
         });
@@ -103,8 +96,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(1);
+                    } else resolve(1);
                 }
             );
         });
@@ -116,8 +108,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(1);
+                    } else resolve(1);
                 }
             );
         });
@@ -129,8 +120,7 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(1);
+                    } else resolve(1);
                 }
             );
         });
@@ -143,8 +133,33 @@ class Lop {
                 (error, res) => {
                     if (error) {
                         reject(error);
-                    }
-                    resolve(1);
+                    } else resolve(1);
+                }
+            );
+        });
+    }
+
+    xemHocPhi(mahv) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `SELECT khoa_hoc.MA_KH, khoa_hoc.TEN_KH, lop.TEN_LOP, mo_dang_ky.HOC_PHI , danh_sach_hoc_vien_lop.HOC_PHI AS DONG, danh_sach_hoc_vien_lop.NGAY_DONG FROM danh_sach_hoc_vien_lop INNER JOIN lop ON danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP INNER JOIN mo_dang_ky ON mo_dang_ky.MA_KHCC = lop.MA_KHCC INNER JOIN khoa_hoc on khoa_hoc.MA_KH = mo_dang_ky.MA_KH WHERE MA_HV = "${mahv}" ORDER BY danh_sach_hoc_vien_lop.HOC_PHI`,
+                (error, res) => {
+                    if (error) {
+                        reject(error);
+                    } else resolve(res);
+                }
+            );
+        });
+    }
+
+    tongHocPhi(mahv) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `SELECT SUM(mo_dang_ky.HOC_PHI) AS TONG FROM danh_sach_hoc_vien_lop INNER JOIN lop ON danh_sach_hoc_vien_lop.MA_LOP = lop.MA_LOP INNER JOIN mo_dang_ky ON mo_dang_ky.MA_KHCC = lop.MA_KHCC INNER JOIN khoa_hoc on khoa_hoc.MA_KH = mo_dang_ky.MA_KH WHERE MA_HV = "${mahv}" AND danh_sach_hoc_vien_lop.HOC_PHI = "0"`,
+                (error, res) => {
+                    if (error) {
+                        reject(error);
+                    } else resolve(res[0].TONG);
                 }
             );
         });

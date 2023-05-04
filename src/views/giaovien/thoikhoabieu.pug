@@ -1,0 +1,75 @@
+extends ../layout/layout-dash
+block container
+	.dash-main.tkb-page
+		.container
+			p.title Thời khóa biểu
+			.bg-white.p-20.radius-16.mt-2
+				.table-responsive
+					table(border="5" cellspacing="0" align="center", style="text-align: center")
+						tr
+							th(height="50" width="300" align="center")
+								b Thứ / Thời gian
+							th(height="50" width="300" align="center") 
+								b 7:30-9:30
+							th(height="50" width="300" align="center") 
+								b 8:00-10:00
+							th(height="50" width="300" align="center") 
+								b 14:30-16:30
+							th(height="50" width="300" align="center") 
+								b 18:00-20:00
+							th(height="50" width="300" align="center") 
+								b 19:00-21:00
+						tr(data-thu="T2")
+							td(height="50" align="center")
+								b Thứ 2
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+						tr(data-thu="T3")
+							td(height="50" align="center")
+								b Thứ 3
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+						tr(data-thu="T4")
+							td(height="50" align="center")
+								b Thứ 4
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+						tr(data-thu="T5")
+							td(height="50" align="center")
+								b Thứ 5
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+						tr(data-thu="T6")
+							td(height="50" align="center")
+								b Thứ 6
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+						tr(data-thu="T7")
+							td(height="50" align="center")
+								b Thứ 7
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center") 
+							td(height="50" align="center")
+							td(height="50" align="center")
+	script.
+		var tkbList = '#{listTKB}';
+	script(src="https://code.jquery.com/jquery-3.1.1.min.js")  
+	script(src="/js/HocVien/thoikhoabieu.js")
+	 																								
+						

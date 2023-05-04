@@ -19,6 +19,12 @@ router.get(
     checkPermission.checkPermission(["HV"]),
     HocVienController.capNhatThongTin
 );
+router.get(
+    "/hocphi",
+    checkLogged.checkLoggedIn,
+    checkPermission.checkPermission(["HV"]),
+    HocVienController.hocPhi
+);
 router.use(
     "/thoikhoabieu",
     checkLogged.checkLoggedIn,

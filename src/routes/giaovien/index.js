@@ -3,13 +3,19 @@ const checkPermission = require("../../middleware/checkPermission");
 const express = require("express");
 const router = express.Router();
 
-const GiaoVienController = require("../../app/controllers/GiaovienController");
+const GiaoVienController = require("../../app/controllers/GiaoVienController");
 
 router.use(
-  "/",
-  checkLogged.checkLoggedIn,
-  checkPermission.checkPermission(["GV"]),
-  GiaoVienController.index
+    "/thoikhoabieu",
+    checkLogged.checkLoggedIn,
+    checkPermission.checkPermission(["GV"]),
+    GiaoVienController.thoikhoabieu
+);
+router.use(
+    "/",
+    checkLogged.checkLoggedIn,
+    checkPermission.checkPermission(["GV"]),
+    GiaoVienController.index
 );
 
 module.exports = router;

@@ -1,0 +1,54 @@
+extends ../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Danh sách đăng ký
+			if messages.success
+				+alert(messages)
+			if messages.fail
+				+alertNot(messages) 
+			.bg-white.p-20.radius-16.mt-2
+				.table-responsive
+					table.table.no-wrap.user-table.mb-0 
+						thead
+							tr.borderbottom
+								th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+								th(scope="col", class="border-0 text-uppercase font-medium") Mã khóa học
+								th(scope="col", class="border-0 text-uppercase font-medium") Tên khóa học
+								th(scope="col", class="border-0 text-uppercase font-medium") Tên lớp
+								th(scope="col", class="border-0 text-uppercase font-medium") Học phí
+								th(scope="col", class="border-0 text-uppercase font-medium") Còn lại
+								th(scope="col", class="border-0 text-uppercase font-medium") Ngày đóng
+						tbody
+							- stt = 1
+							for kh in hocPhi 
+								tr
+									td(class="pl-4")= stt++
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.MA_KH
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.TEN_KH
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.TEN_LOP
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.HOC_PHI
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.DONG
+									td
+										p.text-overflow(class="font-medium mb-0")= kh.NGAY_DONG!="0000-00-00"?formatDate(kh.NGAY_DONG):""
+
+							if hocPhi.length === 0
+								tr 
+									td(colspan="6") Không có khóa học nào
+							tr 
+								td
+								td
+								td
+								td
+								td Tổng:
+								td
+									span.money= tong?tong:0
+								td
+			.flex.flex-end.mt-4
+				a.button(href="/hocvien") Trở về
+			.modal-list
