@@ -1,0 +1,33 @@
+extends ../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Quản lý lương giáo viên
+			.bg-white.p-20.radius-16.mt-2.mb-5
+				form(action="")
+					.create-group.mt-2.align-items-end
+						.create-item(style="width: 45%")
+							label(for='thang') Tháng
+							select.mb-0.not-focus(class="form-control", id="thang", name="thang", required)
+								option(value="") Hãy chọn tháng 
+								for th in thang
+									option(value=th.THANG, selected =(th.THANG==THANG?true:false))= "Tháng "+ th.THANG 
+						.create-item(style="width: 45%")
+							label(for='nam') Năm
+							select.mb-0.not-focus(class="form-control", id="nam", name="nam", required)
+								option(value="") Hãy chọn năm
+								for th in nam
+									option(value=th.NAM, selected =(th.NAM==NAM?true:false))= "Năm "+ th.NAM 
+						button.button.mb-0(type="submit") Xem 
+			if messages.success
+				+alert(messages)
+			if messages.fail
+				+alertNot(messages)
+			.bg-white.p-20.radius-16.mt-2
+				if (luong)
+					p hihi
+				else 
+					h5.p-5= `Tháng ${THANG} chưa được tính lương`
+			.flex.flex-end.mt-4
+				a.button(href="/admin/dmkh/khoahoc") Trở về 
+
