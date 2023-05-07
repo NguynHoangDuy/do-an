@@ -25,7 +25,34 @@ block container
 				+alertNot(messages)
 			.bg-white.p-20.radius-16.mt-2
 				if (luong)
-					p hihi
+					p.title= `Lương tháng ${THANG} năm ${NAM}`
+					.table-responsive
+						table.mx-auto(border="1")
+							tr.border
+								td.px-4.py-3 
+									b Số giờ
+								td.px-4.py-3= luong.GIO + " giờ"
+							tr.border
+								td.px-4.py-3 
+									b Hệ số
+								td.px-4.py-3= luong.HE_SO + " đồng / giờ"
+							tr.border
+								td.px-4.py-3 
+									b Bảo hiểm y tế
+								td.px-4.py-3= luong.BHYT + " đồng"
+							tr.border
+								td.px-4.py-3 
+									b Bảo hiểm xã hội
+								td.px-4.py-3= luong.BHXH + " đồng"
+							tr.border
+								td.px-4.py-3 
+									b Tiền lương
+								td.px-4.py-3= luong.TIEN_LUONG + " đồng"
+							tr.border
+								td.px-4.py-3 
+									b Thực nhận
+								td.px-4.py-3= luong.THUC_NHAN + " đồng"
+
 				else 
 					h5.p-5= `Tháng ${THANG} chưa được tính lương`
 			.flex.flex-end.mt-4

@@ -5,6 +5,7 @@ const {
     getThang,
     getNam,
     themLuong,
+    getSumLuongGV,
 } = require("../../models/luong");
 
 class AdminLuongController {
@@ -26,8 +27,17 @@ class AdminLuongController {
         } else {
             NAM = currentDate.getFullYear();
         }
+
+        const tong = await getSumLuongGV(THANG, NAM, admin);
         const luong = await getListLuong(THANG, NAM, admin);
-        res.render("./admin/luong/luong-gv", { luong, thang, nam, THANG, NAM });
+        res.render("./admin/luong/luong-gv", {
+            luong,
+            thang,
+            nam,
+            THANG,
+            NAM,
+            tong,
+        });
     }
 
     async themLuongGV(req, res) {

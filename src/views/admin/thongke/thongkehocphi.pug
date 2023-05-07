@@ -2,7 +2,7 @@ extends ../../layout/layout-dash
 block container
 	.dash-main
 		.container
-			p.title Quản lý lương giáo viên
+			p.title Thống kê học phí
 			.bg-white.p-20.radius-16.mt-2.mb-5
 				form(action="")
 					.create-group.mt-2.align-items-end
@@ -19,52 +19,42 @@ block container
 								for th in nam
 									option(value=th.NAM, selected =(th.NAM==NAM?true:false))= "Năm "+ th.NAM 
 						button.button.mb-0(type="submit") Xem 
-			.flex.flex-end
-				a.button(href="/admin/luong/giaovien/tinhluong") Tính Lương
 			if messages.success
 				+alert(messages)
 			if messages.fail
 				+alertNot(messages)
 			.bg-white.p-20.radius-16.mt-2
-				if (luong.length > 0)
+				if (hocphi.length > 0)
 					.table-responsive
 						table.table.no-wrap.user-table.mb-0 
 							thead
 								tr.borderbottom
 									th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+									th(scope="col", class="border-0 text-uppercase font-medium") Mã hv
 									th(scope="col", class="border-0 text-uppercase font-medium") Họ tên
-									th(scope="col", class="border-0 text-uppercase font-medium") SDT
 									th(scope="col", class="border-0 text-uppercase font-medium") Chi Nhánh
-									th(scope="col", class="border-0 text-uppercase font-medium") Giờ
-									th(scope="col", class="border-0 text-uppercase font-medium") BHYT
-									th(scope="col", class="border-0 text-uppercase font-medium") BHXH
-									th(scope="col", class="border-0 text-uppercase font-medium") Tiền lương
-									th(scope="col", class="border-0 text-uppercase font-medium") Thực nhận
+									th(scope="col", class="border-0 text-uppercase font-medium") Tên KH
+									th(scope="col", class="border-0 text-uppercase font-medium") Tên Lớp
+									th(scope="col", class="border-0 text-uppercase font-medium") Học phí
 							tbody
 								- stt = 1
-								for kh in luong
+								for kh in hocphi
 									tr
 										//- td(class="pl-4")= (perPage * current) - (perPage - stt++)
 										td(class="pl-4")= stt++
 										td
-											p.text-overflow(class="font-medium mb-0")= kh.HO_TEN
+											p.text-overflow(class="font-medium mb-0")= kh.MA_HV
 										td
-											p.text-overflow(class="font-medium mb-0")= kh.SDT
+											p.text-overflow(class="font-medium mb-0")= kh.HO_TEN
 										td
 											p.text-overflow(class="font-medium mb-0")= kh.MA_CHI_NHANH
 										td
-											p.text-overflow(class="font-medium mb-0")= kh.GIO
+											p.text-overflow(class="font-medium mb-0")= kh.TEN_KH
 										td
-											p.text-overflow(class="font-medium mb-0")= kh.BHYT
+											p.text-overflow(class="font-medium mb-0")= kh.TEN_LOP
 										td
-											p.text-overflow(class="font-medium mb-0")= kh.BHXH
-										td
-											p.text-overflow(class="font-medium mb-0")= kh.TIEN_LUONG
-										td
-											p.text-overflow(class="font-medium mb-0")= kh.THUC_NHAN
+											p.text-overflow(class="font-medium mb-0")= kh.HOC_PHI
 								tr
-									td
-									td 
 									td 
 									td 
 									td 
@@ -73,7 +63,7 @@ block container
 									td Tổng
 									td= tong + ' Đồng'
 				else 
-					h5.p-5= `Tháng ${THANG} chưa được tính lương`
+					h5.p-5= `Tháng ${THANG} chưa có ai đóng học phí`
 					+pagination(current, pages, "/admin/modangky", "/admin/modangky?trang=")
 			.flex.flex-end.mt-4
 				a.button(href="/admin/dmkh/khoahoc") Trở về 

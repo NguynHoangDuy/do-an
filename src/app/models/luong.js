@@ -72,7 +72,69 @@ exports.getListLuong = (THANG, NAM, cn) => {
         );
     });
 };
-
+exports.getSumLuongGV = (THANG, NAM, cn) => {
+    let chiNhanh;
+    if (cn) {
+        chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+        chiNhanh = ``;
+    }
+    return new Promise((resolve, reject) => {
+        db.query(
+            `SELECT SUM(THUC_NHAN) as TONG FROM luong INNER JOIN giao_vien ON luong.MA_GV = giao_vien.MA_GV INNER JOIN he_so_luong ON he_so_luong.MA_GV = luong.MA_GV WHERE THANG = "${THANG}" AND NAM= "${NAM}" ${chiNhanh}`,
+            (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res[0].TONG);
+                }
+            }
+        );
+    });
+};
+exports.getSumLuongGVNAM = (NAM, cn) => {
+    let chiNhanh;
+    if (cn) {
+        chiNhanh = `and MA_CHI_NHANH = '${cn}'`;
+    } else {
+        chiNhanh = ``;
+    }
+    return new Promise((resolve, reject) => {
+        db.query(
+            `SELECT month.THANG, TONG FROM (SELECT 1 AS THANG
+                UNION ALL
+                SELECT 2
+                UNION ALL
+                SELECT 3
+                UNION ALL
+                SELECT 4
+                UNION ALL
+                SELECT 5
+                UNION ALL
+                SELECT 6
+                UNION ALL
+                SELECT 7
+                UNION ALL
+                SELECT 8
+                UNION ALL
+                SELECT 9
+                UNION ALL
+                SELECT 10
+                UNION ALL
+                SELECT 11
+                UNION ALL
+                SELECT 12
+                ) as month LEFT JOIN (SELECT THANG, SUM(THUC_NHAN) as TONG FROM luong INNER JOIN giao_vien ON luong.MA_GV = giao_vien.MA_GV INNER JOIN he_so_luong ON he_so_luong.MA_GV = luong.MA_GV WHERE NAM= "${NAM}" ${chiNhanh} GROUP BY luong.THANG) as luong ON month.THANG = luong.THANG`,
+            (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            }
+        );
+    });
+};
 exports.getLuongGV = (THANG, NAM, magv) => {
     return new Promise((resolve, reject) => {
         db.query(

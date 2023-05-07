@@ -129,7 +129,7 @@ class Lop {
     hocPhi(malop, mahv) {
         return new Promise((resolve, reject) => {
             db.query(
-                `UPDATE danh_sach_hoc_vien_lop SET HOC_PHI='1' WHERE  MA_HV = "${mahv}" AND MA_LOP = "${malop}"`,
+                `UPDATE danh_sach_hoc_vien_lop SET HOC_PHI='1', NGAY_DONG = NOW() WHERE  MA_HV = "${mahv}" AND MA_LOP = "${malop}"`,
                 (error, res) => {
                     if (error) {
                         reject(error);
