@@ -6,6 +6,12 @@ const router = express.Router();
 const AdminController = require("../../app/controllers/AdminController/AdminThongKeController");
 
 router.get(
+    "/dangky",
+    checkLogged.checkLoggedIn,
+    checkAuthor.checkPermission(["QTV"]),
+    AdminController.dangKy
+);
+router.get(
     "/thuchi",
     checkLogged.checkLoggedIn,
     checkAuthor.checkPermission(["QTV"]),

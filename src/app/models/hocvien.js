@@ -142,7 +142,7 @@ class HocVien {
         let kqThem = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV, MA_CHI_NHANH) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}', '${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}', '${chinhanh}')`,
+                    `INSERT INTO hoc_vien (MA_HV, MA_QUYEN, HO_TEN, GIOI_TINH, NGAY_SINH, SDT, DIA_CHI, EMAIL, MAT_KHAU, DOI_TUONG, TINH_TRANG, LOP, TRUONG, PHU_HUYNH, SDT_PH, NGANH, TRUONG_DH, CV, MA_CHI_NHANH, NGAY) VALUES ('${ma_hv}','HV','${ho_ten}','${gt}','${ngaysinh}','${sdt}','${diachi}', '${email}','${matkhau}','${dt}','1', '${lop}',  '${truong}', '${phuhuynh}', '${sdtph}', '${nganh}', '${truongdh}', '${cv}', '${chinhanh}', NOW())`,
                     (err, result) => {
                         if (err) {
                             reject(err);

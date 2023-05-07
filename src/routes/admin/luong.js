@@ -6,12 +6,6 @@ const router = express.Router();
 const AdminController = require("../../app/controllers/AdminController/AdminLuongController");
 
 router.use(
-    "/giaovien/thuchi",
-    checkLogged.checkLoggedIn,
-    checkAuthor.checkPermission(["QTV"]),
-    AdminController.themLuongGV
-);
-router.use(
     "/giaovien/tinhluong",
     checkLogged.checkLoggedIn,
     checkAuthor.checkPermission(["QTV"]),

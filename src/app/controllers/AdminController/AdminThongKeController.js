@@ -1,4 +1,4 @@
-const { getSumHocPhi } = require("../../models/hocphi");
+const { getSumHocPhi, getNamHv, tkHocVien } = require("../../models/hocphi");
 const {
     getThangHP,
     getNamHP,
@@ -69,7 +69,28 @@ class AdminThongKeController {
         const nam = await getNamHP();
         const hocphi = JSON.stringify(await getSumHocPhi(NAM, admin));
         const luong = JSON.stringify(await getSumLuongGVNAM(NAM, admin));
-        res.render("./admin/thongke/thongkethuchi", { nam, hocphi, luong });
+        res.render("./admin/thongke/thongkethuchi", {
+            nam,
+            hocphi,
+            luong,
+            NAM,
+        });
+    }
+    async dangKy(req, res) {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const admin = req.session.chinhanh;
+        const currentDate = new Date();
+        let NAM;
+        if (req.query.nam) {
+            NAM = req.query.nam;
+        } else {
+            NAM = currentDate.getFullYear();
+        }
+
+        const nam = await getNamHv();
+        const hocvien = JSON.stringify(await tkHocVien(NAM, admin));
+        res.render("./admin/thongke/thongkedangky", { nam, NAM, hocvien });
     }
 }
 
