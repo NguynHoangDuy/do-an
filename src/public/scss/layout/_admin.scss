@@ -1,369 +1,370 @@
 /* css header admin */
 .header-dash {
-  background-color: #54b585;
-  /* height: 150px; */
-  padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    background-color: #54b585;
+    /* height: 150px; */
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .flex {
-  display: flex;
+    display: flex;
 }
 
 .header-logo {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .header-title {
-  align-self: center;
-  font-size: 32px;
-  color: white;
-  margin-left: 20px;
-  font-weight: bold;
+    align-self: center;
+    font-size: 32px;
+    color: white;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .text-title {
-  font-size: 22px;
-  color: black;
+    font-size: 22px;
+    color: black;
 }
 
 .text-right {
-  text-align: right;
-  padding-bottom: 10px;
+    text-align: right;
+    padding-bottom: 10px;
 }
 
 .header-infor {
-  border-top: 2px solid snow;
-  padding: 10px 0;
-  background-color: #49796b;
+    border-top: 2px solid snow;
+    padding: 10px 0;
+    background-color: #49796b;
 }
 
 .flex-end {
-  justify-content: end;
+    justify-content: end;
 }
 
 .icon-min {
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
 }
 
 .border-right {
-  border-right: 2px solid snow;
-  margin-right: 20px;
-  padding-right: 20px;
+    border-right: 2px solid snow;
+    margin-right: 20px;
+    padding-right: 20px;
 }
 
 /* end css header admin */
 
 /* css admin main  */
 .dash-main {
-  background-color: #eaeff8;
-  padding: 50px 0;
+    background-color: #eaeff8;
+    padding: 50px 0;
 }
 .group-item {
-  width: calc(100% / 3);
-  padding: 0 15px;
+    width: calc(100% / 3);
+    padding: 0 15px;
 }
 .group {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 .group-content {
-  padding: 20px;
-  background: white;
-  margin-bottom: 20px;
-  justify-content: space-around;
-  border-radius: 20px;
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    border-radius: 20px;
 }
 
 .group-content:hover {
-  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 .content-right {
-  width: 75%;
+    width: 75%;
 }
 
 .content-title {
-  font-weight: 600;
-  color: #1c3967;
-  text-transform: capitalize;
-  text-align: left;
-  margin-bottom: 10px;
+    font-weight: 600;
+    color: #1c3967;
+    text-transform: capitalize;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 .content-desc {
-  min-height: 40px;
-  color: #505050;
+    min-height: 40px;
+    color: #505050;
 }
 
 .btn-circle {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  padding: 14px 15px;
-  font-size: 18px;
-  line-height: 23px;
-  margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 23px;
+    margin-left: 10px;
 }
 .text-muted {
-  color: #8898aa !important;
+    color: #8898aa !important;
 }
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
 button:not(:disabled) {
-  cursor: pointer;
+    cursor: pointer;
 }
 .btn-circle {
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-  padding: 10px;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
 }
 .user-table tbody tr .category-select {
-  max-width: 150px;
-  border-radius: 20px;
+    max-width: 150px;
+    border-radius: 20px;
 }
 
 .p-20 {
-  padding: 20px;
+    padding: 20px;
 }
 
 .radius-16 {
-  border-radius: 16px;
+    border-radius: 16px;
 }
 
 .title {
-  font-size: 32px;
-  color: #1c3967;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 40px;
+    font-size: 32px;
+    color: #1c3967;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 .pagination {
-  margin-top: 10px;
+    margin-top: 10px;
+    max-width: 100%;
 }
 .text-overflow {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  line-height: 1.4;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.4;
 }
 
 .borderbottom {
-  border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
 }
 .table > :not(caption) > * > * {
-  padding: 20px 10px;
+    padding: 20px 10px;
 }
 
 .justify-center {
-  justify-content: center;
+    justify-content: center;
 }
 
 .button {
-  margin-bottom: 20px;
-  text-align: right;
-  padding: 15px;
-  border: 0;
-  background: #54b585;
-  color: white;
-  border-radius: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.1s linear;
+    margin-bottom: 20px;
+    text-align: right;
+    padding: 15px;
+    border: 0;
+    background: #54b585;
+    color: white;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s linear;
 }
 
 .justify-around {
-  justify-content: space-between;
+    justify-content: space-between;
 }
 
 .search-form {
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-  border-radius: 20px;
-  justify-content: space-between;
-  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    border-radius: 20px;
+    justify-content: space-between;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 .search-form > .login-group {
-  width: 40%;
+    width: 40%;
 }
 .search-form > .login-group.button-search {
-  width: unset;
+    width: unset;
 }
 
 .h-50 {
-  height: 50px !important;
+    height: 50px !important;
 }
 
 .not-focus:focus {
-  background: #f3f5f7;
-  border: 1px solid #dee2e6;
-  box-shadow: none;
+    background: #f3f5f7;
+    border: 1px solid #dee2e6;
+    box-shadow: none;
 }
 
 .create-item {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .create-item > label {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 .create-item > input,
 .create-item > select {
-  height: 50px;
-  font-size: 16px;
-  border: 0;
-  background: #f3f5f7;
-  padding: 20px;
-  margin-bottom: 10px;
-  border-radius: 20px;
+    height: 50px;
+    font-size: 16px;
+    border: 0;
+    background: #f3f5f7;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
 }
 .create-item > select {
-  padding: 0 20px;
+    padding: 0 20px;
 }
 .create-form {
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 .create-group > .create-item {
-  width: 48%;
+    width: 48%;
 }
 .create-group {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .sv-content,
 .hs-content,
 .dtk-content {
-  display: none;
+    display: none;
 }
 
 .sv-content,
 .hs-content,
 .dtk-content {
-  display: none;
+    display: none;
 }
 .sv-content input,
 .hs-content input,
 .dtk-content input {
-  pointer-events: none;
+    pointer-events: none;
 }
 input#hs:checked ~ .hs-content,
 input#sv:checked ~ .sv-content,
 input#dtk:checked ~ .dtk-content {
-  display: block;
+    display: block;
 }
 
 input#hs:checked ~ .hs-content input,
 input#sv:checked ~ .sv-content input,
 input#dtk:checked ~ .dtk-content input {
-  pointer-events: auto;
+    pointer-events: auto;
 }
 
 .button-main > button {
-  padding: 10px;
-  height: 50px;
-  border: 0;
-  background: #54b585;
-  color: white;
-  border-radius: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.1s linear;
+    padding: 10px;
+    height: 50px;
+    border: 0;
+    background: #54b585;
+    color: white;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s linear;
 }
 
 .mr-10 {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 .p-15 {
-  padding: 15px !important;
+    padding: 15px !important;
 }
 /* end css admin main */
 
 /*css giao vien */
 .mr-20 {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 .member-entry {
-  display: flex;
-  padding: 20px;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 30%);
-  border-radius: 20px;
-  transition: all 300ms ease-in-out;
-  margin-bottom: 30px;
+    display: flex;
+    padding: 20px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 30%);
+    border-radius: 20px;
+    transition: all 300ms ease-in-out;
+    margin-bottom: 30px;
 }
 .member-entry:hover {
-  background: #dee2e6;
-  transition: all 300ms ease-in-out;
+    background: #dee2e6;
+    transition: all 300ms ease-in-out;
 }
 .member-img {
-  width: 12%;
+    width: 12%;
 }
 .member-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .member-detail {
-  color: #1c3967;
-  width: 80%;
+    color: #1c3967;
+    width: 80%;
 }
 .p-40 {
-  padding: 40px;
+    padding: 40px;
 }
 
 .search-form-full {
-  width: 50%;
+    width: 50%;
 }
 
 .search-form-full > input {
-  width: 100%;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 0;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0;
 }
 .text-20 {
-  font-size: 20px;
+    font-size: 20px;
 }
 /* end css giao vien */
 
 .img-account-profile {
-  height: 10rem;
-  width: 10rem;
-  object-fit: cover;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
 }
 .rounded-circle {
-  border-radius: 50% !important;
+    border-radius: 50% !important;
 }
 
 .close-alert {
-  margin-right: 10px;
-  border: 0;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    margin-right: 10px;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
 
 .mw-70 {
-  max-width: 70%;
+    max-width: 70%;
 }
 
-.post-img img{
-  width: 300px;
-  height: 200px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-  rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-  border-radius: 10px;
+.post-img img {
+    width: 300px;
+    height: 200px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    border-radius: 10px;
 }

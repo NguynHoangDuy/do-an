@@ -40,8 +40,7 @@ block container
 								- stt = 1
 								for kh in hocphi
 									tr
-										//- td(class="pl-4")= (perPage * current) - (perPage - stt++)
-										td(class="pl-4")= stt++
+										td(class="pl-4")= (perPage * current) - (perPage - stt++)
 										td
 											p.text-overflow(class="font-medium mb-0")= kh.MA_HV
 										td
@@ -62,9 +61,10 @@ block container
 									td
 									td Tổng
 									td= tong + ' Đồng'
+						+pagination(current, pages, "/admin/thongke/hocphi?thang="+ THANG + "&nam="+ NAM, "/admin/thongke/hocphi?thang="+ THANG + "&nam="+ NAM+ "&trang=")
 				else 
 					h5.p-5= `Tháng ${THANG} chưa có ai đóng học phí`
-					+pagination(current, pages, "/admin/modangky", "/admin/modangky?trang=")
+			
 			.flex.flex-end.mt-4
 				a.button(href="/admin/dmkh/khoahoc") Trở về 
 

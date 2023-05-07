@@ -1,3 +1,4 @@
+const { getSumHocPhi } = require("../../models/hocphi");
 const {
     getThangHP,
     getNamHP,
@@ -5,6 +6,7 @@ const {
     getListHocPhi,
     getTongHP,
 } = require("../../models/hocphi");
+const { getSumLuongGVNAM } = require("../../models/luong");
 
 class AdminThongKeController {
     async index(req, res) {
@@ -51,6 +53,23 @@ class AdminThongKeController {
             pages: totalPages,
             perPage: perPage,
         });
+    }
+
+    async thuChi(req, res) {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const admin = req.session.chinhanh;
+        const currentDate = new Date();
+        let NAM;
+        if (req.query.nam) {
+            NAM = req.query.nam;
+        } else {
+            NAM = currentDate.getFullYear();
+        }
+        const nam = await getNamHP();
+        const hocphi = JSON.stringify(await getSumHocPhi(NAM, admin));
+        const luong = JSON.stringify(await getSumLuongGVNAM(NAM, admin));
+        res.render("./admin/thongke/thongkethuchi", { nam, hocphi, luong });
     }
 }
 

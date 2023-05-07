@@ -1,0 +1,25 @@
+extends ../../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Thống kê thu chi
+			.bg-white.p-20.radius-16.mt-2.mb-5
+				form(action="")
+					.create-group.mt-2.align-items-end
+						.create-item(style="width: 45%")
+							label(for='nam') Năm
+							select.mb-0.not-focus(class="form-control", id="nam", name="nam", required)
+								option(value="") Hãy chọn năm
+								for th in nam
+									option(value=th.NAM, selected =(th.NAM==NAM?true:false))= "Năm "+ th.NAM 
+						button.button.mb-0(type="submit") Xem 
+			.bg-white.p-20.radius-16.mt-2
+				canvas#chart
+			.flex.flex-end.mt-4
+				a.button(href="/admin/thongke") Trở về
+	script.
+		var hocPhi = '#{hocphi}'; 
+		var luong = '#{luong}';
+	script(src="https://cdn.jsdelivr.net/npm/chart.js")
+	script(src="/js/thongkethuchi.js") 
+
