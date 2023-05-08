@@ -84,7 +84,7 @@ class BaiViet {
     getLatestPosts() {
         return new Promise((resolve, reject) => {
             const query =
-                "SELECT * FROM bai_viet ORDER BY ngay_tao DESC LIMIT 6";
+                "SELECT * FROM bai_viet ORDER BY ngay_tao DESC LIMIT 3";
             db.query(query, (err, res) => {
                 if (err) {
                     reject(err);

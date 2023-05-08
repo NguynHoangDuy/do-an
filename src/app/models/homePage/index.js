@@ -1,17 +1,24 @@
 const con = require("../../../config/db");
 
-class HomePage {
-  bannerImage() {
+exports.bannerImage = () => {
     return new Promise((resolve, reject) => {
-      con.query("SELECT * FROM `banner_home`", (err, kq) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(kq);
-        }
-      });
+        con.query("SELECT * FROM `banner_home`", (err, kq) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(kq);
+            }
+        });
     });
-  }
-}
-
-module.exports = HomePage;
+};
+exports.danhMucKh = () => {
+    return new Promise((resolve, reject) => {
+        con.query("SELECT * FROM danh_muc_kh", (err, kq) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(kq);
+            }
+        });
+    });
+};

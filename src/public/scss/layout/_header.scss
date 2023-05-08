@@ -1,156 +1,38 @@
-// Header
-
-.top-bar {
-    padding: 10px 0;
-    background: #49796b;
-    &-content {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px 20px;
-    }
-    &-info {
-        &--item {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-
-            .social-icon {
-                font-size: 20px;
-                color: #ffffff;
-                padding-right: 10px;
-            }
-            p {
-                font-size: 20px;
-                font-weight: bold;
-                color: #ffffff;
-            }
-        }
-    }
-    &-social {
-        font-size: 20px;
-    }
-}
-
-.social-link {
-    color: #ffffff;
-}
 .header {
-    &.header-fixed {
-        background-color: #fff;
-        width: 100%;
-        top: 0;
-        z-index: 999;
+    &-main {
+        min-height: 112px;
+        background: #6ac88a;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
     }
+
     &-logo {
-        max-width: 214px;
-        margin-right: 115px;
-        border-radius: 50%;
-        &-text {
-            background: #35a866;
-            font-size: 60px;
-            font-weight: bold;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            transform: rotate(-8deg);
-            text-align: center;
-        }
-        &-sub {
-            font-size: 30px;
-            color: #35a866;
-            font-weight: bold;
-            font-style: italic;
+        &-img {
+            border-radius: 50%;
         }
     }
 
     &-menu {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 20px 30px 20px 75px;
-        &-logo {
-            max-width: 214px;
-            display: flex;
-            align-items: center;
-        }
-        &-content {
-            margin-left: 20px;
-        }
-        &-desktop {
-            margin: 0 auto;
-        }
-        &-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0;
-        }
-        &-item {
-            margin: 0 20px;
-            & a {
-                font-weight: bold;
-                font-size: 24px;
-                line-height: 28px;
-                color: #2b2926;
-                position: relative;
-                display: inline-block;
-                height: 100%;
-                word-break: unset;
-                padding-bottom: 10px;
-            }
-        }
-        &-login {
-            padding: 10px 15px;
-            border-radius: 10px;
-            border: 3px solid black;
-            span {
-                font-weight: bold;
-                font-size: 24px;
-                line-height: 28px;
-                color: #2b2926;
-                position: relative;
-                display: inline-block;
-                height: 100%;
-                word-break: unset;
-                // background: #fff;
-                padding-bottom: 10px;
-            }
-            &:hover {
-                border: 3px solid #35a866;
-                background: #35a866;
-                span {
-                    color: white;
-                }
-            }
-        }
-    }
-}
+        margin-bottom: 0;
 
-@media screen and (max-width: 1368px) {
-    .header-menu {
-        padding-left: 30px;
+        &-link {
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
     }
-    .header-menu-item a {
-        font-size: 20px;
-    }
-    .header-menu-login {
-        padding: 10px 5px;
-    }
-    .header-menu-login span {
-        font-size: 20px;
-    }
-}
-@media screen and (max-width: 1279px) {
-    .header-menu {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .header-menu-item a {
-        font-size: 16px;
-    }
-    .header-menu-login {
-        padding: 10px 5px;
-    }
-    .header-menu-login span {
-        font-size: 16px;
+
+    &-button {
+        padding: 9px 24px;
+        font-weight: 500;
+        border-radius: 9999px;
+        color: #44af68;
+        background-color: #fef9ee !important;
     }
 }

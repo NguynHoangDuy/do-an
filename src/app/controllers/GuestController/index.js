@@ -1,19 +1,19 @@
 const QuanTriVien = require("../../models/quantrivien");
 const HocVien = require("../../models/hocvien");
 const GiaoVien = require("../../models/giaovien");
-const HomePage = require("../../models/homePage");
 const BaiViet = require("../../models/bai_viet");
 const bcrypt = require("bcrypt");
 const ChiNhanh = require("../../models/chinhanh");
-const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const { bannerImage, danhMucKh } = require("../../models/homePage");
+const nodemailer = require("nodemailer");
 class GuestController {
     async index(req, res) {
-        const home = new HomePage();
-        const banner = await home.bannerImage();
+        const banner = await bannerImage();
         const baiviet = new BaiViet();
         const posts = await baiviet.getLatestPosts();
-        res.render("index", { banner, posts });
+        const dmKH = await danhMucKh();
+        res.render("index", { banner, posts, dmKH });
     }
     loginForm(req, res) {
         res.render("guest/Registor/login");
