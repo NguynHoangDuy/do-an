@@ -11,5 +11,27 @@ block container
 				.swiper-button-next
 				.swiper-button-prev
 				.swiper-pagination
+		section.course-home
+			.course-home-background
+			.container
+				.course-home-content
+					for kh in dmKH
+						.course-home-item
+							h4.course-home-title= kh.TEN_DM
+							.course-home-main
+								img(src=kh.ANH_DD?kh.ANH_DD:"https://res.cloudinary.com/dcbkfpgsp/image/upload/v1683647140/avatars/1683647139617.png", alt=kh.TEN_DM).course-home-img
+								a.course-home-btn(href="") Học ngay
+		section.intro
+			.container
+				.intro-video
+					.intro-video-content
+						iframe(width="885", height="498", src="https://www.youtube.com/embed/CBZs5OOvqY4", title="SPEAKING TEST - Jerry", frameborder="0", allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", allowfullscreen)
+				.intro-content
+					h3.intro-title Trung tâm anh ngữ ALF
+					p Được thành lập năm 2016, từ một trung tâm nhỏ tại đường Đoàn Trần nghiệp, năm 2022 trung tâm anh ngữ ALF khai trương thêm một chi mới tại 38 Mai Xuân Thưởng, phường Vỉnh Hải, thành phố Nha Trang, tỉnh Khánh hòa và một chi nhánh tại Thành Phố Hồ Chí Minh. 
+					p Trung tâm anh ngữ ALF cung cấp các khóa học luyện thi Cambridge, TOIEC, IELTS, YLE (Starters, Movers, Flyers), các khóa học về tiếng anh giao tiếp phù hợp với nhu cầu của học viên. Bên cạnh những khóa học, trung tâm còn có hoạt động câu lạc bộ tiếng anh nhằm tạo cho học viên có môi trường vận dụng tiếng anh giúp nâng cao khả năng ngôn ngữ và tăng cường kỹ năng giao tiếp.
+							
+
 		include ./blocks/guest/new_post
+
 		

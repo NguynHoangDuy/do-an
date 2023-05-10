@@ -1,20 +1,32 @@
 const db = require("../../config/db");
 
-function add(TEN_DM) {
-    const sql = `INSERT INTO danh_muc_kh (TEN_DM, XOA) VALUES (?, 0)`;
+function add(TEN_DM, ANH_DD) {
+    const sql = `INSERT INTO danh_muc_kh (TEN_DM, ANH_DD, XOA) VALUES (?, ?, 0)`;
     return new Promise((resolve, reject) => {
-        db.query(sql, TEN_DM, (err, res) => {
+        db.query(sql, [TEN_DM, ANH_DD], (err, res) => {
             if (err) reject(err);
             else resolve(1);
         });
     });
 }
 
-// Modal function for updating data in danh_muc_kh table
-function update(madm, tendm) {
-    const sql = `UPDATE danh_muc_kh SET TEN_DM = ? WHERE MA_DM = ?`;
+function getDM(madm) {
     return new Promise((resolve, reject) => {
-        db.query(sql, [tendm, madm], (err, res) => {
+        db.query(`SELECT * FROM danh_muc_kh WHERE MA_DM = '${madm}'`, (err, res)=>{
+            if(err){
+                reject(err)
+            }
+            else {
+                resolve(res[0])
+            }
+        })
+    })
+}
+// Modal function for updating data in danh_muc_kh table
+function update(madm, tendm, anhdd) {
+    const sql = `UPDATE danh_muc_kh SET TEN_DM = ?, ANH_DD = ? WHERE MA_DM = ?`;
+    return new Promise((resolve, reject) => {
+        db.query(sql, [tendm, anhdd, madm], (err, res) => {
             if (err) {
                 reject(err);
                 console.log(err);
@@ -101,9 +113,7 @@ function demMoDangKy(cn, makh) {
     });
 }
 
-function getLop(makhcc) {
-    
-}
+
 
 module.exports = {
     add,
@@ -113,4 +123,5 @@ module.exports = {
     getKHinDM,
     getListMDK,
     demMoDangKy,
+    getDM
 };

@@ -14,3 +14,20 @@ export function changeInputFile() {
         });
     }
 }
+export function changeInputAllFile() {
+    const fileInput = $(".anh_dd");
+    if (fileInput) {
+        fileInput.on("change", function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            const imagePreview = $(this).prev().children()
+            console.log(imagePreview)
+            reader.onload = function (event) {
+                
+                imagePreview.attr('src',event.target.result)
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+}

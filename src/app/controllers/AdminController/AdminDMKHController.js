@@ -10,6 +10,7 @@ const {
     getKHinDM,
     getListMDK,
     demMoDangKy,
+    getDM,
 } = require("../../models/dm_kh");
 class AdminKhoaHocController {
     async index(req, res) {
@@ -25,8 +26,11 @@ class AdminKhoaHocController {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
         const { tenDM } = req.body;
-
-        const kq = await add(tenDM);
+        let anh_dd;
+        if (req.file) {
+            anh_dd = req.file.path;
+        } else anh_dd = "";
+        const kq = await add(tenDM, anh_dd);
         if (kq === 1) {
             req.flash("success", "Thêm khóa học thành công.");
             res.redirect(`/admin/dmkh`);
@@ -39,10 +43,15 @@ class AdminKhoaHocController {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
         const maDM = req.query.madm;
-
+        const dm = await getDM(maDM)
         const { tenDM } = req.body;
-
-        const kq = await update(maDM, tenDM);
+        let anh_dd;
+        if (req.file) {
+            anh_dd = req.file.path;
+        } else anh_dd = dm.ANH_DD;
+        console.log(req.fike)
+        console.log(anh_dd)
+        const kq = await update(maDM, tenDM, anh_dd);
         if (kq === 1) {
             req.flash("success", "Cập nhật khóa học thành công.");
             res.redirect(`/admin/dmkh`);

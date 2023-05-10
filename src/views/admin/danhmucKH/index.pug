@@ -8,12 +8,19 @@ block container
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themdm`)
                     .modal-dialog.mw-70(role='document')
                         .modal-content
-                            form(action="/admin/dmkh/them", method="post") 
+                            form(action="/admin/dmkh/them", method="post", enctype="multipart/form-data") 
                                 .modal-header
                                     h5.modal-title#confirm-modal-title Thêm danh mục mới
                                     button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
                                         span(aria-hidden='true') &times;
                                 .modal-body
+                                    div
+                                        p Ảnh đại diện
+                                            div.text-center
+                                                label.d-block.mb-2(for="anh_dm")
+                                                    img.img-account-profile.rounded-circle.mb-2(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+                                                input.d-none.anh_dd(type="file", name="anh_dd", id="anh_dm")
+                                                label.button(for="anh_dm") Tải ảnh lên
                                     .create-group.mt-2
                                         .create-item.w-100
                                             label(for='tenKH') Tên danh mục
@@ -50,12 +57,19 @@ block container
                                         .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capnhat${dm.MA_DM}`)
                                             .modal-dialog.mw-70(role='document')
                                                 .modal-content
-                                                    form(action=`/admin/dmkh/sua?madm=${dm.MA_DM}`, method="post") 
+                                                    form(action=`/admin/dmkh/sua?madm=${dm.MA_DM}`, method="post", enctype="multipart/form-data") 
                                                         .modal-header
                                                             h5.modal-title#confirm-modal-title Cập nhật khóa học
                                                             button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
                                                                 span(aria-hidden='true') &times;
                                                         .modal-body
+                                                            div
+                                                                p Ảnh đại diện
+                                                                    div.text-center
+                                                                        label.d-block.mb-2(for=`anh-dm-${dm.MA_DM}`)
+                                                                            img.img-account-profile.rounded-circle.mb-2(src=dm.ANH_DD?dm.ANH_DD:"http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+                                                                        input.d-none.anh_dd(type="file", name="anh_dd", id=`anh-dm-${dm.MA_DM}`)
+                                                                        label.button(for=`anh-dm-${dm.MA_DM}`) Tải ảnh lên
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='tenKH') Tên danh mục

@@ -1,5 +1,6 @@
 const checkLogged = require("../../middleware/checkLogin");
 const checkAuthor = require("../../middleware/checkPermission");
+const uploadImage = require("../../middleware/uploadImage");
 const AdminDMKHController = require("../../app/controllers/AdminController/AdminDMKHController");
 
 const express = require("express");
@@ -25,6 +26,7 @@ router.get(
 );
 router.post(
     "/them",
+    uploadImage.single("anh_dd"),
     checkLogged.checkLoggedIn,
     checkAuthor.checkPermission(["QTV"]),
     AdminDMKHController.them
@@ -37,6 +39,7 @@ router.use(
 );
 router.post(
     "/sua",
+    uploadImage.single("anh_dd"),
     checkLogged.checkLoggedIn,
     checkAuthor.checkPermission(["QTV"]),
     AdminDMKHController.capNhat
