@@ -1,3 +1,7 @@
+.section{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
 .banner {
     width: 100%;
     .hero-swiper {
@@ -182,5 +186,38 @@
         font-size: 40px;
         text-align: center;
         margin-bottom: 20px;
+    }
+}
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.branch{
+
+    &-content{
+        display: flex;
+        justify-content: space-between;
+
+    }
+    &-map{
+        width: 65%;
+        min-height: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    &-group{
+        width: 30%;
+    }
+
+    &-item {
+        padding: 20px 20px 20px 60px;
+        border: 1px solid;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        position: relative;
+        border-radius: 10px;
+        cursor: pointer;
     }
 }

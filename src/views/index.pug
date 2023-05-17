@@ -30,6 +30,56 @@ block container
 					h3.intro-title Trung tâm anh ngữ ALF
 					p Được thành lập năm 2016, từ một trung tâm nhỏ tại đường Đoàn Trần nghiệp, năm 2022 trung tâm anh ngữ ALF khai trương thêm một chi mới tại 38 Mai Xuân Thưởng, phường Vỉnh Hải, thành phố Nha Trang, tỉnh Khánh hòa và một chi nhánh tại Thành Phố Hồ Chí Minh. 
 					p Trung tâm anh ngữ ALF cung cấp các khóa học luyện thi Cambridge, TOIEC, IELTS, YLE (Starters, Movers, Flyers), các khóa học về tiếng anh giao tiếp phù hợp với nhu cầu của học viên. Bên cạnh những khóa học, trung tâm còn có hoạt động câu lạc bộ tiếng anh nhằm tạo cho học viên có môi trường vận dụng tiếng anh giúp nâng cao khả năng ngôn ngữ và tăng cường kỹ năng giao tiếp.
+		section.teacher.section 
+			div.py-5.bg-light.team1
+				.container
+					.row.justify-content-center.mb-3
+						.col-md-7.text-center
+							h3.mb-3 Experienced & Professional Team
+							h6.subtitle.font-weight-normal You can relay on our amazing features list and also our customer services will be great experience for you without doubt and in no-time
+					.row
+						div.col-lg-6
+							.card.card-shadow.border-0.mb-4
+								.row.no-gutters
+									.col-md-5.pro-pic(style="background:url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg) center center no-repeat / cover")
+									.col-md-7.bg-white
+										.p-4
+											h6.mb-3.font-weight-medium Michael Doe
+											p You can relay on our amazing features list and also our customer services will be 
+						div.col-lg-6
+							.card.card-shadow.border-0.mb-4
+								.row.no-gutters
+									.col-md-5.pro-pic(style="background:url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg) center center no-repeat / cover")
+									.col-md-7.bg-white
+										.p-4
+											h6.mb-3.font-weight-medium Michael Doe
+											p You can relay on our amazing features list and also our customer services will be 
+						div.col-lg-6
+							.card.card-shadow.border-0.mb-4
+								.row.no-gutters
+									.col-md-5.pro-pic(style="background:url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg) center center no-repeat / cover")
+									.col-md-7.bg-white
+										.p-4
+											h6.mb-3.font-weight-medium Michael Doe
+											p You can relay on our amazing features list and also our customer services will be 
+						div.col-lg-6
+							.card.card-shadow.border-0.mb-4
+								.row.no-gutters
+									.col-md-5.pro-pic(style="background:url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg) center center no-repeat / cover")
+									.col-md-7.bg-white
+										.p-4
+											h6.mb-3.font-weight-medium Michael Doe
+											p You can relay on our amazing features list and also our customer services will be 
+		section.branch.section
+			.container
+				.branch-content
+					.branch-map
+						#map
+					.branch-group
+						for kh in cn
+							.branch-item
+								h5.branch-title= kh.TEN_CHI_NHANH
+								p.branch-desc= kh.DIA_CHI
 							
 
 		include ./blocks/guest/new_post

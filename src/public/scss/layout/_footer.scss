@@ -1,39 +1,47 @@
 // Footer
 .footer {
-  &-main {
-    padding: 50px 0 30px;
-    border-top: 1px solid rgba(100, 100, 100, 0.5);
-  }
-
-  &-content {
-    width: 50%;
-    & > p {
-      font-family: "Open Sans";
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 22px;
+    &-main {
+        padding: 50px 0 30px;
+        border-top: 1px solid rgba(100, 100, 100, 0.5);
     }
-  }
 
-  &-menu {
-    &-link {
-      color: #142c54;
-      font-family: "Open Sans";
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 20px;
+    &-content {
+        width: 50%;
+        & > p {
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 22px;
+        }
     }
-  }
 
-  &-absolute {
-    padding: 15px 0;
-    background: #f1f6ff;
-    & p {
-      color: #142c54;
-      font-family: "Open Sans";
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 20px;
+    &-menu {
+        &-link {
+            color: #142c54;
+            font-family: "Open Sans";
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 20px;
+        }
     }
-  }
+
+    &-absolute {
+        padding: 15px 0;
+        background: #f1f6ff;
+        & p {
+            color: #142c54;
+            font-family: "Open Sans";
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 20px;
+        }
+    }
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+.fz-18 {
+    font-size: 18px;
+    color: #142c54 !important;
 }

@@ -22,3 +22,16 @@ exports.danhMucKh = () => {
         });
     });
 };
+
+
+exports.getCN = () => {
+    return new Promise((resolve, reject) => {
+        con.query("SELECT * FROM chi_nhanh", (err, kq) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(kq);
+            }
+        });
+    });
+}

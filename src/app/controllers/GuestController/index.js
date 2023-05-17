@@ -5,7 +5,7 @@ const BaiViet = require("../../models/bai_viet");
 const bcrypt = require("bcrypt");
 const ChiNhanh = require("../../models/chinhanh");
 const crypto = require("crypto");
-const { bannerImage, danhMucKh } = require("../../models/homePage");
+const { bannerImage, danhMucKh, getCN } = require("../../models/homePage");
 const nodemailer = require("nodemailer");
 class GuestController {
     async index(req, res) {
@@ -13,7 +13,8 @@ class GuestController {
         const baiviet = new BaiViet();
         const posts = await baiviet.getLatestPosts();
         const dmKH = await danhMucKh();
-        res.render("index", { banner, posts, dmKH });
+        const cn = await getCN()
+        res.render("index", { banner, posts, dmKH, cn });
     }
     loginForm(req, res) {
         res.render("guest/Registor/login");
