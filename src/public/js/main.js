@@ -45,9 +45,29 @@ $(document).ready(function() {
     }
 
     geocodeAddress('Đường Đoàn trần nghiệp, Nha Trang, Viet Nam');
+
+
+    const listBranch = $(".branch-item")
+    listBranch.on("click", (e)=>{
+    	const item = e.currentTarget
+		listBranch.removeClass("active")
+		item.classList.add("active")
+		geocodeAddress(item.dataset.diachi);
+    })
   });
+
+
+  (function (w,d,s,o,r,js,fjs) {
+    w[r]=w[r]||function() {(w[r].q = w[r].q || []).push(arguments)}
+    w[r]('app', 'X1NnM5st-N');
+    if(d.getElementById(o)) return;
+    js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
+    js.id = o; js.src = 'https://embed.trustmary.com/embed.js';
+    js.async = 1; fjs.parentNode.insertBefore(js, fjs);
+  }(window, document, 'script', 'trustmary-embed', 'tmary'));
 
 $("#noti-modal").modal("show");
 if ($("#noi_dung")) {
     CKEDITOR.replace("noi_dung", { height: "800px" });
 }
+

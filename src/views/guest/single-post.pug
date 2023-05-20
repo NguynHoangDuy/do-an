@@ -1,8 +1,12 @@
 extends ../layout/layout
 block container
-	main 
-		.container
-			if (post)
-				h2.post-single-headline= post.tieu_de
-				.post-single-content!= post.noi_dung
+	main
+		section.py-5.bg-light 
+			.container
+				if (post)
+					h2.post-single-headline= post.tieu_de
+					.post-single-content!= post.noi_dung
+				else
+					p Không tìm thấy bài viết
+		include ../blocks/guest/new_post
 				

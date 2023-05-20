@@ -1,0 +1,34 @@
+.course{
+    &-list{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-gap: 50px;
+        text-align: center;
+    }
+
+    &-item{
+        margin-bottom: 40px;
+    }
+
+    &-img{
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &-content{
+        min-height: 112px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    &-name{
+        font-weight: 600;
+        overflow: hidden; /* Hides any content that exceeds the specified dimensions */
+        text-overflow: ellipsis; /* Truncates the text with an ellipsis (...) if it overflows the container */
+        display: -webkit-box; /* For compatibility with older browsers */
+        -webkit-box-orient: vertical; /* Specifies vertical layout */
+        -webkit-line-clamp: 2;
+    }
+
+}

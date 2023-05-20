@@ -54,6 +54,26 @@ exports.getListHocPhi = (offset, perPage, THANG, NAM, cn) => {
         );
     });
 };
+exports.getListHocPhiEx = ( THANG, NAM, cn) => {
+    let chiNhanh;
+    if (cn) {
+        chiNhanh = `and mo_dang_ky.MA_CHI_NHANH = '${cn}'`;
+    } else {
+        chiNhanh = ``;
+    }
+    return new Promise((resolve, reject) => {
+        db.query(
+            `SELECT hoc_vien.MA_HV ,hoc_vien.HO_TEN,mo_dang_ky.MA_CHI_NHANH ,khoa_hoc.TEN_KH, lop.TEN_LOP, mo_dang_ky.HOC_PHI FROM danh_sach_hoc_vien_lop INNER JOIN hoc_vien on hoc_vien.MA_HV = danh_sach_hoc_vien_lop.MA_HV INNER JOIN lop on lop.MA_LOP = danh_sach_hoc_vien_lop.MA_LOP INNER JOIN mo_dang_ky on mo_dang_ky.MA_KHCC = lop.MA_KHCC INNER JOIN khoa_hoc on mo_dang_ky.MA_KH = khoa_hoc.MA_KH WHERE EXTRACT(YEAR FROM danh_sach_hoc_vien_lop.NGAY_DONG) = "${NAM}" AND EXTRACT(MONTH FROM danh_sach_hoc_vien_lop.NGAY_DONG) = "${THANG}" ${chiNhanh}`,
+            (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            }
+        );
+    });
+};
 exports.countListHP = (THANG, NAM, cn) => {
     let chiNhanh;
     if (cn) {

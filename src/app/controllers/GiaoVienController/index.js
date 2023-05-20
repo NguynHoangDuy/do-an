@@ -5,7 +5,7 @@ class GiaoVienController {
     index(req, res) {
         res.locals.quyen = "Giáo viên";
         res.locals.ten = req.session.ten;
-        res.render("./giaovien");
+        res.render("./giaovien/index");
     }
     async thoikhoabieu(req, res) {
         res.locals.quyen = "Giáo viên";

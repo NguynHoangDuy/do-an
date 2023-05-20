@@ -1,0 +1,12 @@
+extends layout/layout
+block container
+	main
+		section.post.py-5.bg-light
+			.container
+				.new-post-group
+					for post in posts
+						a(href=`/baiviet/${post.id}`).new-post-item
+							img(src=post.hinh_anh, alt="").new-post-img
+							.new-post-content 
+								h6.new-post-title= post.tieu_de
+		

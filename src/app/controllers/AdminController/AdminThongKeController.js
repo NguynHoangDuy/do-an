@@ -1,4 +1,5 @@
-const { getSumHocPhi, getNamHv, tkHocVien } = require("../../models/hocphi");
+const ExcelJS = require('exceljs');
+const { getSumHocPhi, getNamHv, tkHocVien, getListHocPhiEx } = require("../../models/hocphi");
 const {
     getThangHP,
     getNamHP,
@@ -53,6 +54,43 @@ class AdminThongKeController {
             pages: totalPages,
             perPage: perPage,
         });
+    }
+
+    async xuatHocPhi(req,res)
+    {
+        res.locals.quyen = "Quản trị viên";
+        res.locals.ten = req.session.ten;
+        const admin = req.session.chinhanh;
+        let THANG =  req.query.thang
+        let  NAM = req.query.nam;
+
+        const rows = await getListHocPhiEx(THANG, NAM, admin)
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Data');
+
+        // Add column headers
+        const headers = Object.keys(rows[0]);
+        worksheet.getRow(1).values = headers;
+
+        // Add data rows
+        for (let i = 0; i < rows.length; i++) {
+        const rowValues = Object.values(rows[i]);
+        worksheet.addRow(rowValues);
+        }
+        const fileName= `thong-ke-hoc-phi-thang-${THANG}-nam-${NAM}${admin?"-"+admin:""}.xlsx`
+        // Generate the Excel file buffer
+        workbook.xlsx.writeBuffer()
+        .then((buffer) => {
+            // Set the response headers for file download
+            res.set('Content-Disposition', `attachment; filename=${fileName}`);
+            res.set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.send(buffer);
+        })
+        .catch((err) => {
+            console.error('Error generating Excel file:', err);
+            res.status(500).json({ error: 'Failed to generate Excel file' });
+        });
+
     }
 
     async thuChi(req, res) {

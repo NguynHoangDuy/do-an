@@ -6,6 +6,12 @@ const router = express.Router();
 const AdminController = require("../../app/controllers/AdminController/AdminThongKeController");
 
 router.get(
+    "/hocphi/xuatfile",
+    checkLogged.checkLoggedIn,
+    checkAuthor.checkPermission(["QTV"]),
+    AdminController.xuatHocPhi
+);
+router.get(
     "/dangky",
     checkLogged.checkLoggedIn,
     checkAuthor.checkPermission(["QTV"]),

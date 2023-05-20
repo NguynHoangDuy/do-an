@@ -18,7 +18,9 @@ block container
 								option(value="") Hãy chọn năm
 								for th in nam
 									option(value=th.NAM, selected =(th.NAM==NAM?true:false))= "Năm "+ th.NAM 
-						button.button.mb-0(type="submit") Xem 
+						button.button.mb-0(type="submit") Xem
+			.flex.flex-end
+				a.button(href=`/admin/thongke/hocphi/xuatfile?thang=${THANG}&nam=${NAM}`) Xuất Excel
 			if messages.success
 				+alert(messages)
 			if messages.fail

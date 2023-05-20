@@ -5,7 +5,7 @@ const BaiViet = require("../../models/bai_viet");
 const bcrypt = require("bcrypt");
 const ChiNhanh = require("../../models/chinhanh");
 const crypto = require("crypto");
-const { bannerImage, danhMucKh, getCN } = require("../../models/homePage");
+const { bannerImage, danhMucKh, getCN, getKH, getAllBV } = require("../../models/homePage");
 const nodemailer = require("nodemailer");
 class GuestController {
     async index(req, res) {
@@ -15,6 +15,18 @@ class GuestController {
         const dmKH = await danhMucKh();
         const cn = await getCN()
         res.render("index", { banner, posts, dmKH, cn });
+    }
+    async giaovien(req, res) {
+        res.render("giaovien");
+    }
+    async khoahoc(req, res) {
+        const listKH = await getKH()
+        console.log(listKH)
+        res.render("khoahoc", {listKH});
+    }
+    async baiviet(req, res) {
+        const posts = await getAllBV()
+        res.render("baiviet", {posts});
     }
     loginForm(req, res) {
         res.render("guest/Registor/login");
@@ -146,9 +158,12 @@ class GuestController {
                     req.session.ten = loginHV[0].HO_TEN;
                     req.session.username = loginHV[0].MA_HV;
                     req.session.chinhanh = loginHV[0].MA_CHI_NHANH;
+
+                    console.log("Đăng nhập")
                     res.redirect("./hocvien");
                     return;
                 } else {
+                    console.log("Không thành công")
                     res.redirect("/dangnhap");
                     return;
                 }

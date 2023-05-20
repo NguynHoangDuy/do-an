@@ -25,5 +25,8 @@ router.get(
     GuestController.loginForm
 );
 router.post("/dangnhap", GuestController.dangnhap);
+router.get("/giangvien", GuestController.giaovien);
+router.get("/khoahoc", GuestController.khoahoc);
+router.get("/baiviet", GuestController.baiviet);
 router.get("/", GuestController.index);
 module.exports = router;

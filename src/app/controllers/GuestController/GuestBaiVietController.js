@@ -4,9 +4,10 @@ class GuestController {
     async chitiet(req, res) {
         const id = req.params.id;
         const baiviet = new BaiViet();
-        const posts = await baiviet.getById(id);
-        const post = posts[0];
-        res.render("./guest/single-post", { post });
+        const bv = await baiviet.getById(id);
+        const posts = await baiviet.getLatestPosts();
+        const post = bv[0];
+        res.render("./guest/single-post", { post, posts });
     }
 }
 
