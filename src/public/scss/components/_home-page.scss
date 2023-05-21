@@ -1,4 +1,4 @@
-.section{
+.section {
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
@@ -144,9 +144,8 @@
         border-color: #44af68;
         color: #ffffff;
         position: absolute;
-        left: 50%;
         bottom: 0;
-        transform: translate(-50%, -50%);
+        transform: translate(50%, -50%);
         display: none;
     }
 }
@@ -193,21 +192,19 @@
     width: 100%;
 }
 
-.branch{
-
-    &-content{
+.branch {
+    &-content {
         display: flex;
         justify-content: space-between;
-
     }
-    &-map{
+    &-map {
         width: 65%;
         min-height: 500px;
         border-radius: 10px;
         overflow: hidden;
     }
 
-    &-group{
+    &-group {
         width: 30%;
     }
 
@@ -220,13 +217,104 @@
         border-radius: 10px;
         cursor: pointer;
 
-        &.active{
+        &.active {
             border: 4px solid #44af69;
         }
     }
 }
 
-.pro-pic{
+.pro-pic {
     min-height: 300px;
     height: 100%;
+}
+.facebook-link {
+    text-align: center;
+}
+
+.faq {
+    background-color: #f7e0ac;
+}
+.faq_area {
+    position: relative;
+    z-index: 1;
+    background-color: #f5f5ff;
+}
+
+.faq-accordian {
+    position: relative;
+    z-index: 1;
+}
+.faq-accordian .card {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+.faq-accordian .card:last-child {
+    margin-bottom: 0;
+}
+.faq-accordian .card .card-header {
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom-color: #ebebeb;
+}
+.faq-accordian .card .card-header h6 {
+    cursor: pointer;
+    padding: 1.75rem 2rem;
+    color: #3f43fd;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.faq-accordian .card .card-header h6 span {
+    font-size: 1.5rem;
+}
+.faq-accordian .card .card-header h6.collapsed {
+    color: #070a57;
+}
+.faq-accordian .card .card-header h6.collapsed span {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+.faq-accordian .card .card-body {
+    padding: 1.75rem 2rem;
+}
+.faq-accordian .card .card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.student {
+    &-main {
+        width: 80%;
+        max-width: 500px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    &-content {
+        background-color: #74ebd5;
+        background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+    }
+    &-img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &-desc {
+        font-size: 24px;
+        color: white;
+    }
 }

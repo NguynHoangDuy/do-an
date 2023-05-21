@@ -36,3 +36,56 @@
         background-color: #fef9ee !important;
     }
 }
+
+.search-content {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    background: #3f39398c;
+    cursor: pointer;
+    z-index: 999999;
+    &.active {
+        display: block;
+    }
+}
+
+.form {
+    max-width: 600px;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    overflow: hidden;
+    border-radius: 10px;
+    & button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        padding: 0 20px;
+        border: 0;
+        background: white;
+        outline: none;
+    }
+}
+
+.form .fa-search {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #9ca3af;
+}
+
+.form-input {
+    height: 55px;
+    text-indent: 33px;
+    border: 0 !important;
+}
+
+.form-input:focus {
+    box-shadow: none;
+    border: none;
+}

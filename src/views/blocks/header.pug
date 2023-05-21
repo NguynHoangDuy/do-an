@@ -14,4 +14,9 @@ header.header
                 a.header-menu-link(href="/baiviet") Bài viết
         div
             a.mx-3.header-button(href="/dangnhap") Đăng nhập
-            a.header-button(href="/dangky") Đăng ký
+            a.header-button.btn-search Tìm kiếm
+    .search-content
+        form.form(action="/timkiem", method="GET") 
+            i.fas.fa-search
+            input.form-control.form-input(type='search', name="s", placeholder='Tìm kiếm khóa học')
+            button(type="submit") Tìm kiếm

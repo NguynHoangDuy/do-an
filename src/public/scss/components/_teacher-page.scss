@@ -1,31 +1,46 @@
-.teacher{
-    &-list{
+.child-banner {
+    background: #577d86;
+    padding: 200px 0;
+
+    &-content {
+        max-width: 80%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    &-title {
+        font-size: 60px;
+        color: white;
+    }
+}
+
+.teacher {
+    &-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         grid-gap: 50px;
         text-align: center;
     }
 
-    &-item{
+    &-item {
         margin-bottom: 40px;
     }
 
-    &-img{
+    &-img {
         height: 300px;
         width: 100%;
         object-fit: cover;
     }
 
-    &-content{
+    &-content {
         padding: 20px;
         text-align: center;
     }
 
-    &-name{
+    &-name {
         font-weight: 600;
     }
 
-    &-point{
+    &-point {
         color: red;
     }
 }

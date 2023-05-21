@@ -1,5 +1,6 @@
 const checkLogged = require("../../middleware/checkLogin");
 const checkAuthor = require("../../middleware/checkPermission");
+const uploadImage = require("../../middleware/uploadImage");
 const express = require("express");
 const router = express.Router();
 
@@ -19,12 +20,14 @@ router.use(
 );
 router.post(
   "/capnhatkhoahoc",
+  uploadImage.single("anh_dd"),
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.capNhatKhoaHoc
 );
 router.post(
   "/themkhoahoc",
+  uploadImage.single("anh_dd"),
   checkLogged.checkLoggedIn,
   checkAuthor.checkPermission(["QTV"]),
   AdminController.themKhoaHoc

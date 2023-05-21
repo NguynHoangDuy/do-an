@@ -137,4 +137,4 @@ block container
 										+confirm-modal(`xoa${kh.MA_KHCC}`,'Xác nhận xóa khóa học', 'Bạn có chắc chắn muốn xóa khóa học này?', 'Xóa', `/admin/modangky/xoa?makhcc=${kh.MA_KHCC}`)
 					+pagination(current, pages, "/admin/modangky", "/admin/modangky?trang=")
 			.flex.flex-end.mt-4
-				a.button(href="/admin/dmkh/khoahoc") Trở về
+				a.button(href=`/admin/dmkh/khoahoc/${maDM}`) Trở về

@@ -7,6 +7,7 @@ const adminMoDangKyRouter = require("./admin/modangky");
 const adminLuongRouter = require("./admin/luong");
 const adminThongKeRouter = require("./admin/thongke");
 const adminBaiVietRouter = require("./admin/baiviet");
+const adminDiemSoRouter = require("./admin/demso");
 const adminDanhMucKHRouter = require("./admin/danhmuc");
 const adminLopRouter = require("./admin/lop");
 const giaoVienRouter = require("./giaovien");
@@ -16,6 +17,7 @@ const hocVienRouter = require("./hocvien");
 const guestBaiVietRouter = require("./guest/baiviet");
 const APIRouter = require("./API/index");
 function route(app) {
+    app.use("/admin/diemso", adminDiemSoRouter);
     app.use("/admin/baiviet", adminBaiVietRouter);
     app.use("/admin/modangky", adminMoDangKyRouter);
     app.use("/admin/khoahoc", adminKhoaHocRouter);

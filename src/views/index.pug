@@ -14,6 +14,7 @@ block container
 		section.course-home
 			.course-home-background
 			.container
+				h2.text-center.my-5 Các khóa học của ALF Enlish
 				.course-home-content
 					for kh in dmKH
 						.course-home-item
@@ -30,12 +31,12 @@ block container
 					h3.intro-title Trung tâm anh ngữ ALF
 					p Được thành lập năm 2016, từ một trung tâm nhỏ tại đường Đoàn Trần nghiệp, năm 2022 trung tâm anh ngữ ALF khai trương thêm một chi mới tại 38 Mai Xuân Thưởng, phường Vỉnh Hải, thành phố Nha Trang, tỉnh Khánh hòa và một chi nhánh tại Thành Phố Hồ Chí Minh. 
 					p Trung tâm anh ngữ ALF cung cấp các khóa học luyện thi Cambridge, TOIEC, IELTS, YLE (Starters, Movers, Flyers), các khóa học về tiếng anh giao tiếp phù hợp với nhu cầu của học viên. Bên cạnh những khóa học, trung tâm còn có hoạt động câu lạc bộ tiếng anh nhằm tạo cho học viên có môi trường vận dụng tiếng anh giúp nâng cao khả năng ngôn ngữ và tăng cường kỹ năng giao tiếp.
-		section.teacher.section 
+		section.teacher
 			div.py-5.bg-light.team1
 				.container
 					.row.justify-content-center.mb-3
 						.col-md-12.text-center
-							h2.mb-3 Đội ngũ giáo viên
+							h2.title.mb-3 ĐỘI NGŨ GIÁO VIÊN
 							h6.subtitle.font-weight-normal.mb-5 Đội ngũ giáo viên của ALF Enlish đều là những người có chuyên môn cao, nhiệt huyết. Được chọn lọc và đào tạo khắt khe, áp dụng đồng bộ phương pháp RIPL toàn diện. Mỗi giáo viên là sứ giả truyền cảm hứng không chỉ chuyên sâu mà còn truyền động lực và cảm hứng học tiếng Anh.
 					.row
 						div.col-lg-6.mb-3
@@ -98,7 +99,6 @@ block container
 													i.far.fa-envelope
 												a.mx-4(href="https://zalo.me")
 													i.fab.fa-youtube 
- 
 		section.branch.section
 			.container
 				.branch-content
@@ -108,13 +108,28 @@ block container
 						for kh in cn
 							div.branch-item(data-diachi= kh.DIA_CHI)
 								h5.branch-title= kh.TEN_CHI_NHANH
-								p.branch-desc= kh.DIA_CHI				
-
-		include ./blocks/guest/new_post
+								p.branch-desc= kh.DIA_CHI
+		section.student.mb-5
+			.container
+				h2.title HỌC VIÊN XUẤT SẮC
+				.student-main
+					.hero-swiper
+						.swiper-wrapper
+							for item in hocvien
+								.swiper-slide
+									.student-content
+										img(src= item.HINH_DD?item.HINH_DD:"https://res.cloudinary.com/dcbkfpgsp/image/upload/v1684659972/avatars/hanh-1_q2ebrl.jpg", alt="").student-img
+										h3.text-white.py-4.student-name= item.HO_TEN
+										p.student-desc= item.MON + " - " + item.DIEM
+						.swiper-button-next
+						.swiper-button-prev
+						.swiper-pagination
+		include ./blocks/guest/faq
 		section.facebook
 			.container
-				div#fb-root
-				div.fb-page(data-href="https://www.facebook.com/anhngualf", data-tabs="", data-width="", data-height="", data-small-header="false", data-adapt-container-width="true", data-hide-cover="false", data-show-facepile="true")
+				.facebook-link.pt-5
+					div.fb-page(data-href="https://www.facebook.com/anhngualf", data-tabs="", data-width="", data-height="", data-small-header="false", data-adapt-container-width="true", data-hide-cover="false", data-show-facepile="true")
 				#facebook-revew
-					script(src="https://widget.trustmary.com/GX78byzNc")  
+				script(src="https://widget.trustmary.com/GX78byzNc")  
+		include ./blocks/guest/new_post
 		

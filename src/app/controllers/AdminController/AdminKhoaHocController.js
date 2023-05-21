@@ -57,10 +57,14 @@ class AdminKhoaHocController {
     async themKhoaHoc(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
+        let anh_dd;
+        if (req.file) {
+            anh_dd = req.file.path;
+        } else anh_dd = "";
         const { maKH, tenKH, dmkh } = req.body;
 
         const khoahoc = new KhoaHoc();
-        const kq = await khoahoc.themkhoahoc(maKH, tenKH, dmkh);
+        const kq = await khoahoc.themkhoahoc(maKH, tenKH, dmkh, anh_dd);
         if (kq === 1) {
             req.flash("success", "Thêm khóa học thành công.");
             res.redirect(`/admin/khoahoc`);
@@ -73,11 +77,15 @@ class AdminKhoaHocController {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
         const old = req.query.makh;
-
         const { maKH, tenKH, dmkh } = req.body;
-
+        
         const khoahoc = new KhoaHoc();
-        const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, dmkh, old);
+        const kh = await khoahoc.getKHById(old)
+        let anh_dd;
+        if (req.file) {
+            anh_dd = req.file.path;
+        } else anh_dd = kh.HINH_KH;
+        const kq = await khoahoc.capnhatkhoahoc(maKH, tenKH, dmkh, anh_dd, old);
         if (kq === 1) {
             req.flash("success", "Cập nhật khóa học thành công.");
             res.redirect(`/admin/khoahoc`);

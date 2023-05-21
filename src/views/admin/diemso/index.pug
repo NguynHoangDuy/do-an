@@ -1,0 +1,70 @@
+extends ../../layout/layout-dash
+block container
+    .dash-main
+        .container
+            p.title Quản lý thông tin điểm số
+            .flex.justify-around
+                button.button(data-toggle="modal" ,data-target=`#timkiem`) Thêm học viên mới
+                .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `timkiem`)
+                    .modal-dialog(role='document')
+                        .modal-content
+                            form(action="/admin/diemso/themhocvien", method="post") 
+                                .modal-header
+                                    h5.modal-title#confirm-modal-title Thêm điểm số
+                                    button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='maHV') Mã học viên
+                                            input(type='text', id='maHV', name='maHV')
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='kyThi') Kỳ Thi
+                                            input(type='text', id='kyThi', name='kyThi')
+                                    .create-group.mt-2
+                                        .create-item.w-100
+                                            label(for='diem') Điểm
+                                            input(type='number', id='diem', name='diem', step=".01")
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+                                    button.btn.btn-success(type="submit") Thêm
+            if messages.success
+                +alert(messages)
+            if messages.fail
+                +alertNot(messages) 
+            .bg-white.p-20.radius-16.mt-2
+                .table-responsive
+                    table.table.no-wrap.user-table.mb-0 
+                        thead
+                            tr.borderbottom
+                                th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+                                th(scope="col", class="border-0 text-uppercase font-medium") Họ và tên
+                                th(scope="col", class="border-0 text-uppercase font-medium") Số điện thoại
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chi Nhánh
+                                th(scope="col", class="border-0 text-uppercase font-medium") Kỳ thi
+                                th(scope="col", class="border-0 text-uppercase font-medium") Điểm
+                                th(scope="col", class="border-0 text-uppercase font-medium") Chức năng
+                        tbody
+                            - stt = 1
+                            for hv in listHv 
+                                tr
+                                    td(class="pl-4")= (perPage * current) - (perPage - stt++)
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.HO_TEN
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.SDT
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.MA_CHI_NHANH
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.MON
+                                    td
+                                        p.text-overflow(class="font-medium mb-0")= hv.DIEM
+                                    td
+                                        button(data-toggle="modal" ,data-target=`#${hv.MA_HV}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+                                            i(class="fa fa-trash") 
+                                    +confirm-modal(`${hv.MA_HV}`,'Xác nhận xóa học viên', 'Bạn có chắc chắn muốn xóa học viên này?', 'Xóa', `/admin/diemso/xoahocvien?id=${hv.id}`)
+                +pagination(current, pages, "/admin/diemso", "/admin/diemso?trang=")
+            .flex.flex-end.mt-4
+                a.button(href="/admin") Trở về
+

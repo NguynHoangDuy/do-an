@@ -29,12 +29,18 @@ block container
                 .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themkh`)
                     .modal-dialog.mw-70(role='document')
                         .modal-content
-                            form(action="/admin/khoahoc/themkhoahoc", method="post") 
+                            form(action="/admin/khoahoc/themkhoahoc", method="post", enctype="multipart/form-data") 
                                 .modal-header
                                     h5.modal-title#confirm-modal-title Thêm khóa học mới
                                     button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
                                         span(aria-hidden='true') &times;
                                 .modal-body
+                                    p Ảnh khóa học
+                                                div.text-center
+                                                    label.d-block.mb-2(for="anh_dm")
+                                                        img.img-account-profile.rounded-circle.mb-2(src="http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+                                                    input.d-none.anh_dd(type="file", name="anh_dd", id="anh_dm")
+                                                    label.button(for="anh_dm") Tải ảnh lên
                                     .create-group.mt-2
                                         .create-item.w-100
                                             label(for='maKH') Mã khóa học
@@ -119,12 +125,18 @@ block container
                                         .modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capnhat${kh.MA_KH}`)
                                             .modal-dialog.mw-70(role='document')
                                                 .modal-content
-                                                    form(action=`/admin/khoahoc/capnhatkhoahoc?makh=${kh.MA_KH}`, method="post") 
+                                                    form(action=`/admin/khoahoc/capnhatkhoahoc?makh=${kh.MA_KH}`, method="post", enctype="multipart/form-data") 
                                                         .modal-header
                                                             h5.modal-title#confirm-modal-title Cập nhật khóa học
                                                             button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
                                                                 span(aria-hidden='true') &times;
                                                         .modal-body
+                                                            p Ảnh đại diện
+                                                                div.text-center
+                                                                    label.d-block.mb-2(for=`anh-dm-${kh.MA_KH}`)
+                                                                        img.img-account-profile.rounded-circle.mb-2(src=kh.HINH_KH?kh.HINH_KH:"http://bootdey.com/img/Content/avatar/avatar1.png", alt="")
+                                                                    input.d-none.anh_dd(type="file", name="anh_dd", id=`anh-dm-${kh.MA_KH}`)
+                                                                    label.button(for=`anh-dm-${kh.MA_KH}`) Tải ảnh lên
                                                             .create-group.mt-2
                                                                 .create-item.w-100
                                                                     label(for='maKH') Mã khóa học

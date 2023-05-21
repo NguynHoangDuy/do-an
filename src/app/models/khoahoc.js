@@ -1,5 +1,16 @@
 const con = require("../../config/db");
 class KhoaHoc {
+    getKHById(maKH){
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * from khoa_hoc WHERE MA_KH='${maKH}'`, (err, kq) => {
+                if (err) {
+                    resolve([]);
+                } else {
+                    resolve(kq);
+                }
+            });
+        })
+    }
     dsKhoaHocAll() {
         const dsKH = () => {
             return new Promise((resolve, reject) => {
@@ -84,11 +95,11 @@ class KhoaHoc {
         return timkiem();
     }
 
-    themkhoahoc(maKH, tenKH, ma_dm) {
+    themkhoahoc(maKH, tenKH, ma_dm, anh_dd) {
         const khoahoc = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `INSERT INTO khoa_hoc (MA_KH, TEN_KH, MA_DM, XOA) VALUES ('${maKH}','${tenKH}', '${ma_dm}', '0')`,
+                    `INSERT INTO khoa_hoc (MA_KH, TEN_KH, MA_DM, HINH_KH, XOA) VALUES ('${maKH}','${tenKH}', '${ma_dm}', '${anh_dd}','0')`,
                     (err, kq) => {
                         if (err) {
                             reject(err);
@@ -101,11 +112,11 @@ class KhoaHoc {
         };
         return khoahoc();
     }
-    capnhatkhoahoc(maKH, tenKH, maDM, old) {
+    capnhatkhoahoc(maKH, tenKH, maDM, anh_dd, old) {
         const khoahoc = () => {
             return new Promise((resolve, reject) => {
                 con.query(
-                    `UPDATE khoa_hoc SET MA_KH='${maKH}',TEN_KH='${tenKH}', MA_DM='${maDM}' WHERE MA_KH = '${old}'`,
+                    `UPDATE khoa_hoc SET MA_KH='${maKH}',TEN_KH='${tenKH}', MA_DM='${maDM}', HINH_KH = '${anh_dd}' WHERE MA_KH = '${old}'`,
                     (err, kq) => {
                         if (err) {
                             reject(err);

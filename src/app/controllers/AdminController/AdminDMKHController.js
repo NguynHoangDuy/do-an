@@ -43,14 +43,12 @@ class AdminKhoaHocController {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
         const maDM = req.query.madm;
-        const dm = await getDM(maDM)
+        const dm = await getDM(maDM);
         const { tenDM } = req.body;
         let anh_dd;
         if (req.file) {
             anh_dd = req.file.path;
         } else anh_dd = dm.ANH_DD;
-        console.log(req.fike)
-        console.log(anh_dd)
         const kq = await update(maDM, tenDM, anh_dd);
         if (kq === 1) {
             req.flash("success", "Cập nhật khóa học thành công.");
@@ -86,6 +84,7 @@ class AdminKhoaHocController {
     async modangky(req, res) {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
+
         let perPage = 10;
         const makh = req.params.makh;
         const chiNhanh = new ChiNhanh();
@@ -97,7 +96,6 @@ class AdminKhoaHocController {
         const dsMaKH = await khoahoc.dsKhoaHocAll();
         const maDM = req.params.madm;
         const listKH = await getListMDK(offset, perPage, admin, makh);
-        console.log(admin, makh, maDM);
         function formatMoney(num) {
             return Number(num).toLocaleString("vi-VN", {
                 style: "currency",
@@ -134,11 +132,11 @@ class AdminKhoaHocController {
         res.locals.quyen = "Quản trị viên";
         res.locals.ten = req.session.ten;
         const makhcc = req.params.makhcc;
-
+        const makh = req.params.makh;
+        const maDM = req.params.madm;
         const modangky = new MoDangKy();
         const listLop = await modangky.xemDsLop(makhcc);
-        console.log(listLop);
-        res.render("./admin/danhmucKH/dslop", { listLop });
+        res.render("./admin/danhmucKH/dslop", { listLop, maDM, makh });
     }
 
     async dsHocVien(req, res) {
@@ -163,7 +161,6 @@ class AdminKhoaHocController {
             });
         } else {
             const listHv = await lop.timKiemHV(malop, maHv, tenHv);
-            console.log(listHv);
             res.render("./admin/danhmucKH/dshocvien", { listHv, tk: true });
         }
     }
@@ -174,9 +171,7 @@ class AdminKhoaHocController {
         const malop = req.params.malop;
         const lop = new Lop();
         const { maHv } = req.body;
-        console.log(maHv);
         const kq = await lop.themHocVien(malop, maHv);
-        console.log(kq);
         if (kq === 1) {
             req.flash("success", "Mở đăng ký thành công.");
             res.redirect(`/admin/lop/hocvien/${malop}`);
@@ -191,9 +186,7 @@ class AdminKhoaHocController {
         const malop = req.params.malop;
         const lop = new Lop();
         const { maHv } = req.body;
-        console.log(maHv);
         const kq = await lop.themHocVien(malop, maHv);
-        console.log(kq);
         if (kq === 1) {
             req.flash("success", "Thêm thành công.");
             res.redirect(`/admin/lop/hocvien/${malop}`);

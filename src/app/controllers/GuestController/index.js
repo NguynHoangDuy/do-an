@@ -5,7 +5,15 @@ const BaiViet = require("../../models/bai_viet");
 const bcrypt = require("bcrypt");
 const ChiNhanh = require("../../models/chinhanh");
 const crypto = require("crypto");
-const { bannerImage, danhMucKh, getCN, getKH, getAllBV } = require("../../models/homePage");
+const {
+    bannerImage,
+    danhMucKh,
+    getCN,
+    getKH,
+    getAllBV,
+    search,
+    hocVien,
+} = require("../../models/homePage");
 const nodemailer = require("nodemailer");
 class GuestController {
     async index(req, res) {
@@ -13,20 +21,34 @@ class GuestController {
         const baiviet = new BaiViet();
         const posts = await baiviet.getLatestPosts();
         const dmKH = await danhMucKh();
-        const cn = await getCN()
-        res.render("index", { banner, posts, dmKH, cn });
+        const cn = await getCN();
+        const hocvien = await hocVien();
+        res.render("index", { banner, posts, dmKH, cn, hocvien });
     }
     async giaovien(req, res) {
         res.render("giaovien");
     }
     async khoahoc(req, res) {
-        const listKH = await getKH()
-        console.log(listKH)
-        res.render("khoahoc", {listKH});
+        const dmKH = await danhMucKh();
+        let listKH = [];
+        for (let i = 0; i < dmKH.length; i++) {
+            const kh = await getKH(dmKH[i].MA_DM);
+            if (kh.length !== 0) listKH = [...listKH, kh];
+        }
+        const baiviet = new BaiViet();
+        const posts = await baiviet.getLatestPosts();
+        res.render("khoahoc", { listKH, posts });
     }
     async baiviet(req, res) {
-        const posts = await getAllBV()
-        res.render("baiviet", {posts});
+        const posts = await getAllBV();
+        res.render("baiviet", { posts });
+    }
+    async timkiem(req, res) {
+        const timKiem = req.query.s;
+        const listKH = await search(timKiem);
+        const baiviet = new BaiViet();
+        const posts = await baiviet.getLatestPosts();
+        res.render("timkiem", { listKH, timKiem, posts });
     }
     loginForm(req, res) {
         res.render("guest/Registor/login");
@@ -159,11 +181,11 @@ class GuestController {
                     req.session.username = loginHV[0].MA_HV;
                     req.session.chinhanh = loginHV[0].MA_CHI_NHANH;
 
-                    console.log("Đăng nhập")
+                    console.log("Đăng nhập");
                     res.redirect("./hocvien");
                     return;
                 } else {
-                    console.log("Không thành công")
+                    console.log("Không thành công");
                     res.redirect("/dangnhap");
                     return;
                 }

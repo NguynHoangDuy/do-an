@@ -1,0 +1,21 @@
+extends layout/layout
+block container
+	main
+		.section.child-banner 
+			.child-banner-content
+				h2.text-white.text-left= "Kết quả tìm kiếm: ' " + timKiem + " '" 
+		section.py-5.bg-light
+			.container 
+				.course-list.mb-4
+					for kh in listKH
+						.card.h-100.shadow-sm
+							img.card-img-top(src= kh.HINH_KH?kh.HINH_KH:"https://res.cloudinary.com/dcbkfpgsp/image/upload/v1684514501/avatars/hoc-online-20211223075126_hgami8.jpg", alt="...")
+							.card-body
+								.clearfix.mb-3
+									span.float-start.badge.rounded-pill.btn-green= kh.MA_KH
+								h5.card-title= kh.TEN_KH
+								.text-center.my-4
+									a.btn.btn-green.text-white(href="#") Đăng ký
+		include ./blocks/guest/faq
+		include ./blocks/guest/new_post
+		

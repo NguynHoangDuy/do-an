@@ -24,6 +24,7 @@ router.get(
     checkLogged.checkLoggedInDangNhap,
     GuestController.loginForm
 );
+router.get("/timkiem", GuestController.timkiem);
 router.post("/dangnhap", GuestController.dangnhap);
 router.get("/giangvien", GuestController.giaovien);
 router.get("/khoahoc", GuestController.khoahoc);
