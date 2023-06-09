@@ -1,0 +1,111 @@
+extends ../../layout/layout-dash
+block container
+	.dash-main
+		.container
+			p.title Quản lý phòng
+			.bg-white.p-20.radius-16.mt-2.mb-5
+				if (!admin)
+					form(action="")
+						.create-group.mt-2.align-items-end
+							.create-item(style="width: 45%")
+								label(for='cn') Chi Nhánh
+								select.mb-0.not-focus(class="form-control", id="cn", name="cn", required)
+									option(value="") Hãy chọn chi nhánh
+									for item in cn
+										option(value=item.MA_CHI_NHANH, selected =(item.MA_CHI_NHANH===maChiNhanh?true:false))= item.TEN_CHI_NHANH 
+							button.button.mb-0(type="submit") Xem
+			.flex.flex-end
+				a.button(data-toggle="modal" ,data-target=`#themphong`) Thêm phòng
+				.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `themphong`)
+					.modal-dialog(role='document')
+						.modal-content
+							form(action="/admin/phong/them", method="post") 
+								.modal-header
+									h5.modal-title#confirm-modal-title Thêm phòng học
+									button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+										span(aria-hidden='true') &times;
+								.modal-body
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='maHv') Mã phòng học
+											input(type='text', id='maHv', name='ma', value = mahv)
+									.create-group.mt-2
+										.create-item.w-100
+											label(for='tenHv') Tên phòng
+											input(type='text', id='tenHv', name='ten', value= tenhv)
+									if (!admin)
+										.create-group.mt-2
+											.create-item.w-100
+												label(for='cn2') Chi Nhánh
+												select.mb-0.not-focus(class="form-control", id="cn2", name="cn", required)
+													option(value="") Hãy chọn chi nhánh
+													for item in cn
+														option(value=item.MA_CHI_NHANH)= item.TEN_CHI_NHANH 
+								.modal-footer
+									button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+									button.btn.btn-success(type="submit") Thêm
+			if messages.success
+				+alert(messages)
+			if messages.fail
+				+alertNot(messages) 
+			.bg-white.p-20.radius-16.mt-2
+					.table-responsive
+						table.table.no-wrap.user-table.mb-0 
+							thead
+								tr.borderbottom
+									th(scope="col", class="border-0 text-uppercase font-medium pl-4") #
+									th(scope="col", class="border-0 text-uppercase font-medium") Mã phòng
+									th(scope="col", class="border-0 text-uppercase font-medium") Tên Phòng
+									th(scope="col", class="border-0 text-uppercase font-medium") Chi Nhánh
+							tbody
+								- stt = 1
+								for kh in listPhong
+									tr
+										//- td(class="pl-4")= (perPage * current) - (perPage - stt++)
+										td(class="pl-4")= stt++
+										td
+											p.text-overflow(class="font-medium mb-0")= kh.MA_PHONG
+										td
+											p.text-overflow(class="font-medium mb-0")= kh.TEN_PHONG
+										td
+											p.text-overflow(class="font-medium mb-0")= kh.MA_CHI_NHANH
+										td
+											a(data-toggle="modal" ,data-target=`#capNhat${kh.MA_PHONG}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+												i(class="fa fa-edit")
+											.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirm-modal-title', aria-hidden='true', id= `capNhat${kh.MA_PHONG}`)
+												.modal-dialog(role='document')
+													.modal-content
+														form(action=`/admin/phong/capnhat/${kh.MA_PHONG}`, method="post") 
+															.modal-header
+																h5.modal-title#confirm-modal-title Cập nhật phòng học
+																button.close-alert.close(type='button', data-dismiss='modal', aria-label='Close')
+																	span(aria-hidden='true') &times;
+															.modal-body
+																.create-group.mt-2
+																	.create-item.w-100
+																		label(for='maHv') Mã phòng học
+																		input(type='text', id='maHv', name='ma', value = kh.MA_PHONG)
+																.create-group.mt-2
+																	.create-item.w-100
+																		label(for='tenHv') Tên phòng
+																		input(type='text', id='tenHv', name='ten', value= kh.TEN_PHONG)
+																if (!admin)
+																	.create-group.mt-2
+																		.create-item.w-100
+																			label(for='cn2') Chi Nhánh
+																			select.mb-0.not-focus(class="form-control", id="cn2", name="cn", required)
+																				option(value="") Hãy chọn chi nhánh
+																				for item in cn
+																					option(value=item.MA_CHI_NHANH, selected =(item.MA_CHI_NHANH===kh.MA_CHI_NHANH?true:false))= item.TEN_CHI_NHANH
+															.modal-footer
+																button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+																button.btn.btn-success(type="submit") Cập nhật 
+											button(data-toggle="modal" ,data-target=`#${kh.MA_PHONG}`, class="btn btn-outline-info btn-circle btn-lg btn-circle ")
+												i(class="fa fa-trash") 
+											+confirm-modal(`${kh.MA_PHONG}`,'Xác nhận xóa phòng', 'Bạn có chắc chắn muốn xóa phòng nay?', 'Xóa', `/admin/phong/xoa/${kh.MA_PHONG}`)
+								if (listPhong.length === 0)
+									tr
+										td Không có phòng nào
+			.flex.flex-end.mt-4
+				a.button(href="/admin/dmkh/khoahoc") Trở về 
+

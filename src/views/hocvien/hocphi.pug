@@ -2,7 +2,7 @@ extends ../layout/layout-dash
 block container
 	.dash-main
 		.container
-			p.title Danh sách đăng ký
+			p.title Danh sách học phí
 			if messages.success
 				+alert(messages)
 			if messages.fail
@@ -33,7 +33,7 @@ block container
 									td
 										p.text-overflow(class="font-medium mb-0")= kh.HOC_PHI
 									td
-										p.text-overflow(class="font-medium mb-0")= kh.DONG
+										p.text-overflow(class="font-medium mb-0")= kh.DONG===1?"0":kh.HOC_PHI
 									td
 										p.text-overflow(class="font-medium mb-0")= kh.NGAY_DONG!="0000-00-00"?formatDate(kh.NGAY_DONG):""
 

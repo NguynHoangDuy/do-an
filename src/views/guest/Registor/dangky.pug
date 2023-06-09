@@ -24,6 +24,8 @@ html(lang="en")
 								select.not-focus(class="form-control", id="maCN", name="chinhanh", style="height: 64px")
 									for dsCN in dsMaCN
 										option(value= dsCN.MA_CHI_NHANH)= dsCN.TEN_CHI_NHANH
+						.login-group.flex-row.justify-content-between
+							a(href="/dangnahp") Đăng nhập
 						.login-group.flex-center.my-4
 							button(type='submit') Đăng ký
 				.login-desc

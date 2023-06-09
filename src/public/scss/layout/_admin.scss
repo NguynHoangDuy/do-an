@@ -65,6 +65,8 @@
 .group-item {
     width: calc(100% / 3);
     padding: 0 15px;
+    min-height: 120px;
+    margin-bottom: 30px;
 }
 .group {
     flex-wrap: wrap;
@@ -75,6 +77,7 @@
     margin-bottom: 20px;
     justify-content: space-around;
     border-radius: 20px;
+    height: 100%;
 }
 
 .group-content:hover {

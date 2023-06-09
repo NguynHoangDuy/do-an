@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="/css/main.css")
+		title= title
+	body(class=bodyClass)
+		.login-container
+			.login-main
+				.login-body
+					p.login-title.color-main Quên mật khẩu
+					form.login-form(action='/matkhaumoi', method='POST')
+						.login-group
+							label(for='mk') Mật khẩu mới
+							input(type='password', id='mk', name='mk')
+						.login-group.flex-center.my-4
+							button(type='submit') Xác nhận
+				.login-desc
+					p.login-title.color-white Hello, Friend !
+					p.login-text Thank you for taking the time to explore our website. We hope you find it informative and helpful.
+

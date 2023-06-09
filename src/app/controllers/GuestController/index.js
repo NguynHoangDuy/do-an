@@ -13,6 +13,8 @@ const {
     getAllBV,
     search,
     hocVien,
+    getEmail,
+    changePass,
 } = require("../../models/homePage");
 const nodemailer = require("nodemailer");
 class GuestController {
@@ -53,6 +55,58 @@ class GuestController {
     loginForm(req, res) {
         res.render("guest/Registor/login");
     }
+    quenmatkhau(req, res) {
+        res.render("guest/Registor/quenmatkhau");
+    }
+    async quenmatkhauXacNhan(req, res) {
+        const token = crypto.randomBytes(3).toString("hex");
+        const user = { ...req.body, confirm: token };
+        const email = await getEmail(user.mahv)
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            auth: {
+                user: "duy.nh.61cntt@ntu.edu.vn",
+                pass: "0932491613",
+            },
+        });
+
+        const mailOptions = {
+            from: req.body.email,
+            to: email,
+            subject: "Xác nhận tài khoản của bạn",
+            text: `Mã xác nhận tài khoản học viên của bạn là: ${token}`,
+        };
+        transporter.sendMail(mailOptions, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        req.session.forget = user;
+        res.render("guest/Registor/confirm-quenmatkhau");
+    }
+
+    async xacNhanForgetAction(req, res) {
+        const madk = req.body.madk;
+        const user = req.session.forget;
+        if (madk === user.confirm) {
+            res.render(`guest/Registor/matkhaumoi`);
+        }
+        else {
+            res.redirect(`/dangnhap`);
+        }
+    }
+
+    async matkhaumoi(req, res) {
+        const mk = req.body.mk
+        const user = req.session.forget;
+        const salt = bcrypt.genSaltSync(10);
+        const pass = bcrypt.hashSync(mk, salt);
+        await changePass(user.mahv, pass)
+        res.redirect(`/dangnhap`);
+    }
+
     async dangKyForm(req, res) {
         const chiNhanh = new ChiNhanh();
         const dsMaCN = await chiNhanh.xemChiNhanh();

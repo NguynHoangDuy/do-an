@@ -94,3 +94,32 @@ exports.hocVien = () => {
         );
     });
 };
+exports.getEmail = (mahv) => {
+    return new Promise((resolve, reject) => {
+        con.query(
+            `SELECT EMAIL FROM hoc_vien WHERE MA_HV='${mahv}'`,
+            (err, kq) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(kq[0].EMAIL);
+                }
+            }
+        );
+    });
+};
+
+exports.changePass = (mahv, mk) => {
+    return new Promise((resolve, reject) => {
+        con.query(
+            `UPDATE hoc_vien SET MAT_KHAU='${mk}' WHERE MA_HV='${mahv}'`,
+            (err, kq) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(1);
+                }
+            }
+        );
+    });
+}

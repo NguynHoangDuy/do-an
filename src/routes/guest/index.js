@@ -14,6 +14,26 @@ router.post(
     checkLogged.checkLoggedInDangNhap,
     GuestController.xacNhanAction
 );
+router.post(
+    "/matkhaumoi",
+    checkLogged.checkLoggedInDangNhap,
+    GuestController.matkhaumoi
+);
+router.post(
+    "/xacnhanquenmatkhau-action",
+    checkLogged.checkLoggedInDangNhap,
+    GuestController.xacNhanForgetAction
+);
+router.post(
+    "/xacnhanquenmatkhau",
+    checkLogged.checkLoggedInDangNhap,
+    GuestController.quenmatkhauXacNhan
+);
+router.get(
+    "/quenmatkhau",
+    checkLogged.checkLoggedInDangNhap,
+    GuestController.quenmatkhau
+);
 router.get(
     "/dangky",
     checkLogged.checkLoggedInDangNhap,

@@ -2,35 +2,43 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+
 .banner {
     width: 100%;
+
     .hero-swiper {
         position: relative;
     }
+
     .swiper-pagination-bullet {
         width: 15px;
         height: 15px;
         background: #fff;
         opacity: 0.4;
     }
+
     .swiper-pagination-bullet-active {
         background: #35a864;
         opacity: 1;
     }
+
     .swiper-button-prev {
         color: #dbdbdb;
         opacity: 0.5;
         left: 20px;
         right: auto;
+
         &::after {
             font-size: 40px;
         }
     }
+
     .swiper-button-next {
         color: #dbdbdb;
         opacity: 0.5;
         right: 20px;
         left: auto;
+
         &::after {
             font-size: 40px;
         }
@@ -39,6 +47,7 @@
     .swiper-wrapper {
         position: relative;
     }
+
     &-img {
         height: 600px;
         width: 100%;
@@ -81,16 +90,19 @@
         bottom: 0;
         transform: translateY(20%);
     }
+
     .container {
         position: relative;
         z-index: 2;
     }
+
     &-content {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         grid-gap: 50px;
         text-align: center;
     }
+
     &-main {
         position: relative;
         cursor: pointer;
@@ -104,6 +116,7 @@
             left: 0;
             border-radius: 20px;
         }
+
         &:hover::before {
             background-color: #11536da1;
         }
@@ -114,6 +127,7 @@
             display: block;
         }
     }
+
     &-img {
         width: 100%;
         height: 200px;
@@ -153,15 +167,19 @@
 .intro {
     padding-top: 5rem;
     padding-bottom: 5rem;
+
     &-video {
         max-width: 1000px;
         margin: 0 auto;
+
         &-content {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio (divide 9 by 16 and multiply by 100) */
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio (divide 9 by 16 and multiply by 100) */
             height: 0;
             overflow: hidden;
             border-radius: 10px;
+
             & iframe {
                 position: absolute;
                 top: 0;
@@ -171,15 +189,17 @@
             }
         }
     }
+
     &-content {
         margin-top: 40px;
 
-        & > p {
+        &>p {
             color: #1f1d1a;
             font-size: 24px;
             margin-top: 10px;
         }
     }
+
     &-title {
         color: #44af69;
         font-size: 40px;
@@ -187,6 +207,7 @@
         margin-bottom: 20px;
     }
 }
+
 #map {
     height: 100%;
     width: 100%;
@@ -197,6 +218,7 @@
         display: flex;
         justify-content: space-between;
     }
+
     &-map {
         width: 65%;
         min-height: 500px;
@@ -227,6 +249,7 @@
     min-height: 300px;
     height: 100%;
 }
+
 .facebook-link {
     text-align: center;
 }
@@ -234,6 +257,7 @@
 .faq {
     background-color: #f7e0ac;
 }
+
 .faq_area {
     position: relative;
     z-index: 1;
@@ -244,19 +268,23 @@
     position: relative;
     z-index: 1;
 }
+
 .faq-accordian .card {
     position: relative;
     z-index: 1;
     margin-bottom: 1.5rem;
 }
+
 .faq-accordian .card:last-child {
     margin-bottom: 0;
 }
+
 .faq-accordian .card .card-header {
     background-color: #ffffff;
     padding: 0;
     border-bottom-color: #ebebeb;
 }
+
 .faq-accordian .card .card-header h6 {
     cursor: pointer;
     padding: 1.75rem 2rem;
@@ -272,40 +300,51 @@
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
+
 .faq-accordian .card .card-header h6 span {
     font-size: 1.5rem;
 }
+
 .faq-accordian .card .card-header h6.collapsed {
     color: #070a57;
 }
+
 .faq-accordian .card .card-header h6.collapsed span {
     -webkit-transform: rotate(-180deg);
     transform: rotate(-180deg);
 }
+
 .faq-accordian .card .card-body {
     padding: 1.75rem 2rem;
 }
+
 .faq-accordian .card .card-body p:last-child {
     margin-bottom: 0;
 }
 
 .student {
     &-main {
-        width: 80%;
-        max-width: 500px;
         margin: 0 auto;
         overflow: hidden;
         border-radius: 10px;
     }
+
+    &-group {
+        display: flex;
+        gap: 40px;
+    }
+
     &-content {
         background-color: #74ebd5;
         background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
-
+        width: calc(100% / 3);
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 40px 20px;
+        border-radius: 16px;
     }
+
     &-img {
         width: 300px;
         height: 300px;
