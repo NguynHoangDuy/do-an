@@ -1,4 +1,4 @@
-import { getListPhong } from "./getListPhong.js";
+import { getListPhong, getListTG } from "./getListPhong.js";
 import { renderLopList } from "./renderLopList.js";
 import { renderTKBList } from "./renderTKB.js";
 
@@ -55,10 +55,13 @@ export function inputCapNhat() {
 
     $(document).on("click", ".them-tkb-btn", function (e) {
         const dl = $(this);
+        const maGv = dl.data("magv");
         const malop = dl.data("malop");
         const macn = dl.data("macn");
         $("#MA_LOP_TKB").val(malop);
         $("#MA_CN_TKB").val(macn);
+        $("#MA_GV_TKB").val(maGv);
+        getListTG()
     });
 }
 
@@ -70,9 +73,8 @@ function getListGv(macn, magv) {
         success: (listGv) => {
             let html = `<option value="" >Hãy chọn giáo viên</option>`;
             listGv.forEach((item) => {
-                html += `<option value="${item.MA_GV}" ${
-                    magv == item.MA_GV ? "selected" : ""
-                }>${item.HO_TEN}</option>`;
+                html += `<option value="${item.MA_GV}" ${magv == item.MA_GV ? "selected" : ""
+                    }>${item.HO_TEN}</option>`;
             });
             $("#MA_GV_CN").html(html);
         },
@@ -134,7 +136,6 @@ export function addTKBLop() {
         const MA_TG = $("#tkb-tg").val();
         const MA_PHONG = $("#tkb-phong").val();
 
-        console.log(MA_LOP, MA_THU, MA_TG, MA_PHONG);
         $.ajax({
             url: `/admin/lop/tkb/them`,
             method: "POST",
@@ -178,6 +179,7 @@ export function removeTKB() {
 
 export function changeSelectTKB() {
     $(document).on("change", "#tkb-thu", function (e) {
+        getListTG()
         getListPhong();
     });
     $(document).on("change", "#tkb-tg", function (e) {

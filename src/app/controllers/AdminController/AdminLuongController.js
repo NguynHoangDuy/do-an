@@ -72,7 +72,7 @@ class AdminLuongController {
             req.flash("success", `Tính lương tháng ${THANG} thành công`);
             res.redirect(`/admin/luong/giaovien`);
         } else {
-            req.flash("fail", `Tính lương không tháng ${THANG} thành công`);
+            req.flash("fail", `Tính lương tháng ${THANG} không thành công`);
             res.redirect(`/admin/luong/giaovien`);
         }
     }

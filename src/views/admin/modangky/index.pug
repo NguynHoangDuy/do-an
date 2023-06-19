@@ -94,7 +94,7 @@ block container
 									td
 										p.text-overflow(class="font-medium mb-0")= kh.TG_KT + " tháng"
 									td
-										button(data-toggle="modal", data-makh=`${kh.MA_KHCC}`, data-macn=`${kh.MA_CHI_NHANH}`, data-tenkh=`${kh.TEN_KH}`,data-target=`#ds${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle button-dslop")
+										button(data-toggle="modal", data-makh=`${kh.MA_KHCC}`,data-magv=`${kh.MA_GV}`, data-macn=`${kh.MA_CHI_NHANH}`, data-tenkh=`${kh.TEN_KH}`,data-target=`#ds${kh.MA_KHCC}`, class="btn btn-outline-info btn-circle btn-lg btn-circle button-dslop")
 											i(class="fa fa-info")
 										.modal.fade(tabindex='-1', role='dialog',  data-backdrop="false", aria-labelledby='confirm-modal-title', aria-hidden='true', id= `ds${kh.MA_KHCC}`)
 											.modal-dialog.mw-70(role='document')
@@ -263,6 +263,7 @@ block container
 									.create-group.mt-2
 										input(type="text",id="MA_LOP_TKB", style="display: none;")
 										input(type="text",id="MA_CN_TKB", style="display: none;")
+										input(type="text",id="MA_GV_TKB", style="display: none;")
 										.create-item.w-100
 											label(for='tkb-thu') Thứ
 											select.not-focus(class="form-control", id="tkb-thu", name="tkb-thu", required)
@@ -272,8 +273,6 @@ block container
 										.create-item.w-100
 											label(for='tkb-tg') Thời gian
 											select.not-focus(class="form-control", id="tkb-tg", name="tkb-tg", required)
-												for tg in tgList
-													option(value= tg.MA_TG, data-tgbd= tg.TG_BD, data-tgkt= tg.TG_KT )= tg.TG_BD+" - "+tg.TG_KT
 									.create-group.mt-2
 										.create-item.w-100
 											label(for='tkb-phong') Phòng

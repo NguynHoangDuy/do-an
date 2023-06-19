@@ -19,3 +19,21 @@ export function getListPhong() {
         },
     });
 }
+export function getListTG() {
+    const MA_GV = $("#MA_GV_TKB").val();
+    const MA_THU = $("#tkb-thu").val();
+
+    $.ajax({
+        url: `/api/thoigian`,
+        type: "GET",
+        data: { MA_GV, MA_THU },
+        dataType: "json",
+        success: (listPH) => {
+            let html = "";
+            listPH.forEach((item) => {
+                html += `<option value="${item.MA_TG}" data-tgbd="${item.TG_BD}" data-tgkt="${item.TG_KT}">${item.TG_BD} - ${item.TG_KT}</option>`;
+            });
+            $("#tkb-tg").html(html);
+        },
+    });
+}
