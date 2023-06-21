@@ -92,7 +92,6 @@ class GiaoVienController {
         }
         const luong = await getLuongGV(THANG, NAM, magv);
 
-        console.log(luong);
         res.render("./giaovien/luong", { thang, nam, THANG, NAM, luong });
     }
 }

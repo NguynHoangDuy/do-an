@@ -98,7 +98,6 @@ class HocVien {
                 } else {
                     const countMaHV = parseInt(id[0].MA_HV.substr(5)) + 1;
                     const mahv = "ALFHV" + String(countMaHV).padStart(5, "0");
-                    // console.log(mahv);
                     resolve(mahv);
                 }
             });

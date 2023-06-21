@@ -1,4 +1,3 @@
-import { getListTG } from "./getListPhong.js";
 import { renderTKBList, renderTKB } from "./renderTKB.js";
 
 export function renderLopList(courseId) {
@@ -18,7 +17,7 @@ export function renderLopList(courseId) {
           html += `<td> ${item.TEN_LOP}</td>`;
           html += `<td> ${item.HO_TEN}</td>`;
           html += `<td> ${item.SO_LUONG_HT} / ${item.SO_LUONG} </td>`;
-          html += `<td> <a data-toggle="modal" data-target= '#tkb${item.MA_LOP}' data-malop="${item.MA_LOP}" data-magv="${item.MA_GV} class="btn btn-primary btn-sm tkb-btn"><i class="fa fa-info-circle"></i> </a></td>`;
+          html += `<td> <a data-toggle="modal" data-target= '#tkb${item.MA_LOP}' data-malop="${item.MA_LOP}" class="btn btn-primary btn-sm tkb-btn"><i class="fa fa-info-circle"></i> </a></td>`;
           html += `<td> <a href="/admin/lop/hocvien/${item.MA_LOP}" class="btn btn-primary btn-sm"><i class="fa fa-info-circle"></i> </a></td>`;
           html += `<td> <button class="btn btn-primary btn-sm edit-btn edit-lop-buton" data-toggle="modal" data-target="#capnhatlop" data-malop="${item.MA_LOP}" data-magv="${item.MA_GV}" data-tenlop="${item.TEN_LOP}" data-sl="${item.SO_LUONG}" data-tenkh="${item.TEN_KH}" data-macn="${item.MA_CHI_NHANH}" data-makhcc = "${item.MA_KHCC}" ><i class="fa fa-pencil"></i> </button>
                     <button class="btn btn-danger btn-sm delete-btn remove-lop" data-toggle="modal" data-target="#remove-lop" data-malop="${item.MA_LOP}" data-makhcc = "${item.MA_KHCC}" ><i class="fa fa-trash"></i></button></td>`;
@@ -106,7 +105,11 @@ export function renderLopListHv(makhcc, mahv) {
           html += `<td> ${item.HO_TEN}</td>`;
           html += `<td> ${item.SO_LUONG_HT} / ${item.SO_LUONG} </td>`;
           html += `<td> <a data-toggle="modal" data-target= '#tkb${item.MA_LOP}' data-malop="${item.MA_LOP}" class="btn btn-primary btn-sm tkb-btn"><i class="fa fa-info-circle"></i> </a></td>`;
-          html += `<td> <a class="btn btn-primary btn-sm edit-btn" href="/hocvien/dangkylop/dangky/${item.MA_LOP}"><i class="fa fa-info-circle"></i> </a></td>`;
+          if (Number(item.SO_LUONG_HT) < Number(item.SO_LUONG))
+            html += `<td> <a class="btn btn-primary btn-sm edit-btn" href="/hocvien/dangkylop/dangky/${item.MA_LOP}"><i class="fa fa-info-circle"></i> </a></td>`;
+          else
+            html += `<td> Full </td>`;
+
           html += "</tr>";
 
           let modalHtml = `

@@ -143,7 +143,6 @@ class GuestController {
     async xacNhanAction(req, res) {
         const madk = req.body.madk;
         const user = req.session.registor;
-        console.log(user);
         const hoten = user.email.substring(0, user.email.indexOf("@"));
         const salt = bcrypt.genSaltSync(10);
         const mk = bcrypt.hashSync(user.password, salt);

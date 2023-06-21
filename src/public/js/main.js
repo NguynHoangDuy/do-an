@@ -73,9 +73,3 @@ $("#noti-modal").modal("show");
 if ($("#noi_dung")) {
     CKEDITOR.replace("noi_dung", { height: "800px" });
 }
-
-
-const tkbBtn = $(".tkb-btn");
-tkbBtn.on("click", () => {
-    console.log("click")
-})

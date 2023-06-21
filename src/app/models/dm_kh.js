@@ -12,8 +12,8 @@ function add(TEN_DM, ANH_DD) {
 
 function getDM(madm) {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM danh_muc_kh WHERE MA_DM = '${madm}'`, (err, res)=>{
-            if(err){
+        db.query(`SELECT * FROM danh_muc_kh WHERE MA_DM = '${madm}'`, (err, res) => {
+            if (err) {
                 reject(err)
             }
             else {
@@ -64,7 +64,7 @@ function getKHinDM(madm, cn) {
     } else {
         chiNhanh = ``;
     }
-    const sql = `SELECT khoa_hoc.MA_DM, MA_KH, TEN_KH, TEN_DM, (SELECT COUNT(*) FROM mo_dang_ky WHERE mo_dang_ky.MA_KH = khoa_hoc.MA_KH ${chiNhanh}) as SO_LUONG FROM khoa_hoc INNER JOIN danh_muc_kh on khoa_hoc.MA_DM = danh_muc_kh.MA_DM WHERE khoa_hoc.MA_DM = "${madm}" and khoa_hoc.XOA = 0`;
+    const sql = `SELECT khoa_hoc.MA_DM, MA_KH, TEN_KH, TEN_DM, (SELECT COUNT(*) FROM mo_dang_ky WHERE mo_dang_ky.MA_KH = khoa_hoc.MA_KH  AND mo_dang_ky.XOA = 0 ${chiNhanh}) as SO_LUONG FROM khoa_hoc INNER JOIN danh_muc_kh on khoa_hoc.MA_DM = danh_muc_kh.MA_DM WHERE khoa_hoc.MA_DM = "${madm}" and khoa_hoc.XOA = 0`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, res) => {
             if (err) reject(err);
